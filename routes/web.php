@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MenuController@index');
+
+Route::get('/manage-account', 'AccountController@index');
+
+Route::get('/manage-account/add', 'AccountController@add');
+
+Route::get('/manage-account/edit/{uid}', 'AccountController@edit');
+
+Route::get('/manage-account/delete/{$uid}', 'AccountController@delete');
