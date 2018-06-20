@@ -22,3 +22,13 @@ Route::get('/manage-account/{uid}', 'AccountController@view');
 Route::get('/manage-account/edit/{uid}', 'AccountController@edit');
 
 Route::get('/manage-account/delete/{uid}', 'AccountController@delete');
+
+Route::get('/account/logout', 'AccountController@logout');
+
+Route::get('/account/change-password/{uid}', 'AccountController@changePass');
+
+Route::get('/report', 'ReportController@index');
+
+Route::get('/report/generate', 'ReportController@generate');
+
+Route::get('/report/download', 'ReportController@download');

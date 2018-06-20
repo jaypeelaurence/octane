@@ -48,7 +48,7 @@ class Account extends Database
 	}
 
 	public function updateUser($uid){
-		
+
 	}
 
 	public function deleteUser($uid){

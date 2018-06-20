@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+
 use App\User;
 use App\Account;
 
@@ -48,20 +49,11 @@ class AccountController extends Controller
 		return $this->account->deleteUser($uid);
 	}
 
-	// public function edit(User $uid){
-	// 	$getForm = array(
-	// 		'id' => $uid,
-	// 		'username' => 'jaypee'.rand(0,999),
-	// 		'email' => 'jaypee'.rand(0,999).'@adspark.ph',
-	// 		'password' => 'password'.rand(0,999),
-	// 		'name' => 'Jaypee Laurencec Cocjin'.rand(0,999),
-	// 		'role' => 'Admin'
-	// 	);
+	public function logout(){
+		return 'You are logged out.';
+	}
 
-	// 	return $this->account->editUser($getForm);
-	// }
-
-	// public function delete(User $uid){
-	// 	return $uid;
-	// }
+	public function changePass(){
+		return 'You are changing your password.';
+	}
 }
