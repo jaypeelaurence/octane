@@ -8,34 +8,50 @@ use App\Http\Controllers\Controller;
 
 abstract class Database extends Model
 {
-
-  	public function create($table, $data){
+  	public function create($table, $data = ""){
 		$query = DB::table($table);
 		$query->insert($data);
 		return DB::getPdo()->lastInsertId();
     }
 
-    public function read($table, $condition = ''){
+    public function read($table, $condition = "", $data = ""){
 		$query = DB::table($table);
 
 		if($condition){
 			foreach($condition as $method){
-				echo $method;
+				$setValue = array();
+
+				foreach($method[1] as $getValue){
+					$setValue[] = $getValue;
+				}
+
+				$query->$method[0](...$setValue);
 			}
-			exit;
-			// $query->$condition()[0];
 		}
 
 		return $query->get();
     }
 
-  //   public function edit($table, $condition, $data){
+    public function edit($table, $condition, $data){
 		// $query = DB::table($table);
 		// print_r($condition); exit;
-  //   }
 
-  //   public function delete($table, $data){
-		// $query = DB::table($table);
-		// $query->insert();
-  //   }
+		// return $query->update(..$setValue);
+    }
+
+    public function remove($table, $condition){
+		$query = DB::table($table);
+
+		foreach($condition as $method){
+			$setValue = array();
+
+			foreach($method[1] as $getValue){
+				$setValue[] = $getValue;
+			}
+
+			$query->$method[0](...$setValue);
+		}
+
+		return $query->delete();
+    }
 }

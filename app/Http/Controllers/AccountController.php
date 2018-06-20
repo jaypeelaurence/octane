@@ -18,10 +18,6 @@ class AccountController extends Controller
 		return $this->account->listUser();
 	}
 
-	public function view(User $uid){
-		return $this->account->viewUser($uid);
-	}
-
 	public function add(){
 		$getForm = array(	
 			'username' => 'jaypee',
@@ -32,6 +28,24 @@ class AccountController extends Controller
 		);
 
 		return $this->account->addUser($getForm);
+	}
+
+	public function view(User $uid){
+		return $this->account->viewUser($uid);
+	}
+
+	public function edit(User $uid){
+		$getForm = array(	
+			'username' => 'jaypee',
+			'email' => 'jaypee@adspark.ph'.rand(0,999),
+			'password' => 'password123',
+			'name' => 'Jaypee Laurencec Cocjin',
+			'role' => 'User'
+		);
+	}
+
+	public function delete(User $uid){
+		return $this->account->deleteUser($uid);
 	}
 
 	// public function edit(User $uid){

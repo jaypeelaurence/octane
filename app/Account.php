@@ -35,9 +35,32 @@ class Account extends Database
 
 	public function viewUser($uid){
 		$condition = array(
-			DB::where('id',1)
+			array(
+				'where',
+				array(
+					'id',
+					$uid['id']
+				)
+			)
 		);
 
 		return $this->read($this->table, $condition);
+	}
+
+	public function updateUser($uid){
+		
+	}
+
+	public function deleteUser($uid){
+		$condition = array(
+			array(
+				'where',
+				array(
+					'id',
+					$uid['id']
+				)
+			)
+		);
+		return $this->remove($this->table, $condition);
 	}
 }
