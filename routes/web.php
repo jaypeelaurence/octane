@@ -17,6 +17,8 @@ Route::get('/manage-account', 'AccountController@index');
 
 Route::get('/manage-account/add', 'AccountController@add');
 
-Route::get('/manage-account/edit/{uid}', 'AccountController@edit');
+Route::get('/manage-account/{uid}', 'AccountController@view');
 
-Route::get('/manage-account/delete/{$uid}', 'AccountController@delete');
+Route::get('/manage-account/{uid}/edit', 'AccountController@edit');
+
+Route::get('/manage-account/{$uid}/delete', 'AccountController@delete');
