@@ -22,7 +22,7 @@ class AccountController extends Controller
 	public function add(){
 		$getForm = array(	
 			'username' => 'jaypee',
-			'email' => 'jaypee@adspark.ph'.rand(0,999),
+			'email' => 'jaypee'.rand(0,999).'@adspark.ph',
 			'password' => 'password123',
 			'name' => 'Jaypee Laurencec Cocjin',
 			'role' => 'User'
@@ -37,12 +37,14 @@ class AccountController extends Controller
 
 	public function edit(User $uid){
 		$getForm = array(	
-			'username' => 'jaypee',
-			'email' => 'jaypee@adspark.ph'.rand(0,999),
-			'password' => 'password123',
+			'username' => 'jaypee'.rand(0,999),
+			'email' => 'jaypee'.rand(0,999).'@adspark.ph',
+			'password' => 'password123'.rand(0,999),
 			'name' => 'Jaypee Laurencec Cocjin',
-			'role' => 'User'
+			'role' => 'Admin'
 		);
+
+		return $this->account->updateUser($uid, $getForm);
 	}
 
 	public function delete(User $uid){

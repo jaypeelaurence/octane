@@ -34,24 +34,30 @@ class Account extends Database
 	}
 
 	public function viewUser($uid){
-		$condition = array(
-			array(
-				'where',
-				array(
-					'id',
-					$uid['id']
-				)
-			)
-		);
+		$condition = array();
+		$condition[] = array('where', array('id',$uid['id']));
 
 		return $this->read($this->table, $condition);
 	}
 
-	public function updateUser($uid){
+	public function updateUser($uid, $getForm){
+		$data = array(
+			'username' => $getForm['username'],
+			'email' => $getForm['email'],
+			'password' => md5($getForm['password']),
+			'name' => $getForm['name'],
+			'role' =>  $getForm['role'],
+			'updated_at' => date('Y-m-d H:i:s')
+		);
 
+		$condition = array();
+		$condition[] = array('where', array('id',$uid['id']));
+		$condition[] = array('update', $data);
+
+		return $this->edit($this->table, $condition);
 	}
 
-	public function deleteUser($uid){
+	public function deleteUser($uid, $condition){
 		$condition = array(
 			array(
 				'where',

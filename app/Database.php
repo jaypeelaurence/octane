@@ -14,7 +14,7 @@ abstract class Database extends Model
 		return DB::getPdo()->lastInsertId();
     }
 
-    public function read($table, $condition = "", $data = ""){
+    public function read($table, $condition = ""){
 		$query = DB::table($table);
 
 		if($condition){
@@ -32,12 +32,18 @@ abstract class Database extends Model
 		return $query->get();
     }
 
-    public function edit($table, $condition, $data){
-		// $query = DB::table($table);
-		// print_r($condition); exit;
+    public function edit($table){
+		$query = DB::table($table);
 
-		// return $query->update(..$setValue);
-    }
+		foreach($condition[0][1] as $getValue){
+			$setValue[] = $getValue;
+		}
+
+        $query->where(...$setValue);
+        $query->update($condition[1][1]);
+        
+		return DB::getPdo()->lastInsertId();
+	}
 
     public function remove($table, $condition){
 		$query = DB::table($table);
@@ -52,6 +58,8 @@ abstract class Database extends Model
 			$query->$method[0](...$setValue);
 		}
 
-		return $query->delete();
+		$query->delete();
+
+		return DB::getPdo()->lastInsertId();
     }
 }
