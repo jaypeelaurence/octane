@@ -32,7 +32,7 @@ abstract class Database extends Model
 		return $query->get();
     }
 
-    public function edit($table){
+    public function edit($table, $condition){
 		$query = DB::table($table);
 
 		foreach($condition[0][1] as $getValue){
@@ -40,9 +40,17 @@ abstract class Database extends Model
 		}
 
         $query->where(...$setValue);
-        $query->update($condition[1][1]);
         
-		return DB::getPdo()->lastInsertId();
+        $setField = array();
+
+        $i = 1;
+
+		foreach(array_slice($condition[$i],1) as $key=>$value){
+		   $setField[$key] = $value;
+		   ++$i;
+		}
+
+		return $query->update($setField[0]);
 	}
 
     public function remove($table, $condition){
