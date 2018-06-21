@@ -1,1 +1,1 @@
-index.p
+@extends('master')

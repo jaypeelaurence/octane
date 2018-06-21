@@ -12,8 +12,12 @@ class ReportController extends Controller
 		$this->report = new Report();
 	}
 
+	public function index(){
+		return "This is Index";
+	}
+
 	public function generate(){
-		return "Generating report";
+		return 	$this->report->generate();
 	}
 
 	public function dowload(){

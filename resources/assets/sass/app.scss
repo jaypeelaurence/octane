@@ -1,11 +1,68 @@
+/*Main Style*/
+	body {
+		padding: 0px !important;
+		margin: 0px;
+		background-color: #2878b3;
+		font-family: Open Sans;
+	}
 
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+	a:focus {
+		outline: 0;
+	}
 
-// Variables
-@import "variables";
+	a, button {
+		-o-transition:.5s !important;
+		-ms-transition:.5s !important;
+		-moz-transition:.5s !important;
+		-webkit-transition:.5s !important;
+		transition:.5s !important;
+		text-decoration: none !important;
+	}
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+	a:hover {
+		-o-transition:.5s !important;
+		-ms-transition:.5s !important;
+		-moz-transition:.5s !important;
+		-webkit-transition:.5s !important;
+		transition:.5s !important;
+		text-decoration: none !important;
+	}
 
-body { background-color: blue;}
+	ul {
+		padding: 0px;
+		margin: 0px;
+	}
+
+/*Container Style*/
+
+	#mainContainer{
+		margin: 0px;
+		padding: 0px;
+		width: 100%;
+		height: auto;
+		background-color: #ffffff;
+	}
+	
+	#header{
+		margin: 0px;
+		padding: 15px;
+		width: 100%;
+		height: auto;
+	}
+
+	#footer{
+		margin: 0px;
+		padding: 5px 15px;
+		width: 100%;
+		height: auto;
+		background-color: #2878b3;
+		color: #ffffff;
+	}
+
+	#footer p{
+		margin: 0px;
+		padding: 0px;
+		font-size: 12px;
+	}
+
+

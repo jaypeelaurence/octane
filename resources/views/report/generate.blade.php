@@ -1,1 +1,1 @@
-generate
+@extends('master')
