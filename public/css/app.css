@@ -1,27 +1,33 @@
-/*Main Style*/
+/*Mixins*/
 
-body {
-  padding: 0px !important;
-  margin: 0px;
-  background-color: #2878b3;
-  font-family: Open Sans;
-}
+/*Extends*/
 
-a:focus {
-  outline: 0;
+#container {
+  font-family: Lato;
 }
 
 a,
-button {
+button,
+a :hover {
   -webkit-transition: .5s !important;
   transition: .5s !important;
   text-decoration: none !important;
 }
 
-a:hover {
-  -webkit-transition: .5s !important;
-  transition: .5s !important;
-  text-decoration: none !important;
+/*Resources	*/
+
+/*Main Style*/
+
+body {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: auto;
+  background-color: #2878b3;
+}
+
+a :focus {
+  outline: 0;
 }
 
 ul {
@@ -31,24 +37,40 @@ ul {
 
 /*Container Style*/
 
-#mainContainer {
+#container {
+  padding: 10px;
   margin: 0px;
+  width: 100%;
+  height: auto;
+}
+
+#header {
   padding: 0px;
+  margin: 0px;
   width: 100%;
   height: auto;
   background-color: #ffffff;
 }
 
-#header {
+#navbar {
+  padding: 0px;
   margin: 0px;
-  padding: 15px;
   width: 100%;
   height: auto;
+  background-color: #ffffff;
+}
+
+#body {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
 }
 
 #footer {
+  padding: 0px;
   margin: 0px;
-  padding: 5px 15px;
   width: 100%;
   height: auto;
   background-color: #2878b3;
@@ -56,8 +78,6 @@ ul {
 }
 
 #footer p {
-  margin: 0px;
-  padding: 0px;
   font-size: 12px;
 }
 

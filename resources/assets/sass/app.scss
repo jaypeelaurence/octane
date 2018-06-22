@@ -1,68 +1,56 @@
+@import 'template';
+
 /*Main Style*/
 	body {
-		padding: 0px !important;
-		margin: 0px;
-		background-color: #2878b3;
-		font-family: Open Sans;
-	}
-
-	a:focus {
-		outline: 0;
+		@include container(0px, 0px, 100%, auto);
+		background-color: $color2;
 	}
 
 	a, button {
-		-o-transition:.5s !important;
-		-ms-transition:.5s !important;
-		-moz-transition:.5s !important;
-		-webkit-transition:.5s !important;
-		transition:.5s !important;
-		text-decoration: none !important;
+		@extend %linkState;
 	}
 
-	a:hover {
-		-o-transition:.5s !important;
-		-ms-transition:.5s !important;
-		-moz-transition:.5s !important;
-		-webkit-transition:.5s !important;
-		transition:.5s !important;
-		text-decoration: none !important;
+	a {
+		:focus{
+			outline: 0;
+		}
+
+		:hover{
+			@extend %linkState;
+		}
 	}
 
 	ul {
-		padding: 0px;
-		margin: 0px;
+		@include container(0px, 0px);
 	}
 
 /*Container Style*/
-
-	#mainContainer{
-		margin: 0px;
-		padding: 0px;
-		width: 100%;
-		height: auto;
-		background-color: #ffffff;
+	#container{
+		@include container(10px, 0px, 100%, auto);
+		@extend %font;
 	}
-	
+
 	#header{
-		margin: 0px;
-		padding: 15px;
-		width: 100%;
-		height: auto;
+		@include container(0px, 0px, 100%, auto);
+		background-color: $color1;
+	}
+
+	#navbar{
+		@include container(0px, 0px, 100%, auto);
+		background-color: $color1;
+	}
+
+	#body{
+		@include container(0px, 0px, 100%, auto);
+		background-color: $color1;
 	}
 
 	#footer{
-		margin: 0px;
-		padding: 5px 15px;
-		width: 100%;
-		height: auto;
-		background-color: #2878b3;
-		color: #ffffff;
+		@include container(0px, 0px, 100%, auto);
+		background-color: $color2;
+		color: $color1;
+
+		p{
+			font-size: 12px;
+		}
 	}
-
-	#footer p{
-		margin: 0px;
-		padding: 0px;
-		font-size: 12px;
-	}
-
-

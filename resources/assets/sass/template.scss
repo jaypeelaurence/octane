@@ -1,0 +1,27 @@
+/*Mixins*/
+	@mixin container($padding, $margin, $width: null, $height: null){
+		padding: $padding;
+		margin: $margin;
+		width: $width;
+		height: $height;
+	}
+
+/*Extends*/
+	%font{
+		font-family: Lato;
+	}
+
+	%linkState{
+		-o-transition:.5s !important;
+		-ms-transition:.5s !important;
+		-moz-transition:.5s !important;
+		-webkit-transition:.5s !important;
+		transition:.5s !important;
+		text-decoration: none !important;
+	}
+
+/*Resources	*/
+	$color1: #ffffff;
+	$color2: #2878b3;
+	$color3: #1c5e8e;
+	$color4: #e5e5e5;
