@@ -30,14 +30,15 @@ class AccountController extends Controller
 			'role' => 'User'
 		);
 
-		return $this->account->addUser($getForm);
+		$user = $this->account->addUser($getForm);
+		
+		return view('manage-account.index', compact('user'));
 	}
 
 	public function view(User $uid){
 		$user = $this->account->viewUser($uid);
 
 		return view('account.index', compact('user'));
-
 	}
 
 	public function edit(User $uid){
@@ -49,18 +50,26 @@ class AccountController extends Controller
 			'role' => 'Admin'
 		);
 
-		return $this->account->updateUser($uid, $getForm);
+		$user = $this->account->updateUser($uid, $getForm);
+
+		return view('manage-account.edit', compact('user'));
 	}
 
 	public function delete(User $uid){
-		return $this->account->deleteUser($uid);
+		$user = $this->account->deleteUser($uid);
+
+		return view('manage-account.index', compact('user'));
+	}
+
+	public function login(){
+		return view('account.login');
 	}
 
 	public function logout(){
-		return 'You are logged out.';
+		return view('account.logout');
 	}
 
 	public function changePass(){
-		return 'You are changing your password.';
+		return view('account.change-password');
 	}
 }

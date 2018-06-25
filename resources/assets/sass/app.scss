@@ -21,12 +21,12 @@
 		@include container(0px, 0px);
 	}
 
+	p{
+		@extend %paragraph;
+	}
+
 	nav.navbar{
 		padding: 0px;
-
-		.collapse{
-			padding: 0px 15px;
-		}
 
 		a {
 			padding: 0px;
@@ -34,7 +34,17 @@
 		}
 
 		img {
-			max-width: 250px;
+			@media (min-width: 0px){
+				max-width: 200px;
+			}
+			
+			@media (min-width: 767px){
+				max-width: 250px;
+			}		
+		}
+
+		.navbar-nav{
+			flex-direction: row;
 		}
 
 		.nav-item{
@@ -46,6 +56,10 @@
 					font-size: 14px;
 					color: $color4;
 				}
+
+				@media (min-width: 0px){
+					padding-right: .5rem;
+				}
 			}
 
 			.dropdown-menu{
@@ -56,23 +70,32 @@
 			 	box-shadow: 1px 1px rgba(119, 119, 119, 0.9);
 
 				a{
-					background-color: $color4;
+					background-color: $color1;
 					font-size: 12px;
-					color: $color5;
+					color: $color7;
 					padding: 5px 10px;
 
 					&:hover{
 						background-color: $color5;
-						color: $color4;
 					}
+				}
+
+				@media (min-width: 0px){
+					position: absolute;
+					z-index: 99;
 				}
 			}
 		}
+
+		.navbar-toggler{
+			border: 0px;
+			padding: 0px;
+		}
 	}
 
-/*Container Style*/
+/*Section Style*/
 	#container{
-		@include container(10px, 0px, 100%, auto);
+		@include container(10px, 0px auto, 100%, auto, 1100px);
 	}
 
 	#header{
@@ -89,14 +112,117 @@
 		@include container(0px, 0px, 100%, auto);
 		background-color: $color2;
 		color: $color1;
+	}
 
-		p{
-			@extend %paragraph;
+/*Login Style*/
+	#login{
+		@include container(0px, 0px, 100%, 100vh);
+	  	position: relative;
+ 		overflow: auto;
+
+		#container{
+			@include container(20px, 0px auto, 100%, auto, 500px);
+			position: relative;
+  			top: 20%;
+  			color: white;
+  			text-align: center;
+
+  			&:nth-child(2){
+  				padding: 0px;
+  			}
+		}
+
+		img{		
+			max-width: 500px;
+			width: 100%;
+		}
+
+		#form{
+			padding: 20px;
+			background-color: $color4;
+
+  			.form-group{
+				@media (min-width: 0px){
+			  		text-align: center;
+	  				width: 100%;
+	  				display: block;
+  				}
+
+  				@media (min-width: 767px){
+			  		text-align: left;
+	  				width: 48.5%;
+	  				display: inline-block;
+		  				  				
+	  				&:nth-child(1){
+	  					margin-right: 10px;
+	  				}
+  				}
+
+  				label{
+  					@extend %title2;
+  					color: $color7;
+				}
+  				
+  				.form-control{
+  					@extend %title4;
+  					border-radius: 0px;
+  					padding: 5px 10px;
+  					color: $color5;
+  				}
+  			}
+
+  			button{
+				@extend %title3;
+				width: 100%;
+				padding: 5px 10px;
+				display: block;
+				border: 0px;
+				background-color: $color2;
+
+				&:hover{
+					background-color: $color3;
+				}
+  			}
 		}
 	}
 
-	#body{
+/*Page Style*/
+	#dashboard{
+		@include container(0px, 0px, 100%);
+		@media (min-width: 0px){
+			height: auto;
+		}
+		@media (min-width: 500px){
+			height: 80vh;
+		}
+
+	  	position: relative;
+
+		#container{
+			@include container(20px, 0px, 100%, auto);
+			position: relative;
+  			top: 20%;
+  			color: white;
+		}
+
 		h1{
 			@extend %title;
+			font-size: 40px;
+			font-weight: 300;
+			color: $color7;
+		}
+
+		h2{
+			@extend %title2;
+			font-size: 50px;
+			font-weight: 700;
+			color: $color7;
+		}
+
+		h3{
+			@extend %title3;
+			font-size: 30px;
+			margin-bottom: 10px;
+			color: $color7;
 		}
 	}

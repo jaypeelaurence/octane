@@ -17,15 +17,41 @@ button:hover {
   text-decoration: none !important;
 }
 
-#body h1 {
+#dashboard h1 {
   padding: 0px;
   margin: 0px;
   marign-bottom: 18px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
 }
 
-#footer p {
+#login #form .form-group label,
+#dashboard h2 {
+  padding: 0px;
+  margin: 0px;
+  marign-bottom: 15px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#login #form button,
+#dashboard h3 {
+  padding: 0px;
+  margin: 0px;
+  marign-bottom: 15px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+#login #form .form-group .form-control {
+  padding: 0px;
+  margin: 0px;
+  marign-bottom: 15px;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+p {
   padding: 0px;
   margin: 0px;
   marign-bottom: 15px;
@@ -44,6 +70,8 @@ button:hover {
 /*Dirty White*/
 
 /*Dark Grey*/
+
+/*Orange*/
 
 /*Super Dark Grey*/
 
@@ -71,17 +99,28 @@ nav.navbar {
   padding: 0px;
 }
 
-nav.navbar .collapse {
-  padding: 0px 15px;
-}
-
 nav.navbar a {
   padding: 0px;
   margin: 0px;
 }
 
-nav.navbar img {
-  max-width: 250px;
+@media (min-width: 0px) {
+  nav.navbar img {
+    max-width: 200px;
+  }
+}
+
+@media (min-width: 767px) {
+  nav.navbar img {
+    max-width: 250px;
+  }
+}
+
+nav.navbar .navbar-nav {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 nav.navbar .nav-item a {
@@ -94,6 +133,12 @@ nav.navbar .nav-item a:hover {
   color: #f9f9f9;
 }
 
+@media (min-width: 0px) {
+  nav.navbar .nav-item a {
+    padding-right: .5rem;
+  }
+}
+
 nav.navbar .nav-item .dropdown-menu {
   padding: 0px;
   margin: 0px;
@@ -104,24 +149,36 @@ nav.navbar .nav-item .dropdown-menu {
 }
 
 nav.navbar .nav-item .dropdown-menu a {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   font-size: 12px;
   color: #777777;
   padding: 5px 10px;
 }
 
 nav.navbar .nav-item .dropdown-menu a:hover {
-  background-color: #777777;
-  color: #f9f9f9;
+  background-color: #dbd9d9;
 }
 
-/*Container Style*/
+@media (min-width: 0px) {
+  nav.navbar .nav-item .dropdown-menu {
+    position: absolute;
+    z-index: 99;
+  }
+}
+
+nav.navbar .navbar-toggler {
+  border: 0px;
+  padding: 0px;
+}
+
+/*Section Style*/
 
 #container {
   padding: 10px;
-  margin: 0px;
+  margin: 0px auto;
   width: 100%;
   height: auto;
+  max-width: 1100px;
 }
 
 #header {
@@ -147,5 +204,133 @@ nav.navbar .nav-item .dropdown-menu a:hover {
   height: auto;
   background-color: #2878b3;
   color: #ffffff;
+}
+
+/*Login Style*/
+
+#login {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: auto;
+}
+
+#login #container {
+  padding: 20px;
+  margin: 0px auto;
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  position: relative;
+  top: 20%;
+  color: white;
+  text-align: center;
+}
+
+#login #container:nth-child(2) {
+  padding: 0px;
+}
+
+#login img {
+  max-width: 500px;
+  width: 100%;
+}
+
+#login #form {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+@media (min-width: 0px) {
+  #login #form .form-group {
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+}
+
+@media (min-width: 767px) {
+  #login #form .form-group {
+    text-align: left;
+    width: 48.5%;
+    display: inline-block;
+  }
+
+  #login #form .form-group:nth-child(1) {
+    margin-right: 10px;
+  }
+}
+
+#login #form .form-group label {
+  color: #777777;
+}
+
+#login #form .form-group .form-control {
+  border-radius: 0px;
+  padding: 5px 10px;
+  color: #dbd9d9;
+}
+
+#login #form button {
+  width: 100%;
+  padding: 5px 10px;
+  display: block;
+  border: 0px;
+  background-color: #2878b3;
+}
+
+#login #form button:hover {
+  background-color: #1c5e8e;
+}
+
+/*Page Style*/
+
+#dashboard {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  position: relative;
+}
+
+@media (min-width: 0px) {
+  #dashboard {
+    height: auto;
+  }
+}
+
+@media (min-width: 500px) {
+  #dashboard {
+    height: 80vh;
+  }
+}
+
+#dashboard #container {
+  padding: 20px;
+  margin: 0px;
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: 20%;
+  color: white;
+}
+
+#dashboard h1 {
+  font-size: 40px;
+  font-weight: 300;
+  color: #777777;
+}
+
+#dashboard h2 {
+  font-size: 50px;
+  font-weight: 700;
+  color: #777777;
+}
+
+#dashboard h3 {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #777777;
 }
 

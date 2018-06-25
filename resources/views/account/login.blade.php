@@ -1,7 +1,7 @@
-@extends('master')
+@extends('login')
 
 @section ('pageTitle')
-	Add Account
+	Login
 @endsection
 
 @section ('body')

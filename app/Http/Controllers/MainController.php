@@ -6,9 +6,19 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 
+use App\User;
+use App\Account;
+
 class MainController extends Controller
 {
+	function __construct(){
+		$this->account = new Account();
+	}
+
+
 	public function index(){
-		return view('main.index');
+		$user = $this->account->listUser();
+
+		return view('main.index', compact('user'));
 	}
 }

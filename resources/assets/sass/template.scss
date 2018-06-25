@@ -1,9 +1,10 @@
 /*Mixins*/
-	@mixin container($padding, $margin, $width: null, $height: null){
+	@mixin container($padding, $margin, $width: null, $height: null, $maxwidth: null){
 		padding: $padding;
 		margin: $margin;
 		width: $width;
 		height: $height;
+		max-width: $maxwidth;
 	}
 
 /*Extends*/
@@ -24,16 +25,32 @@
 		padding: 0px;
 		margin: 0px;
 		marign-bottom: 18px;
-		font-size: 18px;
+		font-size: 24px;
 		font-weight: 700;
 	}
 
-	%subtitle{
+	%title2{
 		padding: 0px;
 		margin: 0px;
 		marign-bottom: 15px;
 		font-size: 14px;
 		font-weight: 700;
+	}
+
+	%title3{
+		padding: 0px;
+		margin: 0px;
+		marign-bottom: 15px;
+		font-size: 14px;
+		font-weight: 300;
+	}
+
+	%title4{
+		padding: 0px;
+		margin: 0px;
+		marign-bottom: 15px;
+		font-size: 12px;
+		font-weight: 300;
 	}
 
 	%paragraph{
@@ -50,4 +67,5 @@
 	$color3: #1c5e8e; /*Dark Blue*/
 	$color4: #f9f9f9; /*Dirty White*/
 	$color5: #dbd9d9; /*Dark Grey*/
-	$color5: #777777; /*Super Dark Grey*/
+	$color6: #ffb056; /*Orange*/
+	$color7: #777777; /*Super Dark Grey*/
