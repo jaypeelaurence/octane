@@ -4,18 +4,15 @@
 	body {
 		@include container(0px, 0px, 100%, auto);
 		background-color: $color2;
+		@extend %font;
 	}
 
 	a, button {
-		@extend %linkState;
-	}
-
-	a {
-		:focus{
+		&:focus{
 			outline: 0;
 		}
 
-		:hover{
+		&:hover{
 			@extend %linkState;
 		}
 	}
@@ -24,10 +21,58 @@
 		@include container(0px, 0px);
 	}
 
+	nav.navbar{
+		padding: 0px;
+
+		.collapse{
+			padding: 0px 15px;
+		}
+
+		a {
+			padding: 0px;
+			margin: 0px;
+		}
+
+		img {
+			max-width: 250px;
+		}
+
+		.nav-item{
+			a{
+				font-size: 14px;
+				color: $color4;
+
+				&:hover{
+					font-size: 14px;
+					color: $color4;
+				}
+			}
+
+			.dropdown-menu{
+				padding: 0px;
+				margin: 0px;
+				border-radius: 0px;
+				border: 0px;
+			 	box-shadow: 1px 1px rgba(119, 119, 119, 0.9);
+
+				a{
+					background-color: $color4;
+					font-size: 12px;
+					color: $color5;
+					padding: 5px 10px;
+
+					&:hover{
+						background-color: $color5;
+						color: $color4;
+					}
+				}
+			}
+		}
+	}
+
 /*Container Style*/
 	#container{
 		@include container(10px, 0px, 100%, auto);
-		@extend %font;
 	}
 
 	#header{
@@ -35,14 +80,9 @@
 		background-color: $color1;
 	}
 
-	#navbar{
-		@include container(0px, 0px, 100%, auto);
-		background-color: $color1;
-	}
-
 	#body{
 		@include container(0px, 0px, 100%, auto);
-		background-color: $color1;
+		background-color: $color4;
 	}
 
 	#footer{
@@ -51,6 +91,12 @@
 		color: $color1;
 
 		p{
-			font-size: 12px;
+			@extend %paragraph;
+		}
+	}
+
+	#body{
+		h1{
+			@extend %title;
 		}
 	}

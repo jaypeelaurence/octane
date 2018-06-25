@@ -19,13 +19,12 @@ abstract class Database extends Model
 
 		if($condition){
 			foreach($condition as $method){
-				$setValue = array();
-
-				foreach($method[1] as $getValue){
-					$setValue[] = $getValue;
+				$setValue = [];
+				foreach($method[1] as $values){
+					$setValue[] = $values;
 				}
 
-				$query->$method[0](...$setValue);
+				$query->{$method[0]}(...$setValue);
 			}
 		}
 

@@ -1,5 +1,8 @@
 @extends('master')
 
 @section ('pageTitle')
-	Dashboard |
+	Dashboard
+@endsection
+
+@section ('body')
 @endsection

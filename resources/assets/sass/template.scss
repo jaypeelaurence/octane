@@ -15,13 +15,39 @@
 		-o-transition:.5s !important;
 		-ms-transition:.5s !important;
 		-moz-transition:.5s !important;
-		-webkit-transition:.5s !important;
+		-webkit-transitio:n.5s !important;
 		transition:.5s !important;
 		text-decoration: none !important;
 	}
 
+	%title{
+		padding: 0px;
+		margin: 0px;
+		marign-bottom: 18px;
+		font-size: 18px;
+		font-weight: 700;
+	}
+
+	%subtitle{
+		padding: 0px;
+		margin: 0px;
+		marign-bottom: 15px;
+		font-size: 14px;
+		font-weight: 700;
+	}
+
+	%paragraph{
+		padding: 0px;
+		margin: 0px;
+		marign-bottom: 15px;
+		font-size: 12px;
+		font-weight: 400;
+	}
+
 /*Resources	*/
-	$color1: #ffffff;
-	$color2: #2878b3;
-	$color3: #1c5e8e;
-	$color4: #e5e5e5;
+	$color1: #ffffff; /*White*/
+	$color2: #2878b3; /*Blue*/
+	$color3: #1c5e8e; /*Dark Blue*/
+	$color4: #f9f9f9; /*Dirty White*/
+	$color5: #dbd9d9; /*Dark Grey*/
+	$color5: #777777; /*Super Dark Grey*/

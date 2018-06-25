@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 
-use App\Users;
+use App\User;
 use App\Database;
 
 class Account extends Database
@@ -35,7 +35,7 @@ class Account extends Database
 
 	public function viewUser($uid){
 		$condition = array();
-		$condition[] = array('where', array('id',$uid['id']));
+		$condition[] = array('where' , array('id',$uid['id']));
 
 		return $this->read($this->table, $condition);
 	}

@@ -6,24 +6,19 @@
 	<body>
 		<div id="header">
 			<div id="container">
-			
-			</div>
-		</div>
-		<div id="navbar">
-			<div id="container">
-
+				@include('_template.header')
 			</div>
 		</div>
 		<div id="body">
 			<div id="container">
-				hello
+				<h1>@yield('pageTitle')</h1>
+				@include('_template.body')
 			</div>
 		</div>
 		<div id="footer">
 			<div id="container">
 				@include('_template.footer')
 			</div>
-		</div>
 		</div>
 	</body>
 </html>	

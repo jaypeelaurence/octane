@@ -16,7 +16,9 @@ class AccountController extends Controller
 	}
 
 	public function index(){
-		return $this->account->listUser();
+		$user = $this->account->listUser();
+
+		return view('manage-account.index', compact('user'));
 	}
 
 	public function add(){
@@ -32,7 +34,10 @@ class AccountController extends Controller
 	}
 
 	public function view(User $uid){
-		return $this->account->viewUser($uid);
+		$user = $this->account->viewUser($uid);
+
+		return view('account.index', compact('user'));
+
 	}
 
 	public function edit(User $uid){
