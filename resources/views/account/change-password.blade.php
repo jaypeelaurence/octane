@@ -1,9 +1,9 @@
 @extends('master')
 
-@section ('pageTitle')
+@section('pageTitle')
 	Change Password |
 @endsection
 
-@section ('body')
+@section('body')
 
 @endsection	

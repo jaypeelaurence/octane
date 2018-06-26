@@ -1,9 +1,9 @@
 @extends('master')
 
-@section ('pageTitle')
+@section('pageTitle')
 	Manage Account
 @endsection
 
-@section ('body')
+@section('body')
 	<?= $user ?>
 @endsection	

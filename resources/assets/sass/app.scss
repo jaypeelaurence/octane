@@ -95,7 +95,12 @@
 
 /*Section Style*/
 	#container{
-		@include container(10px, 0px auto, 100%, auto, 1100px);
+		@include container(10px 20px, 0px auto, 100%, auto, 1100px);
+
+		h1{
+			@extend %title;
+			color: $color7;
+		}
 	}
 
 	#header{
@@ -189,14 +194,14 @@
 /*Page Style*/
 	#dashboard{
 		@include container(0px, 0px, 100%);
+	  	position: relative;
+	
 		@media (min-width: 0px){
 			height: auto;
 		}
 		@media (min-width: 500px){
 			height: 80vh;
 		}
-
-	  	position: relative;
 
 		#container{
 			@include container(20px, 0px, 100%, auto);
@@ -223,6 +228,72 @@
 			@extend %title3;
 			font-size: 30px;
 			margin-bottom: 10px;
-			color: $color7;
+			color: $color7;;
+		}
+	}
+
+/*Content style*/
+	#content{
+		@include container(0px, 15px 0px, 100%, auto);
+		background-color: #ffffff;
+		
+		#form{
+			.formTitle{
+				@include container(15px, 0px);
+				@extend %title;
+				font-size: 15px;
+				font-weight: 700;
+				color: $color1;
+				background-color: $color2;
+				border: 1px solid $color2;
+			}
+
+			form{
+				@include container(10px, 0px);
+				border: 1px solid $color4;
+				
+				.form-group{
+					padding: 0px;
+					margin: 0px 5px;
+					margin-bottom: 10px;
+
+					label{
+	  					@extend %title2;
+	  					color: $color7;
+					}
+
+	  				.form-control{
+	  					@extend %title4;
+	  					border-radius: 0px;
+	  					padding: 5px 10px;
+	  					color: $color7;
+	  				}
+				}
+
+				button{
+					@extend %title3;
+					padding: 5px 10px;
+					margin: 0px 5px;
+					display: block;
+					border: 0px;
+					background-color: $color2;
+
+					&:hover{
+						background-color: $color3;
+					}
+				}
+			}
+		}
+
+		#table{
+			
+		}
+	}
+
+/*Custom style*/
+	#content.add-account{
+		form .username, form .password, form .emailAddress, form .accountName{
+			width: 48.8%;
+			display: inline-block;
 		}
 	}

@@ -22,17 +22,19 @@ class AccountController extends Controller
 	}
 
 	public function add(){
-		$getForm = array(	
-			'username' => 'jaypee',
-			'email' => 'jaypee'.rand(0,999).'@adspark.ph',
-			'password' => 'password123',
-			'name' => 'Jaypee Laurencec Cocjin',
-			'role' => 'User'
-		);
+		// $getForm = array(	
+		// 	'username' => 'jaypee',
+		// 	'email' => 'jaypee'.rand(0,999).'@adspark.ph',
+		// 	'password' => 'password123',
+		// 	'name' => 'Jaypee Laurencec Cocjin',
+		// 	'role' => 'User'
+		// );
 
-		$user = $this->account->addUser($getForm);
+		// $user = $this->account->addUser($getForm);
 		
-		return view('manage-account.index', compact('user'));
+		// return view('manage-account.index', compact('user'));
+		
+		return view('manage-account.add');
 	}
 
 	public function view(User $uid){

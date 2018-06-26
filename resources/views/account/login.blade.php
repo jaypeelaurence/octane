@@ -1,9 +1,9 @@
 @extends('login')
 
-@section ('pageTitle')
+@section('pageTitle')
 	Login
 @endsection
 
-@section ('body')
+@section('body')
 
 @endsection	

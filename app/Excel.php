@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 
-use Vendor\PhpOffice\PhpSpreadsheet;
+// use Vendor\PhpOffice\PhpSpreadsheet;
 
 class excel extends Model{
     function __construct(){
-		$this->load = new PhpSpreadsheet;
+		// $this->load = new PhpSpreadsheet;
 	}
 
 	public function load($data){

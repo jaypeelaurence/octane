@@ -1,10 +1,10 @@
-@extends('dashboard')
+@extends('master')
 
-@section ('pageTitle')
+@section('pageTitle')
 	Dashboard
 @endsection
 
-@section ('body')
+@section('body')
 	<div id="dashboard">
 		<div id="container">
 			<h1>Welcome,</h1>
