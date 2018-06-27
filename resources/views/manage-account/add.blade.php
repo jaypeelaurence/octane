@@ -6,8 +6,8 @@
 
 @section ('body')
 	<div id="content" class="add-account">
-		<div id="form">
-			<h1 class='formTitle'>Add Account</h1>
+		<div id="wrapper" class="form">
+			<h1 class='title'>Add Account</h1>
 			<form>
 			  	<div class="form-group username">
 			   		<label for="username">Username</label>

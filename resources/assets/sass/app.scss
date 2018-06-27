@@ -236,22 +236,26 @@
 	#content{
 		@include container(0px, 15px 0px, 100%, auto);
 		background-color: #ffffff;
-		
-		#form{
-			.formTitle{
-				@include container(15px, 0px);
-				@extend %title;
-				font-size: 15px;
-				font-weight: 700;
-				color: $color1;
-				background-color: $color2;
-				border: 1px solid $color2;
+
+		.title{
+			@include container(15px, 0px);
+			@extend %title;
+			font-size: 15px;
+			font-weight: 700;
+			color: $color1;
+			background-color: $color2;
+			border: 1px solid $color2;
+		}
+
+		#wrapper{
+			@include container(0xp, 0px);
+			border: 1px solid $color4;
+
+			form, .table{
+				@include container(10px, 0px);
 			}
 
 			form{
-				@include container(10px, 0px);
-				border: 1px solid $color4;
-				
 				.form-group{
 					padding: 0px;
 					margin: 0px 5px;
@@ -283,15 +287,37 @@
 					}
 				}
 			}
-		}
 
-		#table{
-			
+			#table{
+				overflow-x: scroll;
+					padding: 15px;
+
+				table{
+					border: 0px;
+
+					th{
+						background-color: $color4;
+						font-weight: 700;
+					}
+
+					th, td{
+						@extend %title4;
+						padding: 5px 10px;
+						border: 1px solid $color7;
+						text-align: center;
+
+						&.date{
+							font-weight: 700;
+							background-color: $color5;
+						}
+					}
+				}
+			}
 		}
 	}
 
 /*Custom style*/
-	#content.add-account{
+	.add-account{
 		form .username, form .password, form .emailAddress, form .accountName{
 			width: 48.8%;
 			display: inline-block;

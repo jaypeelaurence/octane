@@ -19,7 +19,7 @@ button:hover {
 
 #container h1,
 #dashboard h1,
-#content #form .formTitle {
+#content .title {
   padding: 0px;
   margin: 0px;
   marign-bottom: 18px;
@@ -29,7 +29,7 @@ button:hover {
 
 #login #form .form-group label,
 #dashboard h2,
-#content #form form .form-group label {
+#content #wrapper form .form-group label {
   padding: 0px;
   margin: 0px;
   marign-bottom: 15px;
@@ -39,7 +39,7 @@ button:hover {
 
 #login #form button,
 #dashboard h3,
-#content #form form button {
+#content #wrapper form button {
   padding: 0px;
   margin: 0px;
   marign-bottom: 15px;
@@ -48,7 +48,9 @@ button:hover {
 }
 
 #login #form .form-group .form-control,
-#content #form form .form-group .form-control {
+#content #wrapper form .form-group .form-control,
+#content #wrapper #table table th,
+#content #wrapper #table table td {
   padding: 0px;
   margin: 0px;
   marign-bottom: 15px;
@@ -353,7 +355,7 @@ nav.navbar .navbar-toggler {
   background-color: #ffffff;
 }
 
-#content #form .formTitle {
+#content .title {
   padding: 15px;
   margin: 0px;
   font-size: 15px;
@@ -363,29 +365,35 @@ nav.navbar .navbar-toggler {
   border: 1px solid #2878b3;
 }
 
-#content #form form {
-  padding: 10px;
+#content #wrapper {
+  padding: 0xp;
   margin: 0px;
   border: 1px solid #f9f9f9;
 }
 
-#content #form form .form-group {
+#content #wrapper form,
+#content #wrapper .table {
+  padding: 10px;
+  margin: 0px;
+}
+
+#content #wrapper form .form-group {
   padding: 0px;
   margin: 0px 5px;
   margin-bottom: 10px;
 }
 
-#content #form form .form-group label {
+#content #wrapper form .form-group label {
   color: #777777;
 }
 
-#content #form form .form-group .form-control {
+#content #wrapper form .form-group .form-control {
   border-radius: 0px;
   padding: 5px 10px;
   color: #777777;
 }
 
-#content #form form button {
+#content #wrapper form button {
   padding: 5px 10px;
   margin: 0px 5px;
   display: block;
@@ -393,16 +401,43 @@ nav.navbar .navbar-toggler {
   background-color: #2878b3;
 }
 
-#content #form form button:hover {
+#content #wrapper form button:hover {
   background-color: #1c5e8e;
+}
+
+#content #wrapper #table {
+  overflow-x: scroll;
+  padding: 15px;
+}
+
+#content #wrapper #table table {
+  border: 0px;
+}
+
+#content #wrapper #table table th {
+  background-color: #f9f9f9;
+  font-weight: 700;
+}
+
+#content #wrapper #table table th,
+#content #wrapper #table table td {
+  padding: 5px 10px;
+  border: 1px solid #777777;
+  text-align: center;
+}
+
+#content #wrapper #table table th.date,
+#content #wrapper #table table td.date {
+  font-weight: 700;
+  background-color: #dbd9d9;
 }
 
 /*Custom style*/
 
-#content.add-account form .username,
-#content.add-account form .password,
-#content.add-account form .emailAddress,
-#content.add-account form .accountName {
+.add-account form .username,
+.add-account form .password,
+.add-account form .emailAddress,
+.add-account form .accountName {
   width: 48.8%;
   display: inline-block;
 }
