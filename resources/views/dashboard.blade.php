@@ -5,14 +5,13 @@
 	</head>
 	<body>
 		<div id="header">
-			<div id="container">
+			<div id="container"> 
 				@include('_template.header')
 			</div>
 		</div>
 		<div id="body">
 			<div id="container">
 				@include('_template.alert')
-
 				@include('_template.body')
 			</div>
 		</div>

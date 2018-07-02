@@ -12,9 +12,7 @@
 		<div id="body">
 			<div id="container">
 				<h1>@yield('pageTitle')</h1>
-
 				@include('_template.alert')
-
 				@include('_template.body')
 			</div>
 		</div>

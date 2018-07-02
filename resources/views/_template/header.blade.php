@@ -5,15 +5,17 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manage Accounts
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/manage-account">List of Accounts</a>
-          <a class="dropdown-item" href="/manage-account/add">Add Account</a>
-        </div>
-      </li>
+        @if(Auth::user()->role == "Admin") 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Manage Accounts
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/manage-account">List of Accounts</a>
+              <a class="dropdown-item" href="/manage-account/add">Add Account</a>
+            </div>
+          </li>
+        @endif
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Reports
@@ -27,7 +29,7 @@
           Account
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/account/change-password">Change Password</a>
+          <a class="dropdown-item" href="/account/{{ Auth::user()->id }}/change-password">Change Password</a>
           <a class="dropdown-item" href="/account/logout">Logout</a>
         </div>
       </li>

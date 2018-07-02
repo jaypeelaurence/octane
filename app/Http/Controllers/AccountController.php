@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Account;
-use App\Validate;
 use App\User;
 
 use Illuminate\Http\Request;
@@ -12,7 +11,6 @@ class AccountController extends Controller
 {
     function __construct(){
         $this->account = new Account;
-        $this->validate = new Validate;
     }
 
     public function index(){
@@ -26,14 +24,21 @@ class AccountController extends Controller
     }
 
     public function store(Request $request){
-        $result = $this->validate->addUser($request);
-
-        if($result){
-            $uid = $this->account->addUser($request->all());
-            return redirect('manage-account/'.$uid)->with('message', "Account ".request('username')." was created!");
-        }else{
+        $validator = $this->validate(request(), [
+            'username' => "required",
+            'email' => "required|email",
+            'password' => "required|confirmed",
+            'name' => "required",
+            'role' => "required",
+        ]);
             
-        }
+        $uid = $this->account->addUser($request->all());
+
+        return redirect('manage-account/'.$uid)->with('message', "Account ".request('username')." was created!");
+
+        // return redirect('manage-account/add')->withErrors($validator)->withInput();
+        // // }else{
+        // }
     }
 
     public function show(User $uid) {
@@ -49,9 +54,11 @@ class AccountController extends Controller
     }
 
     public function update(Request $request, User $uid){
-        $this->account->editUser($getForm, $uid);
+        // $request = request()->all();
 
-        return redirect('manage-account/'.$uid->id)->with('message', "Account ".$request." was edited!");
+        $this->account->editUser($request->all(), $uid);
+
+        return redirect('manage-account/'.$uid->id)->with('message', "Account ".$uid->username." was edited!");
     }
 
     public function destroy(User $uid){

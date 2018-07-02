@@ -10,7 +10,7 @@
 			<h1 class='title'>{{ $user->name }} | Edit</h1>
 			<div id="edit-account">
 				<form method="POST" action="/manage-account/{{ $user->id }}/edit">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					{{ csrf_field() }}
 				  	<div class="form-group username">
 				   		<label for="username">Username</label>
 				    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->username }}" name='username'>

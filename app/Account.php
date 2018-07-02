@@ -23,11 +23,15 @@ class Account extends Model{
     public function addUser($getForm){
         foreach($getForm as $key => $field){
             if($field != null){
-                $values[$key] = $field;
+                if($key == "password"){
+                    $values[$key] = md5($field);
+                }else{
+                    $values[$key] = $field;
+                }
             }
         }
 
-        $values['remember_token'] = md5(time().rand(0,100));
+        $values['remember_token'] =  bcrypt(time().rand(0,100));
         
         $addUser = $this->user::create($values);
 
@@ -39,7 +43,11 @@ class Account extends Model{
 
         foreach($getForm as $key => $field){
             if($field != null){
-                $values[$key] = $field;
+                if($key == "password"){
+                    $values[$key] = md5($field);
+                }else{
+                    $values[$key] = $field;
+                }
             }
         }
 

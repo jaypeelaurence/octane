@@ -23,12 +23,4 @@ class MainController extends Controller{
 	public function index(){
 		return view('main.index');
 	}
-
-	public function login(){
-		return view('account.login');
-	}
-
-	public function loginValidate(){
-		// return view('account.login');
-	}
 }
