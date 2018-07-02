@@ -14,16 +14,25 @@
 Route::get('/', 'MainController@index');
 
 Route::get('/manage-account', 'AccountController@index');
-Route::get('/manage-account/add', 'AccountController@add');
-Route::get('/manage-account/{uid}', 'AccountController@view');
+
+Route::get('/manage-account/add', 'AccountController@create');
+Route::post('/manage-account/add', 'AccountController@store');
+
+Route::get('/manage-account/{uid}', 'AccountController@show');
+
 Route::get('/manage-account/{uid}/edit', 'AccountController@edit');
-Route::get('/manage-account/{uid}/delete', 'AccountController@delete');
+Route::post('/manage-account/{uid}/edit', 'AccountController@update');
 
-Route::get('/account/login', 'AccountController@login');
-Route::get('/account/logout', 'AccountController@logout');
-Route::get('/account/{uid}', 'AccountController@view');
-Route::get('/account/{uid}/change-password', 'AccountController@changePass');
+Route::get('/manage-account/{uid}/delete', 'AccountController@destroy');
 
-Route::get('/report', 'ReportController@index');
-Route::get('/report/generate', 'ReportController@generate');
-Route::get('/report/download', 'ReportController@download');
+
+Route::get('/account/login', 'MainController@login');
+Route::post('/account/login', 'MainController@loginValidate');
+
+Route::get('/account/{uid}', 'MainController@show');
+
+Route::get('/account/{uid}/change-password', 'AccountController@change');
+Route::post('/account/{uid}/change-password', 'AccountController@changeValidate');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

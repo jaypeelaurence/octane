@@ -5,5 +5,5 @@
 @endsection
 
 @section('body')
-	<?= $user ?>
+	{{ $user }}
 @endsection	

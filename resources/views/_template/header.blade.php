@@ -10,10 +10,8 @@
           Manage Accounts
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">List of Accounts</a>
-          <a class="dropdown-item" href="#">Add Account</a>
-          <a class="dropdown-item" href="#">Update Account</a>
-          <a class="dropdown-item" href="#">Delete Account</a>
+          <a class="dropdown-item" href="/manage-account">List of Accounts</a>
+          <a class="dropdown-item" href="/manage-account/add">Add Account</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -21,8 +19,7 @@
           Reports
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Generate Report</a>
-          <a class="dropdown-item" href="#">Download Report</a>
+          <a class="dropdown-item" href="report/generate">Generate Report</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -30,8 +27,8 @@
           Account
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Change Password</a>
-          <a class="dropdown-item" href="#">Logout</a>
+          <a class="dropdown-item" href="/account/change-password">Change Password</a>
+          <a class="dropdown-item" href="/account/logout">Logout</a>
         </div>
       </li>
     </ul>

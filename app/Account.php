@@ -2,71 +2,55 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Controllers\Controller;
 
 use App\User;
-use App\Database;
 
-class Account extends Database
-{
-	function __construct(){
-		$this->table = 'users';
-	}
+class Account extends Model{
+    function __construct(){
+        $this->user = new User;
+    }
 
-    public function listUser(){
-		return $this->read($this->table);
-	}
-
+    public function viewUser($uid = null){
+    	if($uid){
+    		return $uid;
+    	}else{
+            return $this->user::orderBy('id', 'asc')->get();
+    	}
+    }
+    
     public function addUser($getForm){
-		$data = array(
-			'username' => $getForm['username'],
-			'email' => $getForm['email'],
-			'password' => md5($getForm['password']),
-			'name' => $getForm['name'],
-			'role' =>  $getForm['role'],
-			'remember_token' => md5($getForm['username'].'+'.$getForm['name'].'+'.$getForm['role']),
-			'created_at' => date('Y-m-d H:i:s'),
-			'updated_at' => date('Y-m-d H:i:s')
-		);
+        foreach($getForm as $key => $field){
+            if($field != null){
+                $values[$key] = $field;
+            }
+        }
 
-		return $this->create($this->table, $data);
-	}
+        $values['remember_token'] = md5(time().rand(0,100));
+        
+        $addUser = $this->user::create($values);
 
-	public function viewUser($uid){
-		$condition = array();
-		$condition[] = array('where' , array('id',$uid['id']));
+        return $addUser->id;
+    }
 
-		return $this->read($this->table, $condition);
-	}
+    public function editUser($getForm, $uid){
+        $editUser = $this->user::find($uid->id);
 
-	public function updateUser($uid, $getForm){
-		$data = array(
-			'username' => $getForm['username'],
-			'email' => $getForm['email'],
-			'password' => md5($getForm['password']),
-			'name' => $getForm['name'],
-			'role' =>  $getForm['role'],
-			'updated_at' => date('Y-m-d H:i:s')
-		);
+        foreach($getForm as $key => $field){
+            if($field != null){
+                $values[$key] = $field;
+            }
+        }
 
-		$condition = array();
-		$condition[] = array('where', array('id',$uid['id']));
-		$condition[] = array('update', $data);
+        $editUser->update($values);
 
-		return $this->edit($this->table, $condition);
-	}
+        return $editUser->id;
+    }
 
-	public function deleteUser($uid, $condition){
-		$condition = array(
-			array(
-				'where',
-				array(
-					'id',
-					$uid['id']
-				)
-			)
-		);
-		return $this->remove($this->table, $condition);
-	}
+    public function deleteUser($uid){
+        $deleteUser = $this->user::find($uid->id);
+
+        return $deleteUser->delete();
+    }
 }

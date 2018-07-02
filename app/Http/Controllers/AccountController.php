@@ -2,76 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Controllers\Controller;
-
-use App\User;
 use App\Account;
+use App\Validate;
+use App\User;
+
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
-	function __construct(){
-		$this->account = new Account();
-	}
+    function __construct(){
+        $this->account = new Account;
+        $this->validate = new Validate;
+    }
 
-	public function index(){
-		$user = $this->account->listUser();
+    public function index(){
+        $user = $this->account->viewUser();
 
-		return view('manage-account.index', compact('user'));
-	}
+        return view('manage-account.index', compact('user'));
+    }
 
-	public function add(){
-		// $getForm = array(	
-		// 	'username' => 'jaypee',
-		// 	'email' => 'jaypee'.rand(0,999).'@adspark.ph',
-		// 	'password' => 'password123',
-		// 	'name' => 'Jaypee Laurencec Cocjin',
-		// 	'role' => 'User'
-		// );
+    public function create(){
+        return view('manage-account.add');
+    }
 
-		// $user = $this->account->addUser($getForm);
-		
-		// return view('manage-account.index', compact('user'));
-		
-		return view('manage-account.add');
-	}
+    public function store(Request $request){
+        $result = $this->validate->addUser($request);
 
-	public function view(User $uid){
-		$user = $this->account->viewUser($uid);
+        if($result){
+            $uid = $this->account->addUser($request->all());
+            return redirect('manage-account/'.$uid)->with('message', "Account ".request('username')." was created!");
+        }else{
+            
+        }
+    }
 
-		return view('account.index', compact('user'));
-	}
+    public function show(User $uid) {
+        $user = $this->account->viewUser($uid);
 
-	public function edit(User $uid){
-		$getForm = array(	
-			'username' => 'jaypee'.rand(0,999),
-			'email' => 'jaypee'.rand(0,999).'@adspark.ph',
-			'password' => 'password123'.rand(0,999),
-			'name' => 'Jaypee Laurencec Cocjin',
-			'role' => 'Admin'
-		);
+        return view('manage-account.show', compact('user'));
+    }
 
-		$user = $this->account->updateUser($uid, $getForm);
+    public function edit(User $uid){
+        $user = $this->account->viewUser($uid);
 
-		return view('manage-account.edit', compact('user'));
-	}
+        return view('manage-account.edit', compact('user'));
+    }
 
-	public function delete(User $uid){
-		$user = $this->account->deleteUser($uid);
+    public function update(Request $request, User $uid){
+        $this->account->editUser($getForm, $uid);
 
-		return view('manage-account.index', compact('user'));
-	}
+        return redirect('manage-account/'.$uid->id)->with('message', "Account ".$request." was edited!");
+    }
 
-	public function login(){
-		return view('account.login');
-	}
+    public function destroy(User $uid){
+        $this->account->deleteUser($uid);
 
-	public function logout(){
-		return view('account.logout');
-	}
+        return redirect('manage-account/')->with('message', "Account ".$uid->username." was deleted!");
+    }
 
-	public function changePass(){
-		return view('account.change-password');
-	}
+    public function change(User $uid){
+        $user = $this->account->viewUser($uid);
+        
+        return view('account.change', compact('user'));
+    }
 }

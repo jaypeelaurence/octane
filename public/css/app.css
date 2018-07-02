@@ -39,7 +39,8 @@ button:hover {
 
 #login #form button,
 #dashboard h3,
-#content #wrapper form button {
+#content #wrapper form button,
+#content #wrapper #details table td {
   padding: 0px;
   margin: 0px;
   marign-bottom: 15px;
@@ -47,10 +48,12 @@ button:hover {
   font-weight: 300;
 }
 
+.alert,
 #login #form .form-group .form-control,
 #content #wrapper form .form-group .form-control,
 #content #wrapper #table table th,
-#content #wrapper #table table td {
+#content #wrapper #table table td,
+#content #wrapper #details .actions a {
   padding: 0px;
   margin: 0px;
   marign-bottom: 15px;
@@ -176,6 +179,26 @@ nav.navbar .nav-item .dropdown-menu a:hover {
 nav.navbar .navbar-toggler {
   border: 0px;
   padding: 0px;
+}
+
+.alert {
+  padding: 10px 15px 5px 15px;
+  margin: 10px 0px 0px 0px;
+  font-weight: 700;
+  border: 0px;
+  border-radius: 0px;
+}
+
+.alert ul {
+  list-style: none;
+}
+
+.alert ul li {
+  margin-bottom: 5px;
+}
+
+.alert ul li i {
+  margin-right: 10px;
 }
 
 /*Section Style*/
@@ -405,8 +428,21 @@ nav.navbar .navbar-toggler {
   background-color: #1c5e8e;
 }
 
+@media (min-width: 0px) {
+  #content #wrapper #table,
+  #content #wrapper #details {
+    overflow-x: scroll;
+  }
+}
+
+@media (min-width: 800px) {
+  #content #wrapper #table,
+  #content #wrapper #details {
+    overflow-x: hidden;
+  }
+}
+
 #content #wrapper #table {
-  overflow-x: scroll;
   padding: 15px;
 }
 
@@ -414,9 +450,39 @@ nav.navbar .navbar-toggler {
   border: 0px;
 }
 
+@media (min-width: 0px) {
+  #content #wrapper #table table {
+    width: auto;
+  }
+}
+
+@media (min-width: 500px) {
+  #content #wrapper #table table {
+    width: 100%;
+  }
+}
+
 #content #wrapper #table table th {
   background-color: #f9f9f9;
   font-weight: 700;
+}
+
+#content #wrapper #table table td.settings {
+  background-color: #f9f9f9;
+}
+
+#content #wrapper #table table td.settings a {
+  font-size: 10px;
+  color: #777777;
+  margin-right: 10px;
+}
+
+#content #wrapper #table table td.settings a:hover {
+  color: #2878b3;
+}
+
+#content #wrapper #table table td.settings a i {
+  margin-right: 2px;
 }
 
 #content #wrapper #table table th,
@@ -432,13 +498,86 @@ nav.navbar .navbar-toggler {
   background-color: #dbd9d9;
 }
 
+#content #wrapper #details {
+  padding: 10px 15px;
+  margin: 0px;
+}
+
+#content #wrapper #details table td:nth-child(1) {
+  padding-right: 20px;
+  font-weight: 700;
+  color: #2878b3;
+}
+
+#content #wrapper #details .actions {
+  padding: 10px 15px;
+  margin: 0px;
+}
+
+#content #wrapper #details .actions a {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+@media (min-width: 0px) {
+  #content #wrapper #details .actions a {
+    display: inline-block;
+    padding: 10px;
+    margin: 0px;
+  }
+}
+
+@media (min-width: 800px) {
+  #content #wrapper #details .actions a {
+    display: block;
+    padding: 10px;
+    margin: 0px 0px 5px 0px;
+  }
+}
+
+#content #wrapper #details .actions a:hover {
+  opacity: 0.5;
+}
+
+#content #wrapper #details .actions a.edit {
+  background-color: #1c5e8e;
+}
+
+#content #wrapper #details .actions a.delete {
+  background-color: #777777;
+}
+
+#content #wrapper #details .actions a i {
+  margin-right: 10px;
+}
+
 /*Custom style*/
 
-.add-account form .username,
-.add-account form .password,
-.add-account form .emailAddress,
-.add-account form .accountName {
-  width: 48.8%;
-  display: inline-block;
+@media (min-width: 0px) {
+  #add-account form .username,
+  #add-account form .password,
+  #add-account form .emailAddress,
+  #add-account form .accountName,
+  #edit-account form .username,
+  #edit-account form .password,
+  #edit-account form .emailAddress,
+  #edit-account form .accountName {
+    width: 100%;
+    display: block;
+  }
+}
+
+@media (min-width: 800px) {
+  #add-account form .username,
+  #add-account form .password,
+  #add-account form .emailAddress,
+  #add-account form .accountName,
+  #edit-account form .username,
+  #edit-account form .password,
+  #edit-account form .emailAddress,
+  #edit-account form .accountName {
+    width: 48.5%;
+    display: inline-block;
+  }
 }
 
