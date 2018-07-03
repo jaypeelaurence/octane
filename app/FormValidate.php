@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 use Validator;
 
 class FormValidate extends Model
@@ -13,13 +15,15 @@ class FormValidate extends Model
     }
 
  	public function addUser(Request $request){
-        $validator = Validator::make($request->all(), [
+ 		$rules = array(
             'username' => "required|unique:users,username",
             'email' => "required|email",
             'password' => "required|confirmed|min:6	",
             'name' => "required",
             'role' => "required",
-        ]);
+        );
+
+        $validator = Validator::make($request->all(), $rules);
 
        	return $validator;
 	}
@@ -40,6 +44,20 @@ class FormValidate extends Model
  		}
 
         $validator = Validator::make($request->all(), $rules);
+
+       	return $validator;
+	}
+
+ 	public function changePass(Request $request, User $uid){
+		$rules = array(
+	        "oldPassword" => [
+	        	"required",
+	        	"checkPass:".$uid->password,
+	        ],
+	        "password" => "required|confirmed|min:6"
+		);
+
+		$validator = Validator::make($request->all(), $rules);
 
        	return $validator;
 	}

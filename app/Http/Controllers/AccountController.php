@@ -73,4 +73,16 @@ class AccountController extends Controller
         
         return view('account.change', compact('user'));
     }
+
+    public function changeUpdate(Request $request, User $uid){
+        $result = $this->formValidate->changePass($request, $uid);
+
+        if ($result->fails()) {
+            return redirect('account/'.$uid->id.'/change-password')->withErrors($result)->withInput();
+        }else{
+            $this->account->editUser($request->all(), $uid);
+
+            return redirect('account/'.$uid->id)->with('message', "Account ".$uid->username." changed password!");
+        }
+    }
 }

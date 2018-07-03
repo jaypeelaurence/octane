@@ -1,10 +1,14 @@
-@import 'template';
+	@import 'template';
 
 /*Main Style*/
 	body {
 		@include container(0px, 0px, 100%, auto);
-		background-color: $color2;
+		background-color: $color4;
 		@extend %font;
+
+		&#login{
+			background-color: $color2;
+		}
 	}
 
 	a, button {
@@ -115,6 +119,16 @@
 		}
 	}
 
+	#form, #wrapper{
+		.row{
+			margin: -5px;
+
+			.col-md-6, .col-md-4 {
+				padding: 6px;
+			}
+		}
+	}
+
 /*Section Style*/
 	#container{
 		@include container(10px 20px, 0px auto, 100%, auto, 1100px);
@@ -139,6 +153,16 @@
 		@include container(0px, 0px, 100%, auto);
 		background-color: $color2;
 		color: $color1;
+		width: 100%;
+
+		@media (min-width: 0px){
+			position: relative;
+		}
+
+		@media (min-width: 767px){
+			position: fixed;
+			bottom: 0;
+		}
 	}
 
 /*Login Style*/
@@ -171,18 +195,10 @@
   			.form-group{
 				@media (min-width: 0px){
 			  		text-align: center;
-	  				width: 100%;
-	  				display: block;
   				}
 
   				@media (min-width: 767px){
 			  		text-align: left;
-	  				width: 48.5%;
-	  				display: inline-block;
-		  				  				
-	  				&:nth-child(1){
-	  					margin-right: 10px;
-	  				}
   				}
 
   				label{
@@ -429,23 +445,6 @@
 							margin-right: 10px;
 						}
 					}
-				}
-			}
-		}
-	}
-
-/*Custom style*/
-	#add-account, #edit-account{
-		form {
-			.username, .password, .emailAddress, .accountName, .role{
-				@media (min-width: 0px){
-					width: 100%;
-					display: block;
-				}
-
-				@media (min-width: 800px){
-					width: 48.5%;
-					display: inline-block;
 				}
 			}
 		}

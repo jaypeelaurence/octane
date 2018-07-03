@@ -33,4 +33,4 @@ Route::get('/account/logout', 'SessionsController@destroy')->middleware('auth');
 Route::get('/account/{uid}', 'MainController@show')->middleware('auth');
 
 Route::get('/account/{uid}/change-password', 'AccountController@change')->middleware('auth');
-Route::post('/account/{uid}/change-password', 'AccountController@changeValidate')->middleware('auth');
+Route::post('/account/{uid}/change-password', 'AccountController@changeUpdate')->middleware('auth');
