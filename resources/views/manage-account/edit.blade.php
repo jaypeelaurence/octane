@@ -13,24 +13,34 @@
 					{{ csrf_field() }}
 				  	<div class="form-group username">
 				   		<label for="username">Username</label>
-				    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->username }}" name='username'>
+				    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->username }}" name='username' value="{{ old('username') }}">
+				  	</div>
+				  	<div class="form-group emailAddress">
+				    	<label for="username">Email Address</label>
+				    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->email }}" name='email' value="{{ old('email') }}">
 				  	</div>
 				  	<div class="form-group password">
 				    	<label for="exampleInputPassword1">Password</label>
 				    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="enter new password" name='password'>
 				  	</div>
-					  	<div class="form-group emailAddress">
-				    	<label for="username">Email Address</label>
-				    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->email }}" name='email'>
+				  	<div class="form-group password">
+				    	<label for="password_confirmation">Password Confirmation</label>
+				    	<input type="password" class="form-control form-control-sm" id="password_confirmation" placeholder="re-enter password" name='password_confirmation'>
 				  	</div>
 				  	<div class="form-group accountName">
 				    	<label for="username">Employee Name</label>
-				   	 	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->name }}" name='name'>
+				   	 	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->name }}" name='name' value="{{ old('name') }}">
 				  	</div>
 				  	<div class="form-group role">
 				    	<label for="username">Role</label>
 						<select class="form-control form-control-sm"  name='role'>
-					 		<option value='{{ $user->role }}'>{{ $user->role }}</option>
+							@if(old('role'))
+						  		<option value='role'>{{ old('role') }}</option>
+						  		@else
+					 				<option value='{{ $user->role }}'>{{ $user->role }}</option>
+					 			@endelse
+					  		@endif
+
 					 	 	@if ($user->role == 'Admin')
 						  		<option value='User'>User</option>
 							@else

@@ -13,29 +13,33 @@
 					{{ csrf_field() }}
 				  	<div class="form-group username">
 				   		<label for="username">Username</label>
-				    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" name='username' required>
+				    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter username" name='username' required value="{{ old('username') }}">
+				  	</div>
+				  	<div class="form-group emailAddress">
+				    	<label for="email">Email Address</label>
+				    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter emailaddress" name='email' required value="{{ old('email') }}">
 				  	</div>
 				  	<div class="form-group password">
 				    	<label for="password">Password</label>
-				    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="******" name='password' required>
-				  	</div>				  	<div class="form-group password">
-				    	<label for="password_confirmation">Password Confirmation</label>
-				    	<input type="password" class="form-control form-control-sm" id="password_confirmation" placeholder="******" name='password_confirmation' required>
+				    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="enter password" name='password' required  required>
 				  	</div>
-					  	<div class="form-group emailAddress">
-				    	<label for="username">Email Address</label>
-				    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="your@email.com" name='email' required>
+				  	<div class="form-group password">
+				    	<label for="password_confirmation">Password Confirmation</label>
+				    	<input type="password" class="form-control form-control-sm" id="password_confirmation" placeholder="re-enter password" name='password_confirmation' required>
 				  	</div>
 				  	<div class="form-group accountName">
 				    	<label for="username">Employee Name</label>
-				   	 	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Juan Dela Cruz" name='name' required>
+				   	 	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter employee name" name='name' required value="{{ old('name') }}">
 				  	</div>
 				  	<div class="form-group role">
 				    	<label for="username">Role</label>
 						<select class="form-control form-control-sm"  name='role' required>
-						  <option value=''>-- select a role --</option>
-						  <option value='Admin'>Admin</option>
-						  <option value='User'>User</option>
+							@if(old('role'))
+						  		<option value='role'>{{ old('role') }}</option>
+							@endif
+						  	<option value=''>-- select a role --</option>
+						  	<option value='Admin'>Admin</option>
+						  	<option value='User'>User</option>
 						</select>
 					</div>
 				  	<button type="submit" class="btn btn-primary">Create Account</button>

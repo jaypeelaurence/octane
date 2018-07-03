@@ -194,7 +194,11 @@
   					@extend %title4;
   					border-radius: 0px;
   					padding: 5px 10px;
-  					color: $color5;
+  					color: $color7;
+
+  					&::placeholder{
+  						color: $color5;
+  					}
   				}
   			}
 
@@ -293,6 +297,10 @@
 	  					border-radius: 0px;
 	  					padding: 5px 10px;
 	  					color: $color7;
+
+	  					&::placeholder{
+	  						color: $color5;
+	  					}
 	  				}
 				}
 
@@ -429,7 +437,7 @@
 /*Custom style*/
 	#add-account, #edit-account{
 		form {
-			.username, 	.password, .emailAddress, .accountName{
+			.username, .password, .emailAddress, .accountName, .role{
 				@media (min-width: 0px){
 					width: 100%;
 					display: block;

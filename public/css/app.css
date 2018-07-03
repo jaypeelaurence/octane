@@ -304,6 +304,22 @@ nav.navbar .navbar-toggler {
 #login #form .form-group .form-control {
   border-radius: 0px;
   padding: 5px 10px;
+  color: #777777;
+}
+
+#login #form .form-group .form-control::-webkit-input-placeholder {
+  color: #dbd9d9;
+}
+
+#login #form .form-group .form-control:-ms-input-placeholder {
+  color: #dbd9d9;
+}
+
+#login #form .form-group .form-control::-ms-input-placeholder {
+  color: #dbd9d9;
+}
+
+#login #form .form-group .form-control::placeholder {
   color: #dbd9d9;
 }
 
@@ -414,6 +430,22 @@ nav.navbar .navbar-toggler {
   border-radius: 0px;
   padding: 5px 10px;
   color: #777777;
+}
+
+#content #wrapper form .form-group .form-control::-webkit-input-placeholder {
+  color: #dbd9d9;
+}
+
+#content #wrapper form .form-group .form-control:-ms-input-placeholder {
+  color: #dbd9d9;
+}
+
+#content #wrapper form .form-group .form-control::-ms-input-placeholder {
+  color: #dbd9d9;
+}
+
+#content #wrapper form .form-group .form-control::placeholder {
+  color: #dbd9d9;
 }
 
 #content #wrapper form button {
@@ -558,10 +590,12 @@ nav.navbar .navbar-toggler {
   #add-account form .password,
   #add-account form .emailAddress,
   #add-account form .accountName,
+  #add-account form .role,
   #edit-account form .username,
   #edit-account form .password,
   #edit-account form .emailAddress,
-  #edit-account form .accountName {
+  #edit-account form .accountName,
+  #edit-account form .role {
     width: 100%;
     display: block;
   }
@@ -572,10 +606,12 @@ nav.navbar .navbar-toggler {
   #add-account form .password,
   #add-account form .emailAddress,
   #add-account form .accountName,
+  #add-account form .role,
   #edit-account form .username,
   #edit-account form .password,
   #edit-account form .emailAddress,
-  #edit-account form .accountName {
+  #edit-account form .accountName,
+  #edit-account form .role {
     width: 48.5%;
     display: inline-block;
   }
