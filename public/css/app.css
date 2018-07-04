@@ -472,13 +472,23 @@ nav.navbar .navbar-toggler {
 #content #wrapper form button {
   padding: 5px 10px;
   margin: 0px 5px;
-  display: block;
+  margin-right: 5px;
+  display: inline-block;
   border: 0px;
   background-color: #2878b3;
 }
 
 #content #wrapper form button:hover {
   background-color: #1c5e8e;
+}
+
+#content #wrapper form button.reset {
+  background-color: #dbd9d9;
+  color: #777777;
+}
+
+#content #wrapper form button.reset:hover {
+  background-color: #f9f9f9;
 }
 
 @media (min-width: 0px) {

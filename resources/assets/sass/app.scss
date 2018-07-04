@@ -321,12 +321,22 @@
 					@extend %title3;
 					padding: 5px 10px;
 					margin: 0px 5px;
-					display: block;
+					margin-right: 5px;
+					display: inline-block;
 					border: 0px;
 					background-color: $color2;
 
 					&:hover{
 						background-color: $color3;
+					}
+
+					&.reset{
+						background-color: $color5;
+						color: $color7;
+
+						&:hover{
+							background-color: $color4;
+						}
 					}
 				}
 			}
