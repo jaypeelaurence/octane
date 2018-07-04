@@ -7,7 +7,7 @@
 @section('body')
 	<div id="content">
 		<div id="wrapper">
-			<h1 class='title'>{{ $user->name }}</h1>
+			<h1 class='title'>{{ $user->firstname }} {{ $user->lastname }}</h1>
 			<div id="details">
 				<div class="row">
 					<div class="col-md-9">
@@ -17,16 +17,16 @@
 								<td>{{ $user->id }}</td>
 							<tr>
 							<tr>
-								<td>Username</td>
-								<td>{{ $user->username }}</td>
+								<td>Name</td>
+								<td>{{ $user->firstname }} {{ $user->lastname }}</td>
 							<tr>
 							<tr>
 								<td>Email Address</td>
 								<td>{{ $user->email }}</td>
 							<tr>
 							<tr>
-								<td>Employee Name</td>
-								<td>{{ $user->name }}</td>
+								<td>Mobile Number</td>
+								<td>{{ $user->mobile }}</td>
 							<tr>
 							<tr>
 								<td>Role</td>

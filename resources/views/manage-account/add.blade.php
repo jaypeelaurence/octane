@@ -12,51 +12,51 @@
 				<form method="POST" action="/manage-account/add">
 					{{ csrf_field() }}
 				  	<div class="row">
-				  		<div class="col-md-6">
-						  	<div class="form-group username">
-						   		<label for="username">Username</label>
-						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter username" name='username' required value="{{ old('username') }}">
+				  		<div class="col-md-4">
+						  	<div class="form-group firstname">
+						    	<label for="firstname">First Name *</label>
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter first name" name='firstname' required value="{{ old('firstname') }}">
 						  	</div>
 					  	</div>
-				  		<div class="col-md-6">
-						  	<div class="form-group emailAddress">
-						    	<label for="email">Email Address</label>
-						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter emailaddress" name='email' required value="{{ old('email') }}">
+					  	<div class="col-md-4">
+						  	<div class="form-group middlename">
+						    	<label for="middlename">Middle Name *</label>
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter middle name" name='middlename' required value="{{ old('middlename') }}">
 						  	</div>
 					  	</div>
-				  		<div class="col-md-6">
-						  	<div class="form-group password">
-						    	<label for="password">Password</label>
-						    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="enter password" name='password' required  required>
+					  	<div class="col-md-4">
+						  	<div class="form-group lastname">
+						    	<label for="lastname">Last Name *</label>
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter last name" name='lastname' required value="{{ old('lastname') }}">
 						  	</div>
 					  	</div>
-				  		<div class="col-md-6">
-						  	<div class="form-group password">
-						    	<label for="password_confirmation">Password Confirmation</label>
-						    	<input type="password" class="form-control form-control-sm" id="password_confirmation" placeholder="re-enter password" name='password_confirmation' required>
+					  	<div class="col-md-6">
+						  	<div class="form-group email">
+						    	<label for="email">Email Address *</label>
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter email address" name='email' required value="{{ old('email') }}">
 						  	</div>
 					  	</div>
-				  		<div class="col-md-6">
-						  	<div class="form-group accountName">
-						    	<label for="username">Employee Name</label>
-						   	 	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter employee name" name='name' required value="{{ old('name') }}">
+					  	<div class="col-md-6">
+						  	<div class="form-group mobile">
+						    	<label for="mobile">Mobile *</label>
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter moible number" name='mobile' required value="{{ old('mobile') }}">
 						  	</div>
 					  	</div>
-				  		<div class="col-md-6">
+						<div class="col-md-12">
 						  	<div class="form-group role">
-						    	<label for="username">Role</label>
+						    	<label for="username">Role *</label>
 								<select class="form-control form-control-sm"  name='role' required>
 									@if(old('role'))
-								  		<option value='role'>{{ old('role') }}</option>
+								  		<option value='{{ old('role') }}'>{{ old('role') }}</option>
 									@endif
 								  	<option value=''>-- select a role --</option>
 								  	<option value='Admin'>Admin</option>
 								  	<option value='User'>User</option>
 								</select>
 							</div>
-						</div>
+						</div>	  	
 					</div>
-				  	<button type="submit" class="btn btn-primary">Create Account</button>
+					<button type="submit" class="btn btn-primary">Create Account</button>
 				</form>
 			</div>
 		</div>

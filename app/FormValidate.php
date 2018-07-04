@@ -16,10 +16,11 @@ class FormValidate extends Model
 
  	public function addUser(Request $request){
  		$rules = [
-      'username' => "required|unique:users,username",
-      'email' => "required|email",
-      'password' => "required|confirmed|min:6	",
-      'name' => "required",
+      'lastname' => "required",
+      'middlename' => "required",
+      'firstname' => "required",
+      'email' => "required|unique:users,email|email",
+      'mobile' => "required|unique:users,mobile|mobile",
       'role' => "required",
     ];
 
@@ -30,14 +31,14 @@ class FormValidate extends Model
 
  	public function editUser(Request $request){
  		$rules = [];
-
- 		if($request->input('username') != null){
- 			$rules['username'] = "unique:users,username";
- 		}
- 		
- 		if($request->input('email') != null){
- 			$rules['email'] = "email";
- 		}
+    
+    if($request->input('email') != null){
+      $rules['email'] = "unique:users,email|email";
+    }
+    
+    if($request->input('mobile') != null){
+      $rules['mobile'] = "unique:users,mobile|mobile";
+    }
 
  		if($request->input('password') != null){
  			$rules['password'] = "confirmed|min:6";

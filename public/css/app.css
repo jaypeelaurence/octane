@@ -214,10 +214,12 @@ nav.navbar .navbar-toggler {
 #form .row .col-md-4,
 #form .row .col-md-9,
 #form .row .col-md-3,
+#form .row .col-md-12,
 #wrapper .row .col-md-6,
 #wrapper .row .col-md-4,
 #wrapper .row .col-md-9,
-#wrapper .row .col-md-3 {
+#wrapper .row .col-md-3,
+#wrapper .row .col-md-12 {
   padding: 6px;
 }
 

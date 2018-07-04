@@ -7,21 +7,39 @@
 @section('body')
 	<div id="content">
 		<div id="wrapper">
-			<h1 class='title'>{{ $user->name }} | Edit</h1>
+			<h1 class='title'>{{ $user->firstname }} {{ $user->lastname }} | Edit</h1>
 			<div id="edit-account">
 				<form method="POST" action="/manage-account/{{ $user->id }}/edit">
 					{{ csrf_field() }}
 				  	<div class="row">
-				  		<div class="col-md-6">
-						  	<div class="form-group username">
-						   		<label for="username">Username</label>
-						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->username }}" name='username' value="{{ old('username') }}">
+				  		<div class="col-md-4">
+						  	<div class="form-group firstname">
+						    	<label for="firstname">First Name</label>
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->firstname }}" name='firstname' value="{{ old('firstname') }}">
 						  	</div>
 					  	</div>
-				  		<div class="col-md-6">
-						  	<div class="form-group emailAddress">
-						    	<label for="username">Email Address</label>
+					  	<div class="col-md-4">
+						  	<div class="form-group middlename">
+						    	<label for="middlename">Middle Name</label>
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->middlename }}" name='middlename' value="{{ old('middlename') }}">
+						  	</div>
+					  	</div>
+					  	<div class="col-md-4">
+						  	<div class="form-group lastname">
+						    	<label for="lastname">Last Name</label>
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->lastname }}" name='lastname' value="{{ old('lastname') }}">
+						  	</div>
+					  	</div>
+					  	<div class="col-md-6">
+						  	<div class="form-group email">
+						    	<label for="email">Email Address</label>
 						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->email }}" name='email' value="{{ old('email') }}">
+						  	</div>
+					  	</div>
+					  	<div class="col-md-6">
+						  	<div class="form-group mobile">
+						    	<label for="mobile">Mobile</label>
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->mobile }}" name='mobile' value="{{ old('mobile') }}">
 						  	</div>
 					  	</div>
 				  		<div class="col-md-6">
@@ -33,21 +51,15 @@
 				  		<div class="col-md-6">
 						  	<div class="form-group password">
 						    	<label for="password_confirmation">Password Confirmation</label>
-						    	<input type="password" class="form-control form-control-sm" id="password_confirmation" placeholder="re-enter password" name='password_confirmation'>
+						    	<input type="password" class="form-control form-control-sm" id="password_confirmation" placeholder="re-enter new password" name='password_confirmation'>
 						  	</div>
 					  	</div>
-				  		<div class="col-md-6">
-						  	<div class="form-group accountName">
-						    	<label for="username">Employee Name</label>
-						   	 	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->name }}" name='name' value="{{ old('name') }}">
-						  	</div>
-					  	</div>
-				  		<div class="col-md-6">
+				  		<div class="col-md-12">
 						  	<div class="form-group role">
 						    	<label for="username">Role</label>
 								<select class="form-control form-control-sm"  name='role'>
 									@if(old('role'))
-								  		<option value='role'>{{ old('role') }}</option>
+								  		<option value='{{ old('role') }}'>{{ old('role') }}</option>
 								  		@else
 							 				<option value='{{ $user->role }}'>{{ $user->role }}</option>
 							 			@endelse

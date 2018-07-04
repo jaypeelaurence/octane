@@ -22,6 +22,15 @@ class AppServiceProvider extends ServiceProvider
                 return true;
             }
         }, 'The old password field is incorrect.');
+
+        //Validates MobileNumber
+        Validator::extend('mobile', function ($attribute, $value, $parameters){
+            if(strlen($value) != 12 || substr($value, 0, 2) != '63' || is_numeric($value) == false){
+                return false;
+            }else{
+                return true;
+            }
+        }, 'The mobile number must be a valid.');
     }
 
     /**

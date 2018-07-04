@@ -15,7 +15,7 @@
 							<th class='date'>UID</th>
 							<th>Name</th>
 							<th>Email Address</th>
-							<th>Username</th>
+							<th>Mobile Number</th>
 							<th>Role</th>
 							<th>Created At</th>
 							<th>Updated At</th>
@@ -26,9 +26,9 @@
 						@foreach ($user as $value)
 							<tr>
 								<td class='date'>{{ $value->id }}</td>
-								<td>{{ $value->name }}</td>
+								<td>{{ $value->firstname }} {{ $value->lastname }} </td>
 								<td>{{ $value->email }}</td>
-								<td>{{ $value->username }}</td>
+								<td>{{ $value->mobile }}</td>
 								<td>{{ $value->role }}</td>
 								<td>{{ $value->created_at }}</td>
 								<td>{{ $value->updated_at }}</td>
