@@ -34,3 +34,5 @@ Route::get('/account/{uid}', 'MainController@show')->middleware('auth');
 
 Route::get('/account/{uid}/change-password', 'AccountController@change')->middleware('auth');	
 Route::post('/account/{uid}/change-password', 'AccountController@changeUpdate')->middleware('auth');
+
+Route::get('/error/{code}', 'MainController@error');

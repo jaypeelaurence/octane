@@ -9,7 +9,7 @@ use App\User;
 
 class Account extends Model{
     function __construct(){
-        $this->user = new User;
+        $this->user = new User();
     }
 
     public function viewUser($uid = null){

@@ -19,8 +19,8 @@
 					<div class='row'>
 						<div class='col-md-6'>
 						  	<div class="form-group">
-						    	<label for="username">Username</label>
-						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter your username" name="username" required value="{{ old('username') }}">
+						    	<label for="email">Email Address</label>
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter your email address" name="email" required value="{{ old('emailaddress') }}">
 					 		</div>
 				 		</div>
 					  	<div class="col-md-6">

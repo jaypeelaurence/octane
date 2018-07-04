@@ -11,25 +11,25 @@ use Validator;
 class FormValidate extends Model
 {
     function __construct(){
-        $this->account = new Account;
+      $this->account = new Account();
     }
 
  	public function addUser(Request $request){
- 		$rules = array(
-            'username' => "required|unique:users,username",
-            'email' => "required|email",
-            'password' => "required|confirmed|min:6	",
-            'name' => "required",
-            'role' => "required",
-        );
+ 		$rules = [
+      'username' => "required|unique:users,username",
+      'email' => "required|email",
+      'password' => "required|confirmed|min:6	",
+      'name' => "required",
+      'role' => "required",
+    ];
 
-        $validator = Validator::make($request->all(), $rules);
+    $validator = Validator::make($request->all(), $rules);
 
-       	return $validator;
+   	return $validator;
 	}
 
  	public function editUser(Request $request){
- 		$rules = array();
+ 		$rules = [];
 
  		if($request->input('username') != null){
  			$rules['username'] = "unique:users,username";
@@ -43,22 +43,33 @@ class FormValidate extends Model
  			$rules['password'] = "confirmed|min:6";
  		}
 
-        $validator = Validator::make($request->all(), $rules);
+    $validator = Validator::make($request->all(), $rules);
 
-       	return $validator;
+   	return $validator;
 	}
 
- 	public function changePass(Request $request, User $uid){
-		$rules = array(
-	        "oldPassword" => [
-	        	"required",
-	        	"checkPass:".$uid->password,
-	        ],
-	        "password" => "required|confirmed|min:6"
-		);
+  public function changePass(Request $request, User $uid){
+    $rules = [
+      "oldPassword" => [
+        "required",
+        "checkPass:".$uid->password,
+      ],
+      "password" => "required|confirmed|min:6"
+    ];
+
+    $validator = Validator::make($request->all(), $rules);
+
+    return $validator;
+  }
+
+ 	public function login(Request $request){
+		$rules = [
+      "email" => "required|email",
+      "password" => "required"
+		];
 
 		$validator = Validator::make($request->all(), $rules);
 
-       	return $validator;
+   	return $validator;
 	}
 }

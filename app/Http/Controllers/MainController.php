@@ -8,10 +8,11 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Account;
+use App\ErrorCode;
 
 class MainController extends Controller{
     function __construct(){
-        $this->account = new Account;
+        $this->account = new Account();
     }
 
 	public function show(User $uid){
@@ -22,5 +23,16 @@ class MainController extends Controller{
 
 	public function index(){
 		return view('main.index');
+	}
+
+	public function error($code){
+		$getError = new ErrorCode($code);
+
+		$error = [
+			'code' => $getError->code(),
+			'message' => $getError->message(),
+		];
+
+		return view('main.error', compact("error"));
 	}
 }

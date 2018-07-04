@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 class AccountController extends Controller
 {
     function __construct(){
-        $this->account = new Account;
-        $this->formValidate = new FormValidate;
+        $this->account = new Account();
+        $this->formValidate = new FormValidate();
     }
 
     public function index(){

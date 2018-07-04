@@ -6,12 +6,14 @@ use App\User;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\FormValidate;
 
 class SessionsController extends Controller
 {
     function __construct(){
     	$this->middleware('guest', ['except' => 'destroy']);
-        $this->user = new User;
+        $this->user = new User();
+        $this->formValidate = new FormValidate();
     }
 
 	public function create(){
@@ -19,18 +21,24 @@ class SessionsController extends Controller
 	}
 
 	public function store(Request $request){
-		$user = $this->user::where('username',$request->username)
-			->where('password',md5($request->password));
+		$result = $this->formValidate->login($request);
 
-		if(count($user->get()) == 1){
-			$getUser = $user->get();
+        if(!$result->fails()) {
+			$user = $this->user::where('email',$request->email)
+				->where('password',md5($request->password));
 
-			auth()->login($getUser[0]);
+			if(count($user->get()) == 1){
+				$getUser = $user->get();
 
-	        return redirect()->home();
+				auth()->login($getUser[0]);
+
+		        return redirect()->home();
+			}else{
+				return back()->withErrors(['message' => 'Incorrect Email Address or password']);
+			}
 		}else{
-			return back()->withErrors(['message' => 'Incorrect username or password']);
-		}
+			return back()->withErrors($result)->withInput();
+        }
 	}
 
 	public function destroy(){
