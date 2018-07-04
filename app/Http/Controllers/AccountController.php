@@ -33,7 +33,7 @@ class AccountController extends Controller
         }else{
             $uid = $this->account->addUser($request->all());
 
-            return redirect('manage-account/'.$uid)->with('message', "Account ".request('username')." was created!");
+            return redirect('manage-account/'.$uid)->with('message', "Account ".request('firstname')." ".request('lastname')." was created!");
         }
     }
 
@@ -58,14 +58,14 @@ class AccountController extends Controller
         }else{
             $this->account->editUser($request->all(), $uid);
 
-            return redirect('manage-account/'.$uid->id)->with('message', "Account ".$uid->username." was edited!");
+            return redirect('manage-account/'.$uid->id)->with('message', "Account ".$uid->firstname." ".$uid->lastname." was edited!");
         }
     }
 
     public function destroy(User $uid){
         $this->account->deleteUser($uid);
 
-        return redirect('manage-account/')->with('message', "Account ".$uid->username." was deleted!");
+        return redirect('manage-account/')->with('message', "Account ".$uid->firstname." ".$uid->lastname." was deleted!");
     }
 
     public function change(User $uid){
@@ -82,7 +82,7 @@ class AccountController extends Controller
         }else{
             $this->account->editUser($request->all(), $uid);
 
-            return redirect('account/'.$uid->id)->with('message', "Account ".$uid->username." changed password!");
+            return redirect('account/'.$uid->id)->with('message', "Account ".$uid->firstname." ".$uid->lastname." changed password!");
         }
     }
 }

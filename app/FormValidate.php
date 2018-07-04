@@ -17,7 +17,6 @@ class FormValidate extends Model
  	public function addUser(Request $request){
  		$rules = [
       'lastname' => "required",
-      'middlename' => "required",
       'firstname' => "required",
       'email' => "required|unique:users,email|email",
       'mobile' => "required|unique:users,mobile|mobile",
