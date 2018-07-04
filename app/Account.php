@@ -31,7 +31,7 @@ class Account extends Model{
             }
         }
 
-        $values['remember_token'] =  bcrypt(time().rand(0,100));
+        $values['remember_token'] =  md5(time().rand(0,100));
         
         $addUser = $this->user::create($values);
 

@@ -29,6 +29,7 @@
           Account
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/account/{{ Auth::user()->id }}">My Account</a>
           <a class="dropdown-item" href="/account/{{ Auth::user()->id }}/change-password">Change Password</a>
           <a class="dropdown-item" href="/account/logout">Logout</a>
         </div>

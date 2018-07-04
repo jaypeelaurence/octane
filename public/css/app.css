@@ -212,8 +212,12 @@ nav.navbar .navbar-toggler {
 
 #form .row .col-md-6,
 #form .row .col-md-4,
+#form .row .col-md-9,
+#form .row .col-md-3,
 #wrapper .row .col-md-6,
-#wrapper .row .col-md-4 {
+#wrapper .row .col-md-4,
+#wrapper .row .col-md-9,
+#wrapper .row .col-md-3 {
   padding: 6px;
 }
 
@@ -255,19 +259,8 @@ nav.navbar .navbar-toggler {
   background-color: #2878b3;
   color: #ffffff;
   width: 100%;
-}
-
-@media (min-width: 0px) {
-  #footer {
-    position: relative;
-  }
-}
-
-@media (min-width: 767px) {
-  #footer {
-    position: fixed;
-    bottom: 0;
-  }
+  position: fixed;
+  bottom: 0;
 }
 
 /*Login Style*/
@@ -438,10 +431,14 @@ nav.navbar .navbar-toggler {
   margin: 0px;
 }
 
+#content #wrapper form .row {
+  padding: 0px 5px;
+  margin-bottom: 10px;
+}
+
 #content #wrapper form .form-group {
   padding: 0px;
-  margin: 0px 5px;
-  margin-bottom: 10px;
+  margin: 0px;
 }
 
 #content #wrapper form .form-group label {
@@ -557,14 +554,24 @@ nav.navbar .navbar-toggler {
   margin: 0px;
 }
 
-#content #wrapper #details table td:nth-child(1) {
+#content #wrapper #details table td {
+  padding: 5px 10px;
   padding-right: 20px;
+  border: 1px solid #ffffff;
+}
+
+#content #wrapper #details table td:nth-child(1) {
   font-weight: 700;
   color: #2878b3;
+  background-color: #dbd9d9;
+}
+
+#content #wrapper #details table td:nth-child(2) {
+  background-color: #f9f9f9;
 }
 
 #content #wrapper #details .actions {
-  padding: 10px 15px;
+  padding: 10px;
   margin: 0px;
 }
 

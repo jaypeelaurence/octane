@@ -60,6 +60,6 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->guest(route('login'));
+        return redirect("account/login")->withErrors(['message' => "You are not authorized to view the page!"]);
     }
 }
