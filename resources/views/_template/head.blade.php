@@ -10,4 +10,7 @@
 
 <link rel="stylesheet" type="text/css" href="/css/app.css"/>
 
+
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/vnd.microsoft.icon" />
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

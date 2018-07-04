@@ -20,7 +20,7 @@
 					  	</div>
 					  	<div class="col-md-4">
 						  	<div class="form-group middlename">
-						    	<label for="middlename">Middle Name *</label>
+						    	<label for="middlename">Middle Name</label>
 						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter middle name" name='middlename' value="{{ old('middlename') }}">
 						  	</div>
 					  	</div>
