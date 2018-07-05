@@ -34,7 +34,7 @@ class SessionsController extends Controller
 
 		        return redirect()->home();
 			}else{
-				return back()->withErrors(['message' => 'Incorrect Email Address or password']);
+				return back()->withErrors(['message' => 'Incorrect Email Address or password'])->withInput();
 			}
 		}else{
 			return back()->withErrors($result)->withInput();

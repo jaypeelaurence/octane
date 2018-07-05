@@ -538,6 +538,7 @@ nav.navbar .navbar-toggler {
   font-size: 10px;
   color: #777777;
   margin-right: 10px;
+  display: inline-block;
 }
 
 #content #wrapper #table table td.settings a:hover {

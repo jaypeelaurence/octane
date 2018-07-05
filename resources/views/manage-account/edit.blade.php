@@ -75,7 +75,7 @@
 						</div>
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
-					<button type="reset" class="btn btn-primary reset">Reset</button>
+					<button type="reset" class="btn btn-primary reset">Clear</button>
 				</form>
 			</div>
 		</div>
