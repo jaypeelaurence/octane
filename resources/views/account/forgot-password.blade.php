@@ -1,7 +1,7 @@
 @extends('login')
 
 @section('pageTitle')
-	Login
+	Forgot Password
 @endsection
 
 @section('body')
@@ -14,25 +14,19 @@
 			@include('_template.alert')
 
 			<div id=form>
-				<form method="POST" action="/account/login">
+				<form method="POST" action="/account/forgot-password">
 					{{ csrf_field() }}
 					<div class='row'>
-						<div class='col-md-6'>
+						<div class='col-md-12'>
 						  	<div class="form-group">
 						    	<label for="email">Email Address</label>
 						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter your email address" name="email" required value="{{ old('email') }}">
 					 		</div>
 				 		</div>
-					  	<div class="col-md-6">
-						  	<div class="form-group">
-						    	<label for="exampleInputPassword1">Password</label>
-						    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="enter your password" name="password" required>
-						  	</div>
-					  	</div>
 					</div>
-				  <button type="submit" class="btn btn-primary">Login</button>
+				  <button type="submit" class="btn btn-primary">Verify Email Address</button>
 				</form>
-				<a class='action' href="forgot-password">Forgot Password</a>
+				<a class='action' href="/account/login">Go back to login page</a>
 			</div>
 		</div>
 		<div id="container">

@@ -23,10 +23,13 @@ Route::get('/manage-account/{uid}', 'AccountController@show')->middleware('auth'
 Route::get('/manage-account/{uid}/edit', 'AccountController@edit')->middleware('auth');
 Route::post('/manage-account/{uid}/edit', 'AccountController@update')->middleware('auth');
 
-Route::get('/manage-account/{uid}/delete', 'AccountController@destroy')->middleware('auth');
+Route::post('/manage-account/{uid}', 'AccountController@destroy')->middleware('auth');
 
 Route::get('/account/login', 'SessionsController@create');
 Route::post('/account/login', 'SessionsController@store');
+
+Route::get('/account/forgot-password', 'SessionsController@forgotCreate');
+Route::post('/account/forgot-password', 'SessionsController@forgotStore');
 
 Route::get('/account/logout', 'SessionsController@destroy')->middleware('auth');
 
@@ -37,6 +40,7 @@ Route::post('/account/{uid}/change-password', 'AccountController@changeUpdate')-
 
 Route::get('/account/{uid}', 'MainController@show')->middleware('auth');
 
-Route::get('/report', 'MainController@show')->middleware('auth');
+Route::get('/report', 'ReportController@index')->middleware('auth');
+Route::post('/report', 'ReportController@show')->middleware('auth');
 
 Route::get('/error/{code}', 'MainController@error');

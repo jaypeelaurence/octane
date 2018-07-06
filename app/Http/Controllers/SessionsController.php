@@ -46,4 +46,20 @@ class SessionsController extends Controller
 
         return redirect('/account/login');
 	}
+
+    public function forgotCreate(){
+        return view('account.forgot-password');
+    }
+
+    public function forgotStore(Request $request){
+        $result = $this->formValidate->forgot($request);
+
+		$user = $this->user::where('email',$request->email);
+
+		if(count($user->get()) == 1){
+            return back()->with(['message' => 'Sent an email to ' . $request->email . ' for to reset your password.']);
+        }else{
+            return back()->withErrors(['message' => 'Email address not registered.'])->withInput();
+        }
+    }
 }

@@ -50,7 +50,7 @@ class AccountController extends Controller
         return view('manage-account.edit', compact('user'));
     }
 
-    public function update(Request $request, User $uid){
+    public function update(User $uid){
         $result = $this->formValidate->editUser($request);
         
         if ($result->fails()) {

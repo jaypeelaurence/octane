@@ -44,7 +44,10 @@
 					</div>
 					<div class="col-md-3 actions">
 						<a href="{{ $user->id }}/edit" class='edit'><i class="fa fa-edit"></i>Edit</a>
-						<a href="{{ $user->id }}/delete" class='delete'><i class="fa fa-trash"></i>Delete</a>
+						<form action="{{ $user->id }}" method="POST">
+							{{ csrf_field() }}
+							<button type="submit"><i class="fa fa-trash"></i>Delete</a></button>
+						</form>
 					</div>
 				</div>
 			</div>

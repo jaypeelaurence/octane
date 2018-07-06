@@ -62,14 +62,24 @@ class FormValidate extends Model
     return $validator;
   }
 
- 	public function login(Request $request){
-		$rules = [
+  public function login(Request $request){
+    $rules = [
       "email" => "required|email",
       "password" => "required"
-		];
+    ];
 
-		$validator = Validator::make($request->all(), $rules);
+    $validator = Validator::make($request->all(), $rules);
 
-   	return $validator;
-	}
+    return $validator;
+  }
+
+  public function forgot(Request $request){
+    $rules = [
+      "email" => "required|email",
+    ];
+
+    $validator = Validator::make($request->all(), $rules);
+
+    return $validator;
+  }
 }

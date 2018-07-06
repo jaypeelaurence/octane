@@ -35,7 +35,10 @@
 								<td class='settings'>
 									<a href="manage-account/{{ $value->id }}"><i class="fa fa-eye"></i>View</a>
 									<a href="manage-account/{{ $value->id }}/edit"><i class="fa fa-edit"></i>Edit</a>
-									<a href="manage-account/{{ $value->id }}/delete"><i class="fa fa-trash"></i>Delete</a>
+									<form action="manage-account/{{ $value->id }}" method="POST">
+										{{ csrf_field() }}
+										<button type="submit"><i class='fa fa-edit'></i>Delete</button>
+									</form>
 								</td>
 							</tr>
 						@endforeach

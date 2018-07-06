@@ -50,10 +50,12 @@ button:hover {
 
 .alert,
 #login #form .form-group .form-control,
+#login .action,
 #content #wrapper form .form-group .form-control,
 #content #wrapper #table table th,
 #content #wrapper #table table td,
-#content #wrapper #details .actions a {
+#content #wrapper #details .actions a,
+#content #wrapper #details .actions form button {
   padding: 0px;
   margin: 0px;
   marign-bottom: 15px;
@@ -352,6 +354,16 @@ nav.navbar .navbar-toggler {
   background-color: #1c5e8e;
 }
 
+#login .action {
+  display: block;
+  margin-top: 10px;
+  color: #777777;
+}
+
+#login .action:hover {
+  color: #1c5e8e;
+}
+
 /*Page Style*/
 
 #dashboard {
@@ -409,6 +421,11 @@ nav.navbar .navbar-toggler {
   width: 100%;
   height: auto;
   background-color: #ffffff;
+}
+
+#content.filter {
+  -webkit-box-shadow: 0px 3px 2px 1px rgba(119, 119, 119, 0.3);
+          box-shadow: 0px 3px 2px 1px rgba(119, 119, 119, 0.3);
 }
 
 #content .title {
@@ -549,6 +566,33 @@ nav.navbar .navbar-toggler {
   margin-right: 2px;
 }
 
+#content #wrapper #table table td.settings form {
+  padding: 0px;
+  margin: 0px;
+  width: auto;
+  display: inline-block;
+}
+
+#content #wrapper #table table td.settings form button {
+  padding: 0px;
+  margin: 0px;
+  font-size: 10px;
+  color: #777777;
+  margin-right: 10px;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0);
+  display: inline-block;
+}
+
+#content #wrapper #table table td.settings form button:hover {
+  color: #2878b3;
+  cursor: pointer;
+}
+
+#content #wrapper #table table td.settings form button i {
+  margin-right: 2px;
+}
+
 #content #wrapper #table table th,
 #content #wrapper #table table td {
   padding: 5px 10px;
@@ -591,6 +635,7 @@ nav.navbar .navbar-toggler {
 #content #wrapper #details .actions a {
   font-weight: 700;
   color: #ffffff;
+  background-color: #1c5e8e;
 }
 
 @media (min-width: 0px) {
@@ -613,15 +658,54 @@ nav.navbar .navbar-toggler {
   opacity: 0.5;
 }
 
-#content #wrapper #details .actions a.edit {
-  background-color: #1c5e8e;
-}
-
-#content #wrapper #details .actions a.delete {
-  background-color: #777777;
-}
-
 #content #wrapper #details .actions a i {
   margin-right: 10px;
+}
+
+#content #wrapper #details .actions form {
+  padding: 0px;
+  margin: 0px;
+}
+
+#content #wrapper #details .actions form button {
+  background-color: #777777;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+}
+
+@media (min-width: 0px) {
+  #content #wrapper #details .actions form button {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px 0px 5px 0px;
+  }
+}
+
+@media (min-width: 800px) {
+  #content #wrapper #details .actions form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 0px 0px 5px 0px;
+  }
+}
+
+#content #wrapper #details .actions form button:hover {
+  opacity: 0.5;
+}
+
+#content #wrapper #details .actions form button i {
+  margin-right: 10px;
+}
+
+h1#message {
+  font-size: 5em;
+  font-weight: 300;
+  text-align: center;
+  margin: 100px 0px;
+  padding: 0px;
+  color: #dbd9d9;
 }
 

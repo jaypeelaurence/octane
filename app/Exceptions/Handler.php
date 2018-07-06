@@ -48,6 +48,10 @@ class Handler extends ExceptionHandler
         if ($exception instanceof NotFoundHttpException){
             return redirect("error/100");
         }
+
+        // if ($exception instanceof NotFoundHttpException){
+        //     return redirect("error/100");
+        // }
         
         return parent::render($request, $exception);
     }

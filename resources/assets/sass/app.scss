@@ -224,6 +224,17 @@
 				}
   			}
 		}
+
+		.action{
+			@extend %title4;
+			display: block;
+			margin-top: 10px;
+			color: $color7;
+
+			&:hover{
+				color: $color3;
+			}
+		}
 	}
 
 /*Page Style*/
@@ -271,6 +282,10 @@
 	#content{
 		@include container(0px, 15px 0px, 100%, auto);
 		background-color: #ffffff;
+
+		&.filter{
+		 	box-shadow: 0px 3px 2px 1px rgba(119, 119, 119, 0.3);
+		}
 
 		.title{
 			@include container(15px, 0px);
@@ -386,6 +401,32 @@
 									margin-right: 2px;
 								}
 							}
+
+							form{
+								@include container(0px, 0px);
+								width: auto;
+								display: inline-block;
+
+								button{
+									@include container(0px, 0px);
+									font-size: 10px;
+									color: $color7;
+									margin-right: 10px;
+									display: inline-block;
+									background-color: rgba(255,255,255,0);
+									display: inline-block;
+
+									&:hover{
+										color: $color2;
+										cursor: pointer;
+									}
+
+									i{
+										margin-right: 2px;
+									}
+								}
+							}
+
 						}
 					}
 
@@ -442,24 +483,57 @@
 						@extend %title4;
 						font-weight: 700;
 						color: $color1;
+						background-color: $color3;
 
 						&:hover{
 							opacity: 0.5;
-						}
-
-						&.edit{
-							background-color: $color3;
-						}
-
-						&.delete{
-							background-color: $color7;
 						}
 
 						i{
 							margin-right: 10px;
 						}
 					}
+
+					form{
+						@include container(0px, 0px);
+						button{
+							@media (min-width: 0px){
+								display: inline-block;
+								@include container(10px, 5px 0px 5px 0px);
+							}
+
+							@media (min-width: 800px){
+								display: block;
+								width: 100%;
+								@include container(10px, 0px 0px 5px 0px);
+							}
+
+							background-color: $color7;
+							@extend %title4;
+							font-weight: 700;
+							color: $color1;
+							cursor: pointer;
+							text-align: left;
+
+							&:hover{
+								opacity: 0.5;
+							}
+
+							i{
+								margin-right: 10px;
+							}
+						}
+					}
 				}
 			}
 		}
+	}
+
+	h1#message{
+		font-size: 5em;
+		font-weight: 300;
+		text-align: center;
+		margin: 100px 0px;
+		padding: 0px;
+		color: $color5;
 	}
