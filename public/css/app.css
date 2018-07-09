@@ -700,6 +700,69 @@ nav.navbar .navbar-toggler {
   margin-right: 10px;
 }
 
+@media (min-width: 0px) {
+  #content.filter {
+    overflow-x: scroll;
+  }
+}
+
+@media (min-width: 800px) {
+  #content.filter {
+    overflow-x: hidden;
+  }
+}
+
+@media (min-width: 0px) {
+  #content.filter #wrapper {
+    width: 1000px;
+  }
+}
+
+@media (min-width: 800px) {
+  #content.filter #wrapper {
+    width: 100%;
+  }
+}
+
+#content.filter #wrapper #report form #column {
+  display: inline-block;
+  width: 30.3%;
+}
+
+#content.filter #wrapper #report form #column:nth-child(3),
+#content.filter #wrapper #report form #column:nth-child(4) {
+  padding-right: 10px;
+}
+
+#content.filter #wrapper #report form #column:nth-child(5) {
+  max-width: 20px;
+}
+
+#content.filter #wrapper #report form #column .monthYear #date {
+  display: block;
+}
+
+#content.filter #wrapper #report form #column .monthYear #date .start,
+#content.filter #wrapper #report form #column .monthYear #date .end {
+  display: inline-block;
+  width: 48%;
+}
+
+#content.filter #wrapper #report form #column .monthYear #date .gj-datepicker {
+  width: 100% !important;
+}
+
+#content.filter #wrapper #report form #column .monthYear #date .gj-datepicker button {
+  background-color: transparent;
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid #dbd9d9;
+}
+
+#content.filter #wrapper #report form #column .monthYear #date .gj-datepicker button:hover {
+  color: #2878b3;
+}
+
 h1#message {
   font-size: 5em;
   font-weight: 300;

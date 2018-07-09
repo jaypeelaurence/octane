@@ -17,4 +17,9 @@ class ReportController extends Controller
     public function index(){
         return view('report.index');
     }
+
+    public function show(Request $request){
+    	return $request->all();
+        // return view('report.index');
+    }
 }
