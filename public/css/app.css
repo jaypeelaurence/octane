@@ -772,3 +772,9 @@ h1#message {
   color: #dbd9d9;
 }
 
+/*Datepicker style*/
+
+.gj-picker {
+  font-size: 12px;
+}
+

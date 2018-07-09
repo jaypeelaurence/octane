@@ -26,7 +26,7 @@
 					  	<div id="column">
 						  	<div class="form-group accountName">
 						    	<label for="accountName">Account Name *</label>
-								<select class="form-control form-control-sm"  name='account' required>
+								<select class="form-control form-control-sm" id="btn-account" name='account' required>
 								  	<option value=''>-- select a role --</option>
 								  	<option value='Admin'>Admin</option>
 								  	<option value='User'>User</option>
@@ -36,7 +36,7 @@
 					  	<div id="column">
 						  	<div class="form-group senderId">
 						    	<label for="senderId">Sender ID </label>
-								<select class="form-control form-control-sm"  name='sender'>
+								<select class="form-control form-control-sm" id="btn-sender" name='sender' disabled="disabled">
 								  	<option value=''>-- all sender id --</option>
 								  	<option value='Admin'>Admin</option>
 								  	<option value='User'>User</option>
@@ -54,7 +54,7 @@
 		</div>
 	</div>
 	@include('report.table')
-@endsection	
+	@endsection	
 
 @section ('custom_footer')
     <script>
@@ -62,7 +62,6 @@
         $('#startDate').datepicker({
             uiLibrary: 'bootstrap4',
             iconsLibrary: 'fontawesome',
-            minDate: today,
             maxDate: function () {
                 return $('#endDate').val();
             }
@@ -74,5 +73,9 @@
                 return $('#startDate').val();
             }
         });
+
+		$("#btn-account").change(function(){
+			$('#btn-sender').prop("disabled", false);
+		});
     </script>
 @endsection
