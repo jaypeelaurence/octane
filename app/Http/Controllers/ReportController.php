@@ -15,8 +15,6 @@ class ReportController extends Controller
     }
 
     public function index(){
-        // $list = $this->report->getAccount();
-
         $account = $this->report->getAccount();
 
         return view('report.index', compact('account'));
@@ -24,6 +22,5 @@ class ReportController extends Controller
 
     public function show(Request $request){
     	return $request->all();
-        // return view('report.index');
     }
 }

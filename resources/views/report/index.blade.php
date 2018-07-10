@@ -29,7 +29,7 @@
 								<select class="form-control form-control-sm" id="btn-account" name='account' required>
 								  	<option value=''>-- select a role --</option>
 								  	@foreach ($account as $accountDetails)
-								  		<option value='{{ $accountDetails->id }}'>{{ $accountDetails->system_id }}</option>
+								  		<option value='{{ $accountDetails->system_id }}'>{{ $accountDetails->system_id }}</option>
 								  	@endforeach
 								</select>	
 						  	</div>
@@ -38,9 +38,7 @@
 						  	<div class="form-group senderId">
 						    	<label for="senderId">Sender ID </label>
 								<select class="form-control form-control-sm" id="btn-sender" name='sender' disabled="disabled">
-								  	<option value=''>-- all sender id --</option>
-								  	<option value='Admin'>Admin</option>
-								  	<option value='User'>User</option>
+								  	<option value=''>-- N/A --</option>
 								</select>
 						  	</div>
 					  	</div>

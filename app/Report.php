@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     function __construct(){
-    	$this->query = DB::connection('db_test');
+    	$this->query = DB::connection('mysql2');
     }
 
     public function getAccount(){
-		return $this->query->table('esme_credential')->select('id','system_id')->get();
+		return $this->query->table('esme_credential')->select('system_id')->get();
     }
 }
