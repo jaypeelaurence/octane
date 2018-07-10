@@ -54,6 +54,15 @@ return [
             'engine' => null,
         ],
 
+        'db_test' => [
+            'driver'    => env('DB_CONNECTION_SECOND'),
+            'host'      => env('DB_HOST_SECOND'),
+            'port'      => env('DB_PORT_SECOND'),
+            'database'  => env('DB_DATABASE_SECOND'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),

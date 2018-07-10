@@ -28,8 +28,9 @@
 						    	<label for="accountName">Account Name *</label>
 								<select class="form-control form-control-sm" id="btn-account" name='account' required>
 								  	<option value=''>-- select a role --</option>
-								  	<option value='Admin'>Admin</option>
-								  	<option value='User'>User</option>
+								  	@foreach ($account as $accountDetails)
+								  		<option value='{{ $accountDetails->id }}'>{{ $accountDetails->system_id }}</option>
+								  	@endforeach
 								</select>	
 						  	</div>
 					  	</div>
@@ -37,7 +38,7 @@
 						  	<div class="form-group senderId">
 						    	<label for="senderId">Sender ID </label>
 								<select class="form-control form-control-sm" id="btn-sender" name='sender' disabled="disabled">
-								  	<option value='ALL'>-- all sender id --</option>
+								  	<option value=''>-- all sender id --</option>
 								  	<option value='Admin'>Admin</option>
 								  	<option value='User'>User</option>
 								</select>
@@ -75,7 +76,11 @@
         });
 
 		$("#btn-account").change(function(){
-			$('#btn-sender').prop("disabled", false);
+			if($("#btn-account").val() != ''){
+				$('#btn-sender').prop("disabled", false);
+			}else{
+				$('#btn-sender').prop("disabled", true);
+			}
 		});
     </script>
 @endsection
