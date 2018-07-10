@@ -15,12 +15,32 @@ class ReportController extends Controller
     }
 
     public function index(){
-        $account = $this->report->getAccount();
+        $account = $this->report->listAccount();
 
         return view('report.index', compact('account'));
     }
 
     public function show(Request $request){
-    	return $request->all();
+        $account = $this->report->listAccount();
+
+        $result = $this->formValidate->queryReport($request);
+
+        if ($result->fails()) {
+            return back()->withErrors($result)->withInput();
+        }else{
+            if($request->sender){
+                $listTrans = $this->report->transSenderId($request);
+
+                $transactions['type'] = "senderId";
+                $transactions['data'] = $listTrans;
+            }else{
+                $listTrans = $this->report->transAccount($request);
+
+                $transactions['type'] = "account";
+                $transactions['data'] = $listTrans;
+            }
+        }
+
+        return view('report.index', compact(['account','transactions']));
     }
 }

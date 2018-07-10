@@ -15,10 +15,10 @@
 						    	<label for="monthYear">Month/Year *</label>
 						    	<div id="date">
 							    	<div class="start">
-						    	      	<input id="startDate" name="startDate" placeholder="start date"/>
+						    	      	<input id="startDate" name="start" placeholder="start date"/>
 							      	</div>	
 							        <div class="end">	
-								        <input id="endDate" name="endDate" placeholder="End date"/>
+								        <input id="endDate" name="end" placeholder="End date"/>
 							    	</div>
 						    	</div>
 						  	</div>
@@ -29,7 +29,7 @@
 								<select class="form-control form-control-sm" id="btn-account" name='account' required>
 								  	<option value=''>-- select a role --</option>
 								  	@foreach ($account as $accountDetails)
-								  		<option value='{{ $accountDetails->system_id }}'>{{ $accountDetails->system_id }}</option>
+								  		<option value='{{ $accountDetails->id }}'>{{ $accountDetails->system_id }}</option>
 								  	@endforeach
 								</select>	
 						  	</div>
@@ -47,7 +47,6 @@
 								<button type="submit" class="btn btn-primary">Generate</button>
 						  	</div>
 					  	</div>
-					</div>
 				</form>
 			</div>
 		</div>
@@ -91,7 +90,6 @@
 					return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + days);
 	            },
 	        });
-
 
 	    	if($("#startDate").val() == ''){
 	 	    	$('.end #endDate').prop('disabled', true);

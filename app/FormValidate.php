@@ -82,4 +82,17 @@ class FormValidate extends Model
 
     return $validator;
   }
+
+
+  public function queryReport(Request $request){
+    $rules = [
+      "start" => "required",
+      "end" => "required",
+      "account" => "required"
+    ];
+
+    $validator = Validator::make($request->all(), $rules);
+
+    return $validator;
+  }
 }
