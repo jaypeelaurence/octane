@@ -37,10 +37,20 @@ class ReportController extends Controller
                 $listTrans = $this->report->transAccount($request);
 
                 $transactions['type'] = "account";
-                $transactions['data'] = $listTrans;
+                $transactions['accountName'] = $listTrans['accountName'];
+                $transactions['column'] = $listTrans['column'];
+                $transactions['data'] = $listTrans['data'];
             }
         }
 
         return view('report.index', compact(['account','transactions']));
+    }
+
+    public function get(Request $request){
+        $account = $this->report->listAccount();
+
+        $generateReport = $this->report->generateReport(json_decode(base64_decode($request->transactions)));
+
+        return $generateReport;
     }
 }

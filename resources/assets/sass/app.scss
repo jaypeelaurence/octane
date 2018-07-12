@@ -530,7 +530,7 @@
 
 		&.filter{
 			@media (min-width: 0px){
-					overflow-x: scroll;
+				overflow-x: scroll;
 			}
 
 			@media (min-width: 800px){
@@ -585,6 +585,41 @@
 									}
 								}
 							}
+						}
+					}
+				}
+			}
+		}
+
+		&.report{
+			#table{
+				@media (min-width: 0px){
+					width: auto;
+					overflow-x: scroll !important;
+				}
+
+				@media (min-width: 800px){
+					width: 100%;
+					overflow-x: scroll !important;
+				}
+
+				form{
+					@include container(0px, 0px);
+					button{
+						@include container(10px, 10px 0px 0px 0px);
+						background-color: $color2;
+						@extend %title4;
+						font-weight: 700;
+						color: $color1;
+						cursor: pointer;
+						text-align: left;
+
+						&:hover{
+							opacity: 0.5;
+						}
+
+						i{
+							margin-right: 10px;
 						}
 					}
 				}

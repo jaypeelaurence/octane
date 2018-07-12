@@ -55,7 +55,8 @@ button:hover {
 #content #wrapper #table table th,
 #content #wrapper #table table td,
 #content #wrapper #details .actions a,
-#content #wrapper #details .actions form button {
+#content #wrapper #details .actions form button,
+#content.report #table form button {
   padding: 0px;
   margin: 0px;
   marign-bottom: 15px;
@@ -761,6 +762,43 @@ nav.navbar .navbar-toggler {
 
 #content.filter #wrapper #report form #column .monthYear #date .gj-datepicker button:hover {
   color: #2878b3;
+}
+
+@media (min-width: 0px) {
+  #content.report #table {
+    width: auto;
+    overflow-x: scroll !important;
+  }
+}
+
+@media (min-width: 800px) {
+  #content.report #table {
+    width: 100%;
+    overflow-x: scroll !important;
+  }
+}
+
+#content.report #table form {
+  padding: 0px;
+  margin: 0px;
+}
+
+#content.report #table form button {
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+  background-color: #2878b3;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+}
+
+#content.report #table form button:hover {
+  opacity: 0.5;
+}
+
+#content.report #table form button i {
+  margin-right: 10px;
 }
 
 h1#message {
