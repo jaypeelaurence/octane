@@ -25,26 +25,45 @@ class ReportController extends Controller
 
         $result = $this->formValidate->queryReport($request);
 
+        $dateRange = [
+            $request->start,
+            $request->end
+        ];
+
+
         if ($result->fails()) {
             return back()->withErrors($result)->withInput();
         }else{
             if($request->sender){
-                $listTrans = $this->report->transSenderId($request);
+                $listTrans = $this->report->transSender($request);
 
-                $transactions['type'] = "senderId";
-                $transactions['data'] = $listTrans;
+                $transactions = [
+                    'type'          => 'sender',
+                    'dateRange'     => $dateRange,
+                    'accountName'   => $listTrans['accountName'],
+                    'senderName'    => $listTrans['senderName'],
+                    'column'        => $listTrans['column'],
+                    'data'          => $listTrans['data']
+                ];
             }else{
                 $listTrans = $this->report->transAccount($request);
 
-                $transactions['type'] = "account";
-                $transactions['accountName'] = $listTrans['accountName'];
-                $transactions['column'] = $listTrans['column'];
-                $transactions['data'] = $listTrans['data'];
+                $transactions = [
+                    'type'          => 'account',
+                    'dateRange'     => $dateRange,
+                    'accountName'   => $listTrans['accountName'],
+                    'column'        => $listTrans['column'],
+                    'data'          => $listTrans['data']
+                ];
             }
         }
 
         return view('report.index', compact(['account','transactions']));
     }
+
+    public function load($accountId){
+        return $this->report->listSender($accountId);
+    }    
 
     public function get(Request $request){
         $account = $this->report->listAccount();

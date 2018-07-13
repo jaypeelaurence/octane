@@ -15,7 +15,18 @@ class Report extends Model
     }
 
     public function listAccount(){
-		return $this->query->table('esme_credential')->select('id','system_id')->get();
+        return $this->query->table('esme_credential')->select('id','system_id')->get();
+    }
+
+    public function listSender($id){
+        $accountId = $this->query->table('esme_credential');
+        $accountId->select('allowed_sender_ids');
+        $accountId->where('esme_credential.id', $id);
+        $accountId->get();
+
+        $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
+
+		return $senderId;
     }
 
     public function transAccount($request){
@@ -53,6 +64,49 @@ class Report extends Model
             ];
     }
 
+    public function transSender($request){
+        $start = explode("/",$request->start);
+        $end = explode("/",$request->end);
+
+        $startDate = $start[2] . "-" . $start[0] . "-" . $start[1] . " 00:00:00";
+        $endDate = $end[2] . "-" . $end[0] . "-" .$end[1]." 24:59:59";
+
+        $accountId = $this->query->table('esme_credential');
+        $accountId->select('system_id');
+        $accountId->where('esme_credential.id', $request->account);
+
+        $prefix = $this->query->table('prefix');
+        $prefix->select('id', 'name');
+
+        $select[] = DB::raw("SUBSTRING(transactions.date_time_created, 1, 10) AS date");
+
+        $network[] = "date";
+
+        foreach($prefix->get() as $value){
+            $prefix_id = $value->id;
+            $prefix_name = $value->name;
+            $select[] = DB::raw("(CASE WHEN transactions.prefix_id = '$prefix_id' THEN COUNT(transactions.prefix_id) END) as '$prefix_name'");
+
+            $network[] = $value->name;
+        }
+
+        $mysql = $this->query->table('transactions');
+        $mysql->select($select);
+        $mysql->where([
+            ['esme_credential_id', $request->account],
+            ['source_addr', $request->sender]
+        ]);
+        // $mysql->whereBetween('date_time_created', array($startDate, $endDate));
+        $mysql->groupBy(DB::raw("DATE_FORMAT(transactions.date_time_created, '%Y-%m-%d')"));
+
+        return [
+            'accountName' => $accountId->get()[0]->system_id,
+            'senderName' => $request->sender,
+            'column' => $network,
+            'data' => $mysql->get()
+        ];
+    }
+
     public function generateReport($transactions){
         $cols = "";
 
@@ -88,6 +142,6 @@ class Report extends Model
 
         fclose($file);
 
-        return response()->download($path, "octane-".$transactions->accountName . "-" . time().".csv", $headers);
+        return response()->download($path, $transactions->accountName . "-" . time().".csv", $headers);
     }
 }
