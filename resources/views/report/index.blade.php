@@ -27,7 +27,7 @@
 						  	<div class="form-group accountName">
 						    	<label for="accountName">Account Name *</label>
 								<select class="form-control form-control-sm" id="btn-account" name='account' required>
-									@if(old('role'))
+									@if(old('account'))
 								  		<option value="{{ old('account') }}">{{ old('account') }}</option>
 									@endif
 								  	<option value=''>-- select a account --</option>
@@ -60,7 +60,7 @@
 	@include('report.table')
 	@endsection	
 
-@section ('custom_footer')
+@section ('custom_script')
     <script>
     	// DatePicker
 	    	var date = new Date;
