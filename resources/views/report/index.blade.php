@@ -15,10 +15,10 @@
 						    	<label for="monthYear">Month/Year *</label>
 						    	<div id="date">
 							    	<div class="start">
-						    	      	<input id="startDate" name="start" placeholder="start date"/>
+						    	      	<input id="startDate" name="start" placeholder="start date" value="{{ old('start') }}"/>
 							      	</div>	
 							        <div class="end">	
-								        <input id="endDate" name="end" placeholder="End date"/>
+								        <input id="endDate" name="end" placeholder="End date" value="{{ old('end') }}"/>
 							    	</div>
 						    	</div>
 						  	</div>
@@ -27,7 +27,10 @@
 						  	<div class="form-group accountName">
 						    	<label for="accountName">Account Name *</label>
 								<select class="form-control form-control-sm" id="btn-account" name='account' required>
-								  	<option value=''>-- select a role --</option>
+									@if(old('role'))
+								  		<option value="{{ old('account') }}">{{ old('account') }}</option>
+									@endif
+								  	<option value=''>-- select a account --</option>
 								  	@foreach ($account as $accountDetails)
 								  		<option value='{{ $accountDetails->id }}'>{{ $accountDetails->system_id }}</option>
 								  	@endforeach
@@ -38,6 +41,9 @@
 						  	<div class="form-group senderId">
 						    	<label for="senderId">Sender ID </label>
 								<select class="form-control form-control-sm" id="btn-sender" name='sender'>
+									@if(old('sender'))
+								  		<option value="{{ old('sender') }}">{{ old('sender') }}</option>
+									@endif
 								  	<option value=''>-- N/A --</option>
 								</select>
 						  	</div>

@@ -43,6 +43,7 @@ class Report extends Model
         $mysql = $this->query->table('transactions');
         $mysql->select($select);
         $mysql->where('esme_credential_id', $request->account);
+        $mysql->whereBetween('date_time_created', array($startDate, $endDate));
         $mysql->groupBy(DB::raw("DATE_FORMAT(transactions.date_time_created, '%Y-%m-%d')"));
 
         return [
