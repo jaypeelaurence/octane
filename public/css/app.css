@@ -766,16 +766,18 @@ nav.navbar .navbar-toggler {
 
 @media (min-width: 0px) {
   #content.report #table {
-    width: auto;
     overflow-x: scroll !important;
   }
 }
 
 @media (min-width: 800px) {
   #content.report #table {
-    width: 100%;
     overflow-x: scroll !important;
   }
+}
+
+#content.report #table table {
+  width: auto !important;
 }
 
 #content.report #table form {

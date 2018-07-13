@@ -371,7 +371,8 @@
 
 				table{
 					border: 0px;
-						@media (min-width: 0px){
+					
+					@media (min-width: 0px){
 						width: auto;
 					}
 
@@ -594,13 +595,15 @@
 		&.report{
 			#table{
 				@media (min-width: 0px){
-					width: auto;
 					overflow-x: scroll !important;
 				}
 
-				@media (min-width: 800px){
-					width: 100%;
+				@media (min-width: 800px){;
 					overflow-x: scroll !important;
+				}
+
+				table{
+					width: auto !important;
 				}
 
 				form{
