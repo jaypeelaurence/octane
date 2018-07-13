@@ -150,8 +150,6 @@ class Report extends Model
 
         $filename .= "_" . $transactions->dateRange[0] . "-" . $transactions->dateRange[0];
 
-        ;
-
         return response()->download($path, str_replace("/","", $filename) . ".csv", $headers);
     }
 }
