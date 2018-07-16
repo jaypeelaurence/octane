@@ -55,6 +55,8 @@ class ReportController extends Controller
                     'column'        => $listTrans['column'],
                     'data'          => $listTrans['data']
                 ];
+
+                // return $transactions;
             }
         }
 
