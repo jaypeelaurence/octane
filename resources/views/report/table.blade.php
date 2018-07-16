@@ -1,5 +1,5 @@
 @if(!isset($transactions))
-	<h1 id="message">Generating Transacations</h1>
+	<h1 id="message">Generating Transactions</h1>
 
 	@else
 		@if(count($transactions['data']) != 0)
@@ -72,7 +72,7 @@
 					</div>
 				</div>
 			@else
-				<h1 id="message">0 Transacations Found</h1>
+				<h1 id="message">0 Transactions Found</h1>
 		@endif
 
 @endif

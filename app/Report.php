@@ -21,7 +21,7 @@ class Report extends Model
     public function listSender($id){
         $accountId = $this->query->table('esme_credential');
         $accountId->select('allowed_sender_ids');
-        $accountId->where('esme_credential.id', $id);
+        $accountId->where('esme_credential.id', base64_decode($id));
         $accountId->get();
 
         $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
