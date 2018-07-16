@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     function __construct(){
-    	// $this->query = DB::connection('mysql2');
-        $this->query = DB::connection('mysql2');
+        $this->query = DB::connection('mysql2'); //dummy_db
     }
 
     public function listAccount(){
@@ -77,7 +76,6 @@ class Report extends Model
         $mysql = $this->query->table('transactions');
         $mysql->select($select);
         $mysql->where('esme_credential_id', $request->account);
-        // $mysql->whereBetween('date_time_created', array($startDate, $endDate));
         $mysql->groupBy(DB::raw("transactions.source_addr"));
 
         return [
@@ -119,7 +117,7 @@ class Report extends Model
             ['esme_credential_id', $request->account],
             ['source_addr', $request->sender]
         ]);
-        // $mysql->whereBetween('date_time_created', array($startDate, $endDate));
+        $mysql->whereBetween('date_time_created', array($startDate, $endDate));
         $mysql->groupBy(DB::raw("DATE_FORMAT(transactions.date_time_created, '%Y-%m-%d')"));
 
         return [
