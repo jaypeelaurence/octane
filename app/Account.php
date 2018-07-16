@@ -14,7 +14,7 @@ class Account extends Model{
 
     public function viewUser($uid = null){
     	if($uid){
-    		return $uid;
+            return $this->user::where('id', $uid)->get();
     	}else{
             return $this->user::orderBy('id', 'asc')->get();
     	}

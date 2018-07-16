@@ -1,4 +1,4 @@
-k@extends('master')
+@extends('master')
 
 @section('pageTitle')
 	Edit Account

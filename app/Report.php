@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
@@ -24,9 +23,13 @@ class Report extends Model
         $accountId->where('esme_credential.id', base64_decode($id));
         $accountId->get();
 
-        $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
+        if(count($accountId->get()) != 0){
+            $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
 
-		return $senderId;
+            return $senderId;
+        }else{
+            return redirect('error/100');
+        }
     }
 
     public function transAccount($request){

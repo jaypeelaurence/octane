@@ -9,7 +9,8 @@ class ErrorCode extends Model
     function __construct($code = null){
     	$error = [
     		'100' => ['code' => 100,'message' => "Page not found"],
-    		'101' => ['code' => 101	,'message' => "Website is down"],
+            '101' => ['code' => 101 ,'message' => "Website is down"],
+    		'102' => ['code' => 102	,'message' => "Record not found"],
     	];
 
     	if(array_key_exists($code,$error)){
