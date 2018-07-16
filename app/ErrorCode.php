@@ -10,7 +10,7 @@ class ErrorCode extends Model
     	$error = [
     		'100' => ['code' => 100,'message' => "Page not found"],
             '101' => ['code' => 101 ,'message' => "Website is down"],
-    		'102' => ['code' => 102	,'message' => "Record not found"],
+    		'103' => ['code' => 103	,'message' => "Page restricted"],
     	];
 
     	if(array_key_exists($code,$error)){
