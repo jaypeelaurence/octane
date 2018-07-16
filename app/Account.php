@@ -4,8 +4,10 @@ namespace App;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 use App\User;
+use App\Email;
 
 class Account extends Model{
     function __construct(){
@@ -28,9 +30,18 @@ class Account extends Model{
         }
 
         $values['password'] =  md5('jaypeepogi');
-        $values['remember_token'] =  md5(time().rand(0,100));
+        $values['remember_token'] =  md5(time().rand(0,100));       
         
         $addUser = $this->user::create($values);
+
+        $body = new \stdClass();
+        $body->to = $getForm['firstname'] . " " . $getForm['lastname'];
+        $body->url = base_path() . '/' . base64_encode($addUser->id);
+        $body->subject = "Welcome to Adspark | Octane";
+
+        $request = new Email($body);
+
+        Mail::to($getForm['email'])->send($request->newAccount($body->subject));
 
         return $addUser->id;
     }

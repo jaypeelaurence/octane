@@ -9,7 +9,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Account;
 use App\ErrorCode;
-
+use App\Email;
+		
 class MainController extends Controller{
     function __construct(){
         $this->account = new Account();
