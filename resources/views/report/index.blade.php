@@ -131,6 +131,7 @@
 					    url: "/report/" + $(this).val(),
 
 					    success: function(data){
+					    	console.log(data);
 					    	console.log(data.length);
 
 					    	$.each(data, function(key, value){
