@@ -40,7 +40,7 @@
 					  	<div id="column">
 						  	<div class="form-group senderId">
 						    	<label for="senderId">Sender ID </label>
-								<select class="form-control form-control-sm" id="btn-sender" name='sender' size='1000000'>
+								<select class="form-control form-control-sm" id="btn-sender" name='sender'>
 									@if(old('sender'))
 								  		<option value="{{ old('sender') }}">{{ old('sender') }}</option>
 									@endif
@@ -131,9 +131,9 @@
 					    url: "/report/" + $(this).val(),
 
 					    success: function(data){
-					    	console.log(data);
+					    	var testing = data.slice(2);
 
-					    	$.each(data, function(key, value){
+					    	$.each(testing, function(key, value){
 							   $('#btn-sender').append("<option class='senderId' value='" + value + "'>" + value + "</option>");
 							});
 					    }
