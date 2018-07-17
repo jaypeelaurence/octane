@@ -25,7 +25,11 @@ class Report extends Model
         if(count($accountId->get()) != 0){
             $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
 
-            return array_slice($senderId,0,100);
+            if(count($senderId) >= 3000)){
+                return array_slice($senderId,0,100);
+            }else{
+                return $senderId;
+            }
         }else{
             return redirect('error/100');
         }
