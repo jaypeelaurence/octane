@@ -121,7 +121,7 @@ class Report extends Model
             ['esme_credential_id', $request->account],
             ['source_addr', $request->sender]
         ]);
-        $mysql->whereBetween('date_time_created', array($startDate, $endDate));
+        // $mysql->whereBetween('date_time_created', array($startDate, $endDate));
         $mysql->groupBy(DB::raw("DATE_FORMAT(transactions.date_time_created, '%Y-%m-%d')"));
 
         return [
