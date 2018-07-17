@@ -36,7 +36,7 @@ Route::get('/account/logout', 'SessionsController@destroy')->middleware('auth');
 Route::get('/account/{uid}', 'MainController@show')->middleware(['auth','account']);
 
 Route::get('/account/{uid}/change-password', 'AccountController@change')->middleware(['auth','account']);	
-Route::post('/account/{uid}/change-password', 'AccountController@changeUpdate')->middleware(['auth','account']);
+Route::post('/account/{uid}/change-password', 'AccountController@changeUpdate')->middleware('auth');
 
 Route::get('/report', 'ReportController@index')->middleware('auth');
 Route::post('/report', 'ReportController@show')->middleware('auth');
