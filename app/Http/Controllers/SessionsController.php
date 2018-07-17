@@ -73,7 +73,7 @@ class SessionsController extends Controller
 
 	        Mail::to($user->get()[0]->email)->send($mailer->forgotPassword($body->subject));
 
-            return back()->with(['message' => 'Sent an email to ' . $request->email . ' for to reset your password.']);
+            return back()->with(['message' => 'Sent an email to ' . $request->email . ' to reset your password.']);
         }else{
             return back()->withErrors(['message' => 'Email address not registered.'])->withInput();
         }
