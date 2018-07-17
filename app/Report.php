@@ -20,11 +20,10 @@ class Report extends Model
         $accountId = $this->query->table('esme_credential');
         $accountId->select('allowed_sender_ids');
         $accountId->where('esme_credential.id', $id);
-        $accountId->limit(1000000);
         $accountId->get();
 
         if(count($accountId->get()) != 0){
-            $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
+            $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids);
 
             return $senderId;
         }else{
