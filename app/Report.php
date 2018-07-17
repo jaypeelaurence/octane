@@ -23,9 +23,9 @@ class Report extends Model
         $accountId->get();
 
         if(count($accountId->get()) != 0){
-            $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids);
-            
-            return $senderId;
+            $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
+
+            return array_slice($senderId,2);
         }else{
             return redirect('error/100');
         }

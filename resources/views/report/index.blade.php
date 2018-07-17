@@ -131,9 +131,7 @@
 					    url: "/report/" + $(this).val(),
 
 					    success: function(data){
-					    	var testing = data.slice(2);
-
-					    	$.each(testing, function(key, value){
+					    	$.each(data, function(key, value){
 							   $('#btn-sender').append("<option class='senderId' value='" + value + "'>" + value + "</option>");
 							});
 					    }
