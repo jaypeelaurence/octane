@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Email;
 use App\FormValidate;
+use App\Account;
 
 class SessionsController extends Controller
 {
     function __construct(){
     	$this->middleware('guest', ['except' => ['destroy']]);
         $this->user = new User();
+        $this->account = new Account();
         $this->formValidate = new FormValidate();
     }
 
@@ -62,12 +64,12 @@ class SessionsController extends Controller
 		if(count($user->get()) == 1){
 	        $body = new \stdClass();
 	        $body->to = $user->get()[0]->firstname . " " . $user->get()[0]->lastname;
-	        $body->url = base64_encode("forgot=" . $user->get()[0]->id);
+	        $body->url = base64_encode("type=forgot&uid=" . $user->get()[0]->id . "&time=" . time());
 	        $body->subject = "Forgot Password | Octane";
 
 	        $mailer = new Email($body);
 
-	        DB::table('sessions')->insert(['hash' => '1']);
+	        DB::table('sessions')->insert(['hash' => $body->url]);
 
 	        Mail::to($user->get()[0]->email)->send($mailer->forgotPassword($body->subject));
 
@@ -77,7 +79,33 @@ class SessionsController extends Controller
         }
     }
 
-    public function token($token){
-		return base64_decode($token);
+    public function token($hash){
+		$token = DB::table('sessions')->where('hash', $hash)->get();
+
+		if(count($token) != 0){
+			parse_str(base64_decode($token[0]->hash), $data);
+
+        	return view('account.token', compact(['data', 'hash']));
+		}else{
+			return redirect('/');
+		}
+    }
+
+    public function tokenUpdate(Request $request, $hash){
+    	$result = $this->formValidate->newPass($request);
+
+        if(!$result->fails()) {
+        	$data = $request->all();
+
+            $user = $this->account->changePass($data['password'], $data['uid']);
+
+            auth()->login($user);
+
+            $token = DB::table('sessions')->where('hash', $hash)->delete();
+
+            return redirect('/account/login');
+		}else{
+			return back()->withErrors($result)->withInput();
+        }
     }
 }

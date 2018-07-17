@@ -36,7 +36,7 @@ class Account extends Model{
 
         $body = new \stdClass();
         $body->to = $getForm['firstname'] . " " . $getForm['lastname'];
-        $body->url = base64_encode("new=".$addUser->id);
+        $body->url = base64_encode("type=new&uid=" . $addUser->id . "&time=" . time());
         $body->subject = "Welcome to Adspark | Octane";
 
         $request = new Email($body);
@@ -68,5 +68,12 @@ class Account extends Model{
         $deleteUser = $this->user::find($uid->id);
 
         return $deleteUser->delete();
+    }
+
+    public function changePass($getForm, $uid){
+        $editUser = $this->user::find($uid);
+        $editUser->update(["password" => md5($getForm)]);
+
+        return $this->user::find($uid);
     }
 }
