@@ -129,9 +129,9 @@
 
 					$.ajax({
 					    url: "/report/" + $(this).val(),
-					    
+
 					    success: function(data){
-					    	console.log(data);
+					    	console.log(data.length);
 
 					    	$.each(data, function(key, value){
 							   $('#btn-sender').append("<option class='senderId' value='" + value + "'>" + value + "</option>");
