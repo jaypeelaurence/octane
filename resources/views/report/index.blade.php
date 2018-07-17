@@ -127,15 +127,12 @@
 
 					$('#btn-sender .senderId').remove();
 
-					console.log(btoa($(this).val()));
-
 					$.ajax({
-					    url: "/report/" + $(this).val(),	
-					    data: {
-					        'accountId':$(this).val()
-					    },
-
+					    url: "/report/" + $(this).val(),
+					    
 					    success: function(data){
+					    	console.log(data);
+
 					    	$.each(data, function(key, value){
 							   $('#btn-sender').append("<option class='senderId' value='" + value + "'>" + value + "</option>");
 							});
