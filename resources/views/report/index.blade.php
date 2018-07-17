@@ -130,7 +130,7 @@
 					console.log(btoa($(this).val()));
 
 					$.ajax({
-					    url: "/report/" + btoa($(this).val()),	
+					    url: "/report/" + $(this).val(),	
 					    data: {
 					        'accountId':$(this).val()
 					    },
