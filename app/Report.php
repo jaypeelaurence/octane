@@ -24,10 +24,8 @@ class Report extends Model
 
         if(count($accountId->get()) != 0){
             $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids);
-
-
-
-            return count($senderId);
+            
+            return $senderId;
         }else{
             return redirect('error/100');
         }
