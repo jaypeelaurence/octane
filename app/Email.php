@@ -24,7 +24,7 @@ class Email extends Mailable
         return $this->subject($subject)->view('email.new-account');
     }
 
-    public function forgotPassword(){
-        return $this->view('email.forgot-password');
+    public function forgotPassword($subject){
+        return $this->subject($subject)->view('email.forgot-password');
     }
 }

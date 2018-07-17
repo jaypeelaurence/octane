@@ -36,7 +36,7 @@ class Account extends Model{
 
         $body = new \stdClass();
         $body->to = $getForm['firstname'] . " " . $getForm['lastname'];
-        $body->url = base_path() . '/' . base64_encode($addUser->id);
+        $body->url = base64_encode("new=".$addUser->id);
         $body->subject = "Welcome to Adspark | Octane";
 
         $request = new Email($body);

@@ -43,4 +43,6 @@ Route::post('/report', 'ReportController@show')->middleware('auth');
 Route::post('/report/download', 'ReportController@get')->middleware('auth');
 Route::get('/report/{accountId}', 'ReportController@load')->middleware('auth');
 
+Route::get('/uid/{token}', 'SessionsController@token');
+
 Route::get('/error/{code}', 'MainController@error')->middleware('auth');

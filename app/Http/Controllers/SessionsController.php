@@ -6,12 +6,15 @@ use App\User;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
+use App\Email;
 use App\FormValidate;
 
 class SessionsController extends Controller
 {
     function __construct(){
-    	$this->middleware('guest', ['except' => 'destroy']);
+    	$this->middleware('guest', ['except' => ['destroy']]);
         $this->user = new User();
         $this->formValidate = new FormValidate();
     }
@@ -57,9 +60,24 @@ class SessionsController extends Controller
 		$user = $this->user::where('email',$request->email);
 
 		if(count($user->get()) == 1){
+	        $body = new \stdClass();
+	        $body->to = $user->get()[0]->firstname . " " . $user->get()[0]->lastname;
+	        $body->url = base64_encode("forgot=" . $user->get()[0]->id);
+	        $body->subject = "Forgot Password | Octane";
+
+	        $mailer = new Email($body);
+
+	        DB::table('sessions')->insert(['hash' => '1']);
+
+	        Mail::to($user->get()[0]->email)->send($mailer->forgotPassword($body->subject));
+
             return back()->with(['message' => 'Sent an email to ' . $request->email . ' for to reset your password.']);
         }else{
             return back()->withErrors(['message' => 'Email address not registered.'])->withInput();
         }
+    }
+
+    public function token($token){
+		return base64_decode($token);
     }
 }

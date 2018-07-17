@@ -57,7 +57,7 @@ class AccountController extends Controller
         }
     }
 
-    public function update(User $uid){
+    public function update(Request $request, User $uid){
         $result = $this->formValidate->editUser($request);
         
         if ($result->fails()) {
