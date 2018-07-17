@@ -41,6 +41,8 @@ class Account extends Model{
 
         $request = new Email($body);
 
+        DB::table('sessions')->insert(['hash' => $body->url]);
+
         Mail::to($getForm['email'])->send($request->newAccount($body->subject));
 
         return $addUser->id;
