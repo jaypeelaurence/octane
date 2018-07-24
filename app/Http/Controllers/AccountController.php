@@ -37,20 +37,27 @@ class AccountController extends Controller
         }
     }
 
-    public function show(User $uid) {
-        $user = $this->account->viewUser($uid);
+    public function show($uid) {
+        if(count($this->account->viewUser($uid)) != 0){
+            $user = $this->account->viewUser($uid)[0];
 
-        return view('manage-account.show', compact('user'));
+            return view('manage-account.show', compact('user'));
+        }else{
+            return redirect('error/102');
+        }
     }
 
-    public function edit(User $uid){
-
-        $user = $this->account->viewUser($uid);
-
-        return view('manage-account.edit', compact('user'));
+    public function edit($uid){
+        if(count($this->account->viewUser($uid)) != 0){
+            $user = $this->account->viewUser($uid)[0];
+           
+            return view('manage-account.edit', compact('user'));
+        }else{
+            return redirect('error/102');
+        }
     }
 
-    public function update(User $uid){
+    public function update(Request $request, User $uid){
         $result = $this->formValidate->editUser($request);
         
         if ($result->fails()) {
@@ -68,10 +75,14 @@ class AccountController extends Controller
         return redirect('manage-account/')->with('message', "Account ".$uid->firstname." ".$uid->lastname." was deleted!");
     }
 
-    public function change(User $uid){
-        $user = $this->account->viewUser($uid);
-        
-        return view('account.change', compact('user'));
+    public function change($uid){
+        if(count($this->account->viewUser($uid)) != 0){
+            $user = $this->account->viewUser($uid)[0];
+            
+            return view('account.change', compact('user'));
+        }else{
+            return redirect('error/102');
+        }        
     }
 
     public function changeUpdate(Request $request, User $uid){

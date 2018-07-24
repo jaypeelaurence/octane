@@ -13,17 +13,17 @@
 
 Route::get('/', 'MainController@index')->name('home')->middleware('auth');
 
-Route::get('/manage-account', 'AccountController@index')->middleware('auth');
+Route::get('/manage-account', 'AccountController@index')->middleware(['auth','admin']);
 
-Route::get('/manage-account/add', 'AccountController@create')->middleware('auth');
-Route::post('/manage-account/add', 'AccountController@store')->middleware('auth');
+Route::get('/manage-account/add', 'AccountController@create')->middleware(['auth','admin']);
+Route::post('/manage-account/add', 'AccountController@store')->middleware(['auth','admin']);
 
-Route::get('/manage-account/{uid}', 'AccountController@show')->middleware('auth');
+Route::get('/manage-account/{uid}', 'AccountController@show')->middleware(['auth','admin']);
 
-Route::get('/manage-account/{uid}/edit', 'AccountController@edit')->middleware('auth');
-Route::post('/manage-account/{uid}/edit', 'AccountController@update')->middleware('auth');
+Route::get('/manage-account/{uid}/edit', 'AccountController@edit')->middleware(['auth','admin']);
+Route::post('/manage-account/{uid}/edit', 'AccountController@update')->middleware(['auth','admin']);
 
-Route::post('/manage-account/{uid}', 'AccountController@destroy')->middleware('auth');
+Route::post('/manage-account/{uid}', 'AccountController@destroy')->middleware(['auth','admin']);
 
 Route::get('/account/login', 'SessionsController@create');
 Route::post('/account/login', 'SessionsController@store');
@@ -33,16 +33,17 @@ Route::post('/account/forgot-password', 'SessionsController@forgotStore');
 
 Route::get('/account/logout', 'SessionsController@destroy')->middleware('auth');
 
-Route::get('/account/{uid}', 'MainController@show')->middleware('auth');
+Route::get('/account/{uid}', 'MainController@show')->middleware(['auth','account']);
 
-Route::get('/account/{uid}/change-password', 'AccountController@change')->middleware('auth');	
+Route::get('/account/{uid}/change-password', 'AccountController@change')->middleware(['auth','account']);	
 Route::post('/account/{uid}/change-password', 'AccountController@changeUpdate')->middleware('auth');
-
-Route::get('/account/{uid}', 'MainController@show')->middleware('auth');
 
 Route::get('/report', 'ReportController@index')->middleware('auth');
 Route::post('/report', 'ReportController@show')->middleware('auth');
 Route::post('/report/download', 'ReportController@get')->middleware('auth');
-Route::get('/report/senderid/{accountId}', 'ReportController@load');
+Route::get('/report/{accountId}', 'ReportController@load')->middleware('auth');
 
-Route::get('/error/{code}', 'MainController@error');
+Route::get('/token/{hash}', 'SessionsController@token')->middleware('guest');
+Route::post('/token/{hash}', 'SessionsController@tokenUpdate')->middleware('guest');
+
+Route::get('/error/{code}', 'MainController@error')->middleware('auth');

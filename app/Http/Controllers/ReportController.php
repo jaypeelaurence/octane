@@ -55,6 +55,8 @@ class ReportController extends Controller
                     'column'        => $listTrans['column'],
                     'data'          => $listTrans['data']
                 ];
+
+                // return $transactions;
             }
         }
 
@@ -63,8 +65,8 @@ class ReportController extends Controller
 
     public function load($accountId){
         return $this->report->listSender($accountId);
-    }    
-
+    }
+    
     public function get(Request $request){
         $account = $this->report->listAccount();
 

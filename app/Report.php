@@ -4,14 +4,12 @@ namespace App;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
     function __construct(){
-    	// $this->query = DB::connection('mysql2');
-        $this->query = DB::connection('mysql2');
+        $this->query = DB::connection('mysql2'); //dummy_db
     }
 
     public function listAccount(){
@@ -24,42 +22,69 @@ class Report extends Model
         $accountId->where('esme_credential.id', $id);
         $accountId->get();
 
-        $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
+        if(count($accountId->get()) != 0){
+            $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
 
-		return $senderId;
+            if(count($senderId) >= 3000){
+                return array_slice($senderId,0,100);
+            }else{
+                return $senderId;
+            }
+        }else{
+            return redirect('error/100');
+        }
     }
 
     public function transAccount($request){
         $start = explode("/",$request->start);
         $end = explode("/",$request->end);
 
-        $startDate = $start[2] . "-" . $start[0] . "-" . $start[1] . " 00:00:00";
-        $endDate = $end[2] . "-" . $end[0] . "-" .$end[1]." 24:59:59";
+        $startDate = $start[2] . "-" . $start[0] . "-" . $start[1];
+        $endDate = $end[2] . "-" . $end[0] . "-" .$end[1];
+
+        $dateRange = date_diff(date_create($startDate), date_create($endDate))->d;
+
+        $date[] = [
+            'start' => $startDate . " 00:00:01",
+            'end' => $startDate . " 23:59:59"
+        ];
+
+        $column = ['sender id',$startDate];
+
+        for($i=1; $i <= $dateRange; $i++){
+            $date[] = [
+               'start' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 00:00:01",
+               'end' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 23:59:59"
+            ];
+
+            $column[] = date('Y-m-d', strtotime("+$i day" . $startDate));
+        }
 
         $accountId = $this->query->table('esme_credential');
         $accountId->select('system_id','allowed_sender_ids');
         $accountId->where('esme_credential.id', $request->account);
         $accountId->get();
 
-        $senderId = explode("|", "date|".$accountId->get()[0]->allowed_sender_ids, -1);
-
-        $select[] = DB::raw("SUBSTRING(transactions.date_time_created, 1, 10) AS date");
+        $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
+  
+        $select[] = DB::raw("transactions.source_addr AS 'sender id'");
 
         foreach($senderId as $value){
-            if($value != 'date'){
-                $select[] = DB::raw("(CASE WHEN transactions.source_addr = '$value' THEN COUNT(transactions.source_addr) END) as '$value'");
+            foreach($date as $eachDay){ 
+                $dayStart = $eachDay['start'];
+                $dayEnd = $eachDay['end'];
+                $select[] = DB::raw("(CASE WHEN transactions.date_time_created BETWEEN '$dayStart' AND '$dayEnd' THEN COUNT(transactions.id) END) as '" . substr($dayStart, 0, -9) . "'");
             }
         }
 
         $mysql = $this->query->table('transactions');
         $mysql->select($select);
         $mysql->where('esme_credential_id', $request->account);
-        // $mysql->whereBetween('date_time_created', array($startDate, $endDate));
-        $mysql->groupBy(DB::raw("DATE_FORMAT(transactions.date_time_created, '%Y-%m-%d')"));
+        $mysql->groupBy(DB::raw("transactions.source_addr"));
 
         return [
                 'accountName' => $accountId->get()[0]->system_id,
-                'column' => $senderId,
+                'column' => $column,
                 'data' => $mysql->get()
             ];
     }
@@ -69,7 +94,7 @@ class Report extends Model
         $end = explode("/",$request->end);
 
         $startDate = $start[2] . "-" . $start[0] . "-" . $start[1] . " 00:00:00";
-        $endDate = $end[2] . "-" . $end[0] . "-" .$end[1]." 24:59:59";
+        $endDate = $end[2] . "-" . $end[0] . "-" .$end[1] . " 24:59:59";
 
         $accountId = $this->query->table('esme_credential');
         $accountId->select('system_id');
@@ -96,7 +121,6 @@ class Report extends Model
             ['esme_credential_id', $request->account],
             ['source_addr', $request->sender]
         ]);
-        // $mysql->whereBetween('date_time_created', array($startDate, $endDate));
         $mysql->groupBy(DB::raw("DATE_FORMAT(transactions.date_time_created, '%Y-%m-%d')"));
 
         return [

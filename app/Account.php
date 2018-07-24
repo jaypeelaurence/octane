@@ -4,8 +4,10 @@ namespace App;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 use App\User;
+use App\Email;
 
 class Account extends Model{
     function __construct(){
@@ -14,7 +16,7 @@ class Account extends Model{
 
     public function viewUser($uid = null){
     	if($uid){
-    		return $uid;
+            return $this->user::where('id', $uid)->get();
     	}else{
             return $this->user::orderBy('id', 'asc')->get();
     	}
@@ -28,9 +30,20 @@ class Account extends Model{
         }
 
         $values['password'] =  md5('jaypeepogi');
-        $values['remember_token'] =  md5(time().rand(0,100));
+        $values['remember_token'] =  md5(time().rand(0,100));       
         
         $addUser = $this->user::create($values);
+
+        $body = new \stdClass();
+        $body->to = $getForm['firstname'] . " " . $getForm['lastname'];
+        $body->url = base64_encode("type=new&uid=" . $addUser->id . "&time=" . time());
+        $body->subject = "Welcome to Adspark | Octane";
+
+        $request = new Email($body);
+
+        DB::table('sessions')->insert(['hash' => $body->url]);
+
+        Mail::to($getForm['email'])->send($request->newAccount($body->subject));
 
         return $addUser->id;
     }
@@ -57,5 +70,12 @@ class Account extends Model{
         $deleteUser = $this->user::find($uid->id);
 
         return $deleteUser->delete();
+    }
+
+    public function changePass($getForm, $uid){
+        $editUser = $this->user::find($uid);
+        $editUser->update(["password" => md5($getForm)]);
+
+        return $this->user::find($uid);
     }
 }

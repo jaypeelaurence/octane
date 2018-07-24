@@ -1,5 +1,5 @@
 @if(!isset($transactions))
-	<h1 id="message">Generating Transacations</h1>
+	<h1 id="message">Generating Transactions</h1>
 
 	@else
 		@if(count($transactions['data']) != 0)
@@ -31,30 +31,36 @@
 							<table>
 								<thead>
 									<tr>
-										@foreach ($transactions['column'] as $value)
-											@if($value == "date")
-												<th class='date'>Date</th>
-												@else
-													<th>{{ $value }}</th>
-											@endif
-											@php 
+										@php 
+											$a = 0;
+											foreach($transactions['column'] as $value){
+												if($a == 0){
+													echo "<th class='date'>$value</th>";
+												}else{
+													echo "<th>$value</th>";
+												}
+												++$a;
 												$column[] = $value;
-											@endphp
-										@endforeach
+											}
+										@endphp
 									</tr>
 								</thead>
 								<tbody>
-									@foreach ($transactions['data'] as $field)
-										<tr>
-											@foreach ($column as $data)
-												@if($data == "date")
-													<td class='date'>{{ $field->{$data} }}</td>
-													@else
-														<td>{{ $field->{$data} }}</td>
-												@endif
-											@endforeach
-										</tr>
-									@endforeach
+									@php
+										foreach ($transactions['data'] as $field){
+											echo "<tr>";
+											$b = 0;
+											foreach ($column as $data){
+												if($b == 0){
+													echo "<td class='date'>" . $field->{$data} . "</td>";
+												}else{
+													echo "<td>" . $field->{$data} . "</td>";
+												}
+												++$b;
+											}
+											echo "</tr>";
+										}
+									@endphp
 								</tbody>
 							</table>
 							<form action="report/download" method="POST">
@@ -66,7 +72,7 @@
 					</div>
 				</div>
 			@else
-				<h1 id="message">0 Transacations Found</h1>
+				<h1 id="message">0 Transactions Found</h1>
 		@endif
 
 @endif

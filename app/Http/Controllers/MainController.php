@@ -9,14 +9,15 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Account;
 use App\ErrorCode;
-
+use App\Email;
+		
 class MainController extends Controller{
     function __construct(){
         $this->account = new Account();
     }
 
-	public function show(User $uid){
-        $user = $this->account->viewUser($uid);
+	public function show($uid){
+        $user = $this->account->viewUser($uid)[0];
 
         return view('account.show', compact('user'));
 	}

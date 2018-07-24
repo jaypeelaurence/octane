@@ -10,7 +10,7 @@
 			<h1 class='title'>{{ $user->firstname }} {{ $user->lastname }} | Edit</h1>
 			<div id="change-password">
 				<form method="POST" action="/account/{{ $user->id }}/change-password">
-					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					{{ csrf_field() }}
 				  	<div class="row">
 				  		<div class="col-md-4">
 						  	<div class="form-group password">
