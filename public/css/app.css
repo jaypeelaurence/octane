@@ -764,6 +764,27 @@ nav.navbar .navbar-toggler {
   color: #2878b3;
 }
 
+#content.filter #wrapper #report form #column .accountName #btn-account {
+  overflow-y: scroll;
+  height: 200px;
+}
+
+#content.filter #wrapper #report form #column .accountName #btn-account button {
+  margin: 0px;
+  padding: 0px;
+  display: block;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+#content.filter #wrapper #report form #column .accountName #btn-account button.unPick {
+  color: #777777;
+}
+
+#content.filter #wrapper #report form #column .accountName #btn-account button.pick {
+  color: #2878b3;
+}
+
 @media (min-width: 0px) {
   #content.report #table {
     overflow-x: scroll !important;

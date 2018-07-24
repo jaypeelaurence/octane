@@ -586,6 +586,29 @@
 									}
 								}
 							}
+
+							.accountName{
+								#btn-account{
+									overflow-y: scroll;
+									height: 200px;
+
+									button{
+										margin: 0px;
+										padding: 0px;
+										display: block;
+										cursor: pointer;
+										background-color: transparent;
+
+										&.unPick{
+											color: $color7;
+										}
+
+										&.pick{
+											color: $color2;
+										}
+								 	}
+							 	}
+							}
 						}
 					}
 				}
