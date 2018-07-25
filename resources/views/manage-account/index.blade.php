@@ -33,9 +33,9 @@
 								<td>{{ $value->created_at }}</td>
 								<td>{{ $value->updated_at }}</td>
 								<td class='settings'>
-									<a href="manage-account/{{ $value->id }}"><i class="fa fa-eye"></i>View</a>
-									<a href="manage-account/{{ $value->id }}/edit"><i class="fa fa-edit"></i>Edit</a>
-									<form action="manage-account/{{ $value->id }}" method="POST">
+									<a href="{{ url('/') }}/manage-account/{{ $value->id }}"><i class="fa fa-eye"></i>View</a>
+									<a href="{{ url('/') }}/manage-account/{{ $value->id }}/edit"><i class="fa fa-edit"></i>Edit</a>
+									<form action="{{ url('/') }}/manage-account/{{ $value->id }}" method="POST">
 										{{ csrf_field() }}
 										<button type="submit"><i class='fa fa-edit'></i>Delete</button>
 									</form>

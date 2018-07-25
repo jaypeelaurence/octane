@@ -9,7 +9,7 @@
 		<div id="wrapper">
 			<h1 class='title'>Add Account</h1>
 			<div id="add-account">
-				<form method="POST" action="/manage-account/add">
+				<form method="POST" action="{{ url('/') }}/manage-account/add">
 					{{ csrf_field() }}
 				  	<div class="row">
 				  		<div class="col-md-4">

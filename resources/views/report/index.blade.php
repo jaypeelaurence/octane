@@ -8,7 +8,7 @@
 	<div id="content" class="filter">
 		<div id="wrapper">
 			<div id="report">
-				<form method="POST" action="/report">
+				<form method="POST" action="{{ url('/') }}/report">
 					{{ csrf_field() }}
 				  	<div id="column">
 					  	<div class="form-group monthYear">
@@ -59,7 +59,7 @@
 @endsection	
 
 @section ('custom_script')
-	<script src="/js/app.js" type="text/javascript"></script>
+	<script src="{{ url('/') }}/js/app.js" type="text/javascript"></script>
 	<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/js/gijgo.min.js" type="text/javascript"></script>
 	<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 @endsection

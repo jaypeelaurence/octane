@@ -9,7 +9,7 @@
 		<div id="wrapper">
 			<h1 class='title'>{{ $user->firstname }} {{ $user->lastname }} | Edit</h1>
 			<div id="change-password">
-				<form method="POST" action="/account/{{ $user->id }}/change-password">
+				<form method="POST" action="{{ url('/') }}/account/{{ $user->id }}/change-password">
 					{{ csrf_field() }}
 				  	<div class="row">
 				  		<div class="col-md-4">

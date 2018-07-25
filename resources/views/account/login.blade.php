@@ -7,14 +7,14 @@
 @section('body')
 	<div id=login>
 		<div id="container">
-			<img src="/images/whitelogo.png">
+			<img src="{{ url('/') }}/images/whitelogo.png">
 		</div>
 		<div id="container">
 
 			@include('_template.alert')
 
 			<div id=form>
-				<form method="POST" action="/account/login">
+				<form method="POST" action="{{ url('/') }}/account/login">
 					{{ csrf_field() }}
 					<div class='row'>
 						<div class='col-md-6'>
@@ -32,7 +32,7 @@
 					</div>
 				  <button type="submit" class="btn btn-primary">Login</button>
 				</form>
-				<a class='action' href="forgot-password">Forgot Password</a>
+				<a class='action' href="{{ url('/') }}/account/forgot-password">Forgot Password</a>
 			</div>
 		</div>
 		<div id="container">

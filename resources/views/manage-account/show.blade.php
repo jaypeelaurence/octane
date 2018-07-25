@@ -43,10 +43,10 @@
 						</table>
 					</div>
 					<div class="col-md-3 actions">
-						<a href="{{ $user->id }}/edit" class='edit'><i class="fa fa-edit"></i>Edit</a>
-						<form action="{{ $user->id }}" method="POST">
+						<a href="{{ url('/') }}/manage-account/{{ $user->id }}/edit" class='edit'><i class="fa fa-edit"></i>Edit</a>
+						<form action="{{ url('/') }}/manage-account/{{ $user->id }}" method="POST">
 							{{ csrf_field() }}
-							<button type="submit"><i class="fa fa-trash"></i>Delete</a></button>
+							<button type="submit"><i class="fa fa-trash"></i>Delete</button>
 						</form>
 					</div>
 				</div>
