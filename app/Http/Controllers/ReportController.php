@@ -21,6 +21,8 @@ class ReportController extends Controller
     }
 
     public function show(Request $request){
+        return $request->all();
+
         $account = $this->report->listAccount();
 
         $result = $this->formValidate->queryReport($request);

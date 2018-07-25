@@ -56,6 +56,8 @@ button:hover {
 #content #wrapper #table table td,
 #content #wrapper #details .actions a,
 #content #wrapper #details .actions form button,
+#content.filter #wrapper #report form #column .accountName .pickedAccount,
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account button,
 #content.report #table form button {
   padding: 0px;
   margin: 0px;
@@ -764,25 +766,63 @@ nav.navbar .navbar-toggler {
   color: #2878b3;
 }
 
-#content.filter #wrapper #report form #column .accountName #btn-account {
-  overflow-y: scroll;
-  height: 200px;
+#content.filter #wrapper #report form #column .accountName .pickedAccount {
+  padding: 4px 10px;
+  margin: 0px;
+  color: #777777;
+  border: 1px solid #dbd9d9;
+  position: relative;
 }
 
-#content.filter #wrapper #report form #column .accountName #btn-account button {
+#content.filter #wrapper #report form #column .accountName .pickedAccount button {
+  padding: 0px 10px;
   margin: 0px;
-  padding: 0px;
-  display: block;
   cursor: pointer;
+  right: 0;
+  position: absolute;
   background-color: transparent;
 }
 
-#content.filter #wrapper #report form #column .accountName #btn-account button.unPick {
+#content.filter #wrapper #report form #column .accountName .pickedAccount button.down {
   color: #777777;
 }
 
-#content.filter #wrapper #report form #column .accountName #btn-account button.pick {
+#content.filter #wrapper #report form #column .accountName .pickedAccount button.up {
   color: #2878b3;
+}
+
+#content.filter #wrapper #report form #column .accountName #dropDown {
+  /*position: relative;*/
+}
+
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account {
+  position: absolute;
+  z-index: 9999999;
+  overflow-y: scroll;
+  width: 304px;
+  height: 200px;
+  border: 1px solid #dbd9d9;
+  border-top: 0px;
+  background-color: #ffffff;
+}
+
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account button {
+  padding: 0px 10px;
+  margin: 0px;
+  width: 100%;
+  text-align: left;
+  display: block;
+  cursor: pointer;
+}
+
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account button.unPick {
+  color: #777777;
+  background-color: transparent;
+}
+
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account button.pick {
+  color: #ffffff;
+  background-color: #2878b3;
 }
 
 @media (min-width: 0px) {

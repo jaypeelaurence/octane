@@ -588,26 +588,62 @@
 							}
 
 							.accountName{
-								#btn-account{
-									overflow-y: scroll;
-									height: 200px;
+								.pickedAccount{
+									@include container(4px 10px, 0px);
+									@extend %title4;
+									color: $color7;
+									border: 1px solid $color5;
+									position: relative;
 
 									button{
-										margin: 0px;
-										padding: 0px;
-										display: block;
+										@include container(0px 10px, 0px);
 										cursor: pointer;
+										right: 0;
+										position: absolute;
 										background-color: transparent;
 
-										&.unPick{
+										&.down{
 											color: $color7;
 										}
 
-										&.pick{
+										&.up{
 											color: $color2;
 										}
+									}
+								}
+								#dropDown{
+									/*position: relative;*/
+
+									#btn-account{
+										position: absolute;
+										z-index: 9999999;
+										overflow-y: scroll;
+										width: 304px;
+										height: 200px;
+										border: 1px solid $color5;
+										border-top: 0px;
+										background-color: $color1;
+
+										button{
+											@include container(0px 10px, 0px);
+											@extend %title4;
+											width: 100%;
+											text-align: left;
+											display: block;
+											cursor: pointer;
+
+											&.unPick{
+												color: $color7;
+												background-color: transparent;
+											}
+
+											&.pick{
+												color: $color1;
+												background-color: $color2;
+											}
+									 	}
 								 	}
-							 	}
+								}
 							}
 						}
 					}
