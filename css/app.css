@@ -1,0 +1,879 @@
+/*Mixins*/
+
+/*Extends*/
+
+body {
+  font-family: Lato;
+}
+
+a:hover,
+button:hover {
+  -o-transition: .5s !important;
+  -ms-transition: .5s !important;
+  -moz-transition: .5s !important;
+  -webkit-transitio: n 0.5s !important;
+  -webkit-transition: .5s !important;
+  transition: .5s !important;
+  text-decoration: none !important;
+}
+
+#container h1,
+#dashboard h1,
+#content .title {
+  padding: 0px;
+  margin: 0px;
+  marign-bottom: 18px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+#login #form .form-group label,
+#dashboard h2,
+#content #wrapper form .form-group label {
+  padding: 0px;
+  margin: 0px;
+  marign-bottom: 15px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#login #form button,
+#dashboard h3,
+#content #wrapper form button,
+#content #wrapper #details table td {
+  padding: 0px;
+  margin: 0px;
+  marign-bottom: 15px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.alert,
+#login #form .form-group .form-control,
+#login .action,
+#content #wrapper form .form-group .form-control,
+#content #wrapper #table table th,
+#content #wrapper #table table td,
+#content #wrapper #details .actions a,
+#content #wrapper #details .actions form button,
+#content.filter #wrapper #report form #column .accountName .pickedAccount,
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account button,
+#content.report #table form button {
+  padding: 0px;
+  margin: 0px;
+  marign-bottom: 15px;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+p {
+  padding: 0px;
+  margin: 0px;
+  marign-bottom: 15px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/*Resources	*/
+
+/*White*/
+
+/*Blue*/
+
+/*Dark Blue*/
+
+/*Dirty White*/
+
+/*Dark Grey*/
+
+/*Orange*/
+
+/*Super Dark Grey*/
+
+/*Main Style*/
+
+body {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: auto;
+  background-color: #f9f9f9;
+}
+
+body#login {
+  background-color: #2878b3;
+}
+
+a:focus,
+button:focus {
+  outline: 0;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+nav.navbar {
+  padding: 0px;
+}
+
+nav.navbar a {
+  padding: 0px;
+  margin: 0px;
+}
+
+@media (min-width: 0px) {
+  nav.navbar img {
+    max-width: 200px;
+  }
+}
+
+@media (min-width: 767px) {
+  nav.navbar img {
+    max-width: 250px;
+  }
+}
+
+nav.navbar .navbar-nav {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+nav.navbar .nav-item a {
+  font-size: 14px;
+  color: #f9f9f9;
+}
+
+nav.navbar .nav-item a:hover {
+  font-size: 14px;
+  color: #f9f9f9;
+}
+
+@media (min-width: 0px) {
+  nav.navbar .nav-item a {
+    padding-right: .5rem;
+  }
+}
+
+nav.navbar .nav-item .dropdown-menu {
+  padding: 0px;
+  margin: 0px;
+  border-radius: 0px;
+  border: 0px;
+  -webkit-box-shadow: 1px 1px rgba(119, 119, 119, 0.9);
+          box-shadow: 1px 1px rgba(119, 119, 119, 0.9);
+}
+
+nav.navbar .nav-item .dropdown-menu a {
+  background-color: #ffffff;
+  font-size: 12px;
+  color: #777777;
+  padding: 5px 10px;
+}
+
+nav.navbar .nav-item .dropdown-menu a:hover {
+  background-color: #dbd9d9;
+}
+
+@media (min-width: 0px) {
+  nav.navbar .nav-item .dropdown-menu {
+    position: absolute;
+    z-index: 99;
+  }
+}
+
+nav.navbar .navbar-toggler {
+  border: 0px;
+  padding: 0px;
+}
+
+.alert {
+  padding: 10px 15px 5px 15px;
+  margin: 10px 0px 0px 0px;
+  font-weight: 700;
+  border: 0px;
+  border-radius: 0px;
+}
+
+.alert ul {
+  list-style: none;
+}
+
+.alert ul li {
+  margin-bottom: 5px;
+}
+
+.alert ul li i {
+  margin-right: 10px;
+}
+
+#form .row,
+#wrapper .row {
+  margin: -5px;
+}
+
+#form .row .col-md-6,
+#form .row .col-md-4,
+#form .row .col-md-9,
+#form .row .col-md-3,
+#form .row .col-md-12,
+#wrapper .row .col-md-6,
+#wrapper .row .col-md-4,
+#wrapper .row .col-md-9,
+#wrapper .row .col-md-3,
+#wrapper .row .col-md-12 {
+  padding: 6px;
+}
+
+/*Section Style*/
+
+#container {
+  padding: 10px 20px;
+  margin: 0px auto;
+  width: 100%;
+  height: auto;
+  max-width: 1100px;
+}
+
+#container h1 {
+  color: #777777;
+}
+
+#header {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+}
+
+#body {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: auto;
+  background-color: #f9f9f9;
+}
+
+#footer {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: auto;
+  background-color: #2878b3;
+  color: #ffffff;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+/*Login Style*/
+
+#login {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: auto;
+}
+
+#login #container {
+  padding: 20px;
+  margin: 0px auto;
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  position: relative;
+  top: 20%;
+  color: white;
+  text-align: center;
+}
+
+#login #container:nth-child(2) {
+  padding: 0px;
+}
+
+#login img {
+  max-width: 500px;
+  width: 100%;
+}
+
+#login #form {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+@media (min-width: 0px) {
+  #login #form .form-group {
+    text-align: center;
+  }
+}
+
+@media (min-width: 767px) {
+  #login #form .form-group {
+    text-align: left;
+  }
+}
+
+#login #form .form-group label {
+  color: #777777;
+}
+
+#login #form .form-group .form-control {
+  border-radius: 0px;
+  padding: 5px 10px;
+  color: #777777;
+}
+
+#login #form .form-group .form-control::-webkit-input-placeholder {
+  color: #dbd9d9;
+}
+
+#login #form .form-group .form-control:-ms-input-placeholder {
+  color: #dbd9d9;
+}
+
+#login #form .form-group .form-control::-ms-input-placeholder {
+  color: #dbd9d9;
+}
+
+#login #form .form-group .form-control::placeholder {
+  color: #dbd9d9;
+}
+
+#login #form button {
+  width: 100%;
+  padding: 5px 10px;
+  display: block;
+  border: 0px;
+  background-color: #2878b3;
+}
+
+#login #form button:hover {
+  background-color: #1c5e8e;
+}
+
+#login .action {
+  display: block;
+  margin-top: 10px;
+  color: #777777;
+}
+
+#login .action:hover {
+  color: #1c5e8e;
+}
+
+/*Page Style*/
+
+#dashboard {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  position: relative;
+}
+
+@media (min-width: 0px) {
+  #dashboard {
+    height: auto;
+  }
+}
+
+@media (min-width: 500px) {
+  #dashboard {
+    height: 80vh;
+  }
+}
+
+#dashboard #container {
+  padding: 20px;
+  margin: 0px;
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: 20%;
+  color: white;
+}
+
+#dashboard h1 {
+  font-size: 40px;
+  font-weight: 300;
+  color: #777777;
+}
+
+#dashboard h2 {
+  font-size: 50px;
+  font-weight: 700;
+  color: #777777;
+}
+
+#dashboard h3 {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #777777;
+}
+
+/*Content style*/
+
+#content {
+  padding: 0px;
+  margin: 15px 0px;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+}
+
+#content.filter {
+  -webkit-box-shadow: 0px 3px 2px 1px rgba(119, 119, 119, 0.3);
+          box-shadow: 0px 3px 2px 1px rgba(119, 119, 119, 0.3);
+}
+
+#content .title {
+  padding: 15px;
+  margin: 0px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #2878b3;
+  border: 1px solid #2878b3;
+}
+
+#content #wrapper {
+  padding: 0xp;
+  margin: 0px;
+  border: 1px solid #f9f9f9;
+}
+
+#content #wrapper form,
+#content #wrapper .table {
+  padding: 10px;
+  margin: 0px;
+}
+
+#content #wrapper form .row {
+  padding: 0px 5px;
+  margin-bottom: 10px;
+}
+
+#content #wrapper form .form-group {
+  padding: 0px;
+  margin: 0px;
+}
+
+#content #wrapper form .form-group label {
+  color: #777777;
+}
+
+#content #wrapper form .form-group .form-control {
+  border-radius: 0px;
+  padding: 5px 10px;
+  color: #777777;
+}
+
+#content #wrapper form .form-group .form-control::-webkit-input-placeholder {
+  color: #dbd9d9;
+}
+
+#content #wrapper form .form-group .form-control:-ms-input-placeholder {
+  color: #dbd9d9;
+}
+
+#content #wrapper form .form-group .form-control::-ms-input-placeholder {
+  color: #dbd9d9;
+}
+
+#content #wrapper form .form-group .form-control::placeholder {
+  color: #dbd9d9;
+}
+
+#content #wrapper form button {
+  padding: 5px 10px;
+  margin: 0px 5px;
+  margin-right: 5px;
+  display: inline-block;
+  border: 0px;
+  background-color: #2878b3;
+}
+
+#content #wrapper form button:hover {
+  background-color: #1c5e8e;
+}
+
+#content #wrapper form button.reset {
+  background-color: #dbd9d9;
+  color: #777777;
+}
+
+#content #wrapper form button.reset:hover {
+  background-color: #f9f9f9;
+}
+
+@media (min-width: 0px) {
+  #content #wrapper #table,
+  #content #wrapper #details {
+    overflow-x: scroll;
+  }
+}
+
+@media (min-width: 800px) {
+  #content #wrapper #table,
+  #content #wrapper #details {
+    overflow-x: hidden;
+  }
+}
+
+#content #wrapper #table {
+  padding: 15px;
+}
+
+#content #wrapper #table table {
+  border: 0px;
+}
+
+@media (min-width: 0px) {
+  #content #wrapper #table table {
+    width: auto;
+  }
+}
+
+@media (min-width: 500px) {
+  #content #wrapper #table table {
+    width: 100%;
+  }
+}
+
+#content #wrapper #table table th {
+  background-color: #f9f9f9;
+  font-weight: 700;
+}
+
+#content #wrapper #table table td.settings {
+  background-color: #f9f9f9;
+}
+
+#content #wrapper #table table td.settings a {
+  font-size: 10px;
+  color: #777777;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+#content #wrapper #table table td.settings a:hover {
+  color: #2878b3;
+}
+
+#content #wrapper #table table td.settings a i {
+  margin-right: 2px;
+}
+
+#content #wrapper #table table td.settings form {
+  padding: 0px;
+  margin: 0px;
+  width: auto;
+  display: inline-block;
+}
+
+#content #wrapper #table table td.settings form button {
+  padding: 0px;
+  margin: 0px;
+  font-size: 10px;
+  color: #777777;
+  margin-right: 10px;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0);
+  display: inline-block;
+}
+
+#content #wrapper #table table td.settings form button:hover {
+  color: #2878b3;
+  cursor: pointer;
+}
+
+#content #wrapper #table table td.settings form button i {
+  margin-right: 2px;
+}
+
+#content #wrapper #table table th,
+#content #wrapper #table table td {
+  padding: 5px 10px;
+  border: 1px solid #777777;
+  text-align: center;
+}
+
+#content #wrapper #table table th.date,
+#content #wrapper #table table td.date {
+  font-weight: 700;
+  background-color: #dbd9d9;
+}
+
+#content #wrapper #details {
+  padding: 10px 15px;
+  margin: 0px;
+}
+
+#content #wrapper #details table td {
+  padding: 5px 10px;
+  padding-right: 20px;
+  border: 1px solid #ffffff;
+}
+
+#content #wrapper #details table td:nth-child(1) {
+  font-weight: 700;
+  color: #2878b3;
+  background-color: #dbd9d9;
+}
+
+#content #wrapper #details table td:nth-child(2) {
+  background-color: #f9f9f9;
+}
+
+#content #wrapper #details .actions {
+  padding: 10px;
+  margin: 0px;
+}
+
+#content #wrapper #details .actions a {
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #1c5e8e;
+}
+
+@media (min-width: 0px) {
+  #content #wrapper #details .actions a {
+    display: inline-block;
+    padding: 10px;
+    margin: 0px;
+  }
+}
+
+@media (min-width: 800px) {
+  #content #wrapper #details .actions a {
+    display: block;
+    padding: 10px;
+    margin: 0px 0px 5px 0px;
+  }
+}
+
+#content #wrapper #details .actions a:hover {
+  opacity: 0.5;
+}
+
+#content #wrapper #details .actions a i {
+  margin-right: 10px;
+}
+
+#content #wrapper #details .actions form {
+  padding: 0px;
+  margin: 0px;
+}
+
+#content #wrapper #details .actions form button {
+  background-color: #777777;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+}
+
+@media (min-width: 0px) {
+  #content #wrapper #details .actions form button {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px 0px 5px 0px;
+  }
+}
+
+@media (min-width: 800px) {
+  #content #wrapper #details .actions form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 0px 0px 5px 0px;
+  }
+}
+
+#content #wrapper #details .actions form button:hover {
+  opacity: 0.5;
+}
+
+#content #wrapper #details .actions form button i {
+  margin-right: 10px;
+}
+
+@media (min-width: 0px) {
+  #content.filter {
+    overflow-x: scroll;
+  }
+}
+
+@media (min-width: 800px) {
+  #content.filter {
+    overflow-x: hidden;
+  }
+}
+
+@media (min-width: 0px) {
+  #content.filter #wrapper {
+    width: 1000px;
+  }
+}
+
+@media (min-width: 800px) {
+  #content.filter #wrapper {
+    width: 100%;
+  }
+}
+
+#content.filter #wrapper #report form #column {
+  display: inline-block;
+  width: 30.3%;
+}
+
+#content.filter #wrapper #report form #column:nth-child(3),
+#content.filter #wrapper #report form #column:nth-child(4) {
+  padding-right: 10px;
+}
+
+#content.filter #wrapper #report form #column:nth-child(5) {
+  max-width: 20px;
+}
+
+#content.filter #wrapper #report form #column .monthYear #date {
+  display: block;
+}
+
+#content.filter #wrapper #report form #column .monthYear #date .start,
+#content.filter #wrapper #report form #column .monthYear #date .end {
+  display: inline-block;
+  width: 48%;
+}
+
+#content.filter #wrapper #report form #column .monthYear #date .gj-datepicker {
+  width: 100% !important;
+}
+
+#content.filter #wrapper #report form #column .monthYear #date .gj-datepicker button {
+  background-color: transparent;
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid #dbd9d9;
+}
+
+#content.filter #wrapper #report form #column .monthYear #date .gj-datepicker button:hover {
+  color: #2878b3;
+}
+
+#content.filter #wrapper #report form #column .accountName .pickedAccount {
+  padding: 4px 10px;
+  margin: 0px;
+  color: #777777;
+  border: 1px solid #dbd9d9;
+  position: relative;
+  cursor: pointer;
+}
+
+#content.filter #wrapper #report form #column .accountName .pickedAccount button {
+  padding: 0px 10px;
+  margin: 0px;
+  right: 0;
+  position: absolute;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#content.filter #wrapper #report form #column .accountName .pickedAccount button.down {
+  color: #777777;
+}
+
+#content.filter #wrapper #report form #column .accountName .pickedAccount button.up {
+  color: #2878b3;
+}
+
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account {
+  position: absolute;
+  z-index: 9999999;
+  overflow-y: scroll;
+  width: 304px;
+  height: 200px;
+  border: 1px solid #dbd9d9;
+  border-top: 0px;
+  background-color: #ffffff;
+}
+
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account button {
+  padding: 0px 10px;
+  margin: 0px;
+  width: 100%;
+  text-align: left;
+  display: block;
+  cursor: pointer;
+  border-bottom: 1px solid #ffffff;
+}
+
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account button.unPick {
+  color: #777777;
+  background-color: transparent;
+}
+
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account button.pick {
+  color: #ffffff;
+  background-color: #2878b3;
+}
+
+@media (min-width: 0px) {
+  #content.report #table {
+    overflow-x: scroll !important;
+  }
+}
+
+@media (min-width: 800px) {
+  #content.report #table {
+    overflow-x: scroll !important;
+  }
+}
+
+#content.report #table table {
+  width: auto !important;
+}
+
+#content.report #table form {
+  padding: 0px;
+  margin: 0px;
+}
+
+#content.report #table form button {
+  padding: 10px;
+  margin: 10px 0px 0px 0px;
+  background-color: #2878b3;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+}
+
+#content.report #table form button:hover {
+  opacity: 0.5;
+}
+
+#content.report #table form button i {
+  margin-right: 10px;
+}
+
+h1#message {
+  font-size: 5em;
+  font-weight: 300;
+  text-align: center;
+  margin: 100px 0px;
+  padding: 0px;
+  color: #dbd9d9;
+}
+
+/*Datepicker style*/
+
+.gj-picker {
+  font-size: 12px;
+}
+

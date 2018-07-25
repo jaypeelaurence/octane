@@ -177,7 +177,7 @@ $(document).ready(function () {
 			$(this).parent().append("<input type='hidden' class='accountField' name='account' value='" + list + "'/>");
 
 			$.ajax({
-				url: window.location.origin + "/report/sender/" + list,
+				url: "/report/sender/" + list,
 				type: "GET",
 				success: function success(data) {
 					console.log(data);
