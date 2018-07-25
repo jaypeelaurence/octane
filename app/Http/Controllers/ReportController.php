@@ -65,8 +65,8 @@ class ReportController extends Controller
         return view('report.index', compact(['account','transactions']));
     }
 
-    public function load($accountId){
-        return $this->report->listSender($accountId);
+    public function load($idList){
+        return $this->report->listSender($idList);
     }
     
     public function get(Request $request){

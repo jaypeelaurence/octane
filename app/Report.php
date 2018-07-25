@@ -16,20 +16,23 @@ class Report extends Model
         return $this->query->table('esme_credential')->select('id','system_id')->get();
     }
 
-    public function listSender($id){
-        $accountId = $this->query->table('esme_credential');
-        $accountId->select('allowed_sender_ids');
-        $accountId->where('esme_credential.id', $id);
-        $accountId->get();
+    public function listSender($idList){
+        $accounts = explode("|", $idList, -1);
 
-        if(count($accountId->get()) != 0){
-            $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
+        if(count($accounts) > 0){
+            foreach($accounts as $id){
+                $accountId = $this->query->table('esme_credential');
+                $accountId->select('allowed_sender_ids');
+                $accountId->where('esme_credential.id', $id);
+                $accountId->get(); 
+                $senderIds = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
 
-            if(count($senderId) >= 3000){
-                return $senderId;
-            }else{
-                return $senderId;
+                foreach($senderIds as $senderId){
+                    $list[] = $senderId;
+                }
             }
+
+            return $list;
         }else{
             return redirect('error/100');
         }

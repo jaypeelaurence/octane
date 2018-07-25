@@ -4,10 +4,6 @@
 	Generate Report
 @endsection
 
-@section ('meta')
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
-
 @section ('body')
 	<div id="content" class="filter">
 		<div id="wrapper">
@@ -33,7 +29,7 @@
 				    		<input type='hidden' class='accountField' name='account'/>
 				    		<div class="pickedAccount">
 			    				<span>-- select account --</span>
-			    				<button type="button"></button>
+			    				<button class='list' type="button"></button>
 			    			</div>
 					    	<div id="dropDown">
 						    	<div id="btn-account">
@@ -63,7 +59,7 @@
 @endsection	
 
 @section ('custom_script')
-	<script src="/js/report.js" type="text/javascript"></script>
+	<script src="/js/app.js" type="text/javascript"></script>
 	<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/js/gijgo.min.js" type="text/javascript"></script>
 	<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 @endsection

@@ -772,15 +772,16 @@ nav.navbar .navbar-toggler {
   color: #777777;
   border: 1px solid #dbd9d9;
   position: relative;
+  cursor: pointer;
 }
 
 #content.filter #wrapper #report form #column .accountName .pickedAccount button {
   padding: 0px 10px;
   margin: 0px;
-  cursor: pointer;
   right: 0;
   position: absolute;
   background-color: transparent;
+  cursor: pointer;
 }
 
 #content.filter #wrapper #report form #column .accountName .pickedAccount button.down {
@@ -789,10 +790,6 @@ nav.navbar .navbar-toggler {
 
 #content.filter #wrapper #report form #column .accountName .pickedAccount button.up {
   color: #2878b3;
-}
-
-#content.filter #wrapper #report form #column .accountName #dropDown {
-  /*position: relative;*/
 }
 
 #content.filter #wrapper #report form #column .accountName #dropDown #btn-account {
@@ -813,6 +810,7 @@ nav.navbar .navbar-toggler {
   text-align: left;
   display: block;
   cursor: pointer;
+  border-bottom: 1px solid #ffffff;
 }
 
 #content.filter #wrapper #report form #column .accountName #dropDown #btn-account button.unPick {
