@@ -76,6 +76,7 @@ module.exports = __webpack_require__(2);
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
+	console.log(window.location.origin);
 	// DatePicker
 	var date = new Date();
 	var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
@@ -177,7 +178,7 @@ $(document).ready(function () {
 			$(this).parent().append("<input type='hidden' class='accountField' name='account' value='" + list + "'/>");
 
 			$.ajax({
-				url: "/report/sender/" + list,
+				url: window.location.origin + "/report/sender/" + list,
 				type: "GET",
 				success: function success(data) {
 					console.log(data);
