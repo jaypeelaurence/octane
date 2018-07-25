@@ -97,21 +97,21 @@ $(document).ready(function(){
 				$('#btn-sender').prop("disabled", false);
 				$('#btn-sender').attr('placeholder',"-- all sender Id --");
 
-				$(this).parent().append("<input type='hidden' class='accountField' name='account' value='hello'/>");
+				$(this).parent().append("<input type='hidden' class='accountField' name='account' value='"+ list +"'/>");
 
 				$.ajax({
 				    url: "/report/sender/" + list,
 				    type: "GET",
 				    success: function(data){
 				    	console.log(data)
+				    },
 
 			   //  	 	$('#btn-sender').append("<option class='senderId' value='all'>-- All Sender ID --</option>");
 				  //   	$.each(data, function(key, value){
 						//    $('#btn-sender').append("<option class='senderId' value='" + value + "'>" + value + "</option>");
 						// });
-				    },
 			      	error: function(jqXHR, textStatus, errorThrown){
-					    console.log([textStatus, errorThrown])
+					    console.log(textStatus + " - " + errorThrown)
 				  	}
 				});
 			}else{

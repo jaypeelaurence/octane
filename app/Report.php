@@ -20,7 +20,7 @@ class Report extends Model
         $accounts = explode("|", $idList, -1);
 
         if(count($accounts) > 0){
-            foreach($accounts as $id){
+            foreach($accounts as $key => $id){
                 $accountId = $this->query->table('esme_credential');
                 $accountId->select('allowed_sender_ids');
                 $accountId->where('esme_credential.id', $id);

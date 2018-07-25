@@ -43,7 +43,7 @@
 				  	<div id="column">
 					  	<div class="form-group senderId">
 					    	<label for="senderId">Sender ID </label>
-							<input class="form-control form-control-sm" id="btn-sender" name='sender' placeholder="-- n/a --" value=''/>
+							<input class="form-control form-control-sm" id="btn-sender" name='sender' placeholder="-- n/a --"/>
 					  	</div>
 				  	</div>
 				  	<div id="column">
