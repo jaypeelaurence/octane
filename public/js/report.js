@@ -60,6 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
+<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 39);
 /******/ })
 /************************************************************************/
@@ -31928,3 +31929,26 @@ $(document).ready(function () {
 
 /***/ })
 /******/ ]);
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 36:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(37);
+
+
+/***/ }),
+
+/***/ 37:
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'C:\\wamp64\\www\\laravel\\octane\\resources\\assets\\js\\report.js'");
+
+/***/ })
+
+/******/ });
+>>>>>>> hotfix1
