@@ -9,7 +9,7 @@
 		<div id="wrapper">
 			<h1 class='title'>{{ $user->firstname }} {{ $user->lastname }} | Edit</h1>
 			<div id="edit-account">
-				<form method="POST" action="/manage-account/{{ $user->id }}/edit">
+				<form method="POST" action="{{ url('/') }}/manage-account/{{ $user->id }}/edit">
 					{{ csrf_field() }}
 				  	<div class="row">
 				  		<div class="col-md-4">

@@ -27,15 +27,17 @@
 					  	<div class="form-group accountName">
 					    	<label for="accountName">Account Name *</label>
 				    		<input type='hidden' class='accountField' name='account'/>
-				    		<div class="pickedAccount">
-			    				<span>-- select account --</span>
-			    				<button class='list' type="button"></button>
-			    			</div>
-					    	<div id="dropDown">
-						    	<div id="btn-account">
-									@foreach ($account as $accountDetails)
-									  	<button type='button' class="unPick" value="{{ $accountDetails->id }}|{{ $accountDetails->system_id }}">{{ $accountDetails->system_id }}</button>
-								  	@endforeach
+				    		<div id="accountContainer">
+					    		<div class="pickedAccount">
+				    				<span>-- select account --</span>
+				    				<button class='list' type="button"></button>
+				    			</div>
+						    	<div id="dropDown">
+							    	<div id="btn-account">
+										@foreach ($account as $accountDetails)
+										  	<button type='button' class="unPick" value="{{ $accountDetails->id }}|{{ $accountDetails->system_id }}">{{ $accountDetails->system_id }}</button>
+									  	@endforeach
+							    	</div>
 						    	</div>
 					    	</div>
 					  	</div>

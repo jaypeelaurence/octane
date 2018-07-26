@@ -53,10 +53,24 @@ $(document).ready(function(){
 		$(".pickedAccount button").attr('class','down');
 		$(".pickedAccount button").html("<i class='fa fa-angle-down'></i>");
 
-		$(".pickedAccount").click(function(){
+		// $("body").click(function(event){
+		// 	if($(event.target).parent('div#accountContainer').length == 1){
+		// 		console.log("accountContainer");
+
+		// 		$('#btn-account').show();
+
+		// 		if($(event.target).attr('class') == 'pickedAccount'){
+		// 			$('#btn-account').show();
+		// 		}
+		// 	}else{
+		// 		$('#btn-account').hide();
+		// 	}
+		// });		
+
+		$(".pickedAccount").click(function(event){
 			if($(this).children("button").attr('class') == 'down'){
 				$(this).children("button").attr('class','up');
-				$(this).children("button").html("<i class='fa fa-angle-up'></i>")
+				$(this).children("button").html("<i class='fa fa-angle-up'></i>");
 				$('#btn-account').show();
 			}else{
 				$(this).children("button").attr('class','down');
@@ -82,16 +96,24 @@ $(document).ready(function(){
 				$(this).addClass('unPick');
 			}
 
+			var selected = Object.keys(obj).length;
+
 			var list = '';
 
+			// if(selected < 5){
 			$.each(obj, function(key, value) {
 				list += key + "|";
 			});
 
-			var selected = Object.keys(obj).length;
-
 			$(".accountField").val(list);
 			$('.pickedAccount span').html(selected + " account(s) selected");
+			// }else{
+			// 	$('.pickedAccount span').html(selected + " account(s) selected <i>(max of 5 accounts)</i>");
+			// 	delete obj[picked[0]];
+
+			// 	$(this).removeClass('pick');
+			// 	$(this).addClass('unPick');
+			// }
 
 	// SenderSelection
 			if(obj != '' && selected != 0){
@@ -104,13 +126,13 @@ $(document).ready(function(){
 				    url: window.location.origin + "/report/sender/" + list,
 				    type: "GET",
 				    success: function(data){
-				    	console.log(data)
-				    },
+				    	console.log(data);
+					    },
 
-			   //  	 	$('#btn-sender').append("<option class='senderId' value='all'>-- All Sender ID --</option>");
-				  //   	$.each(data, function(key, value){
-						//    $('#btn-sender').append("<option class='senderId' value='" + value + "'>" + value + "</option>");
-						// });
+				   //  	 	$('#btn-sender').append("<option class='senderId' value='all'>-- All Sender ID --</option>");
+					  //   	$.each(data, function(key, value){
+							//    $('#btn-sender').append("<option class='senderId' value='" + value + "'>" + value + "</option>");
+							// });
 			      	error: function(jqXHR, textStatus, errorThrown){
 					    console.log(textStatus + " - " + errorThrown)
 				  	}

@@ -13,7 +13,7 @@ class Report extends Model
     }
 
     public function listAccount(){
-        return $this->query->table('esme_credential')->select('id','system_id')->get();
+        return $this->query->table('esme_credential')->select('id','system_id')->orderBy('system_id', 'asc')->get();
     }
 
     public function listSender($idList){
@@ -24,8 +24,8 @@ class Report extends Model
                 $accountId = $this->query->table('esme_credential');
                 $accountId->select('allowed_sender_ids');
                 $accountId->where('esme_credential.id', $id);
-                $accountId->get(); 
-                $senderIds = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
+                $accountId->get();
+                $senderIds = explode("|", utf8_encode($accountId->get()[0]->allowed_sender_ids), -1);
 
                 foreach($senderIds as $senderId){
                     $list[] = $senderId;
