@@ -9,25 +9,31 @@
           @if(Auth::user()->role == "Admin") 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Manage Accounts
+                <i class="fa fa-users-cog"> </i> Manage Accounts
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{{ url('/') }}/manage-account">List of Accounts</a>
-                <a class="dropdown-item" href="{{ url('/') }}/manage-account/add">Add Account</a>
+                <a class="dropdown-item" href="{{ url('/') }}/manage-account"><i class="fa fa-users"></i> List of Accounts</a>
+                <a class="dropdown-item" href="{{ url('/') }}/manage-account/add"><i class="fa fa-user-plus"></i> Add Account</a>
               </div>
             </li>
           @endif
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url('/') }}/report">Report</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-file-alt"></i> Report
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ url('/') }}/report/generate"><i class="fa fa-print"></i> Generate Report</a>
+            <a class="dropdown-item" href="{{ url('/') }}/report/download"><i class="fa fa-download"></i> Download Report</a>
+          </div>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
+            <i class="fa fa-user-circle"></i> Account
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ url('/') }}/account/{{ Auth::user()->id }}">My Account</a>
-            <a class="dropdown-item" href="{{ url('/') }}/account/{{ Auth::user()->id }}/change-password">Change Password</a>
-            <a class="dropdown-item" href="{{ url('/') }}/account/logout">Logout</a>
+            <a class="dropdown-item" href="{{ url('/') }}/account/{{ Auth::user()->id }}"><i class="fa fa-user"></i> My Account</a>
+            <a class="dropdown-item" href="{{ url('/') }}/account/{{ Auth::user()->id }}/change-password"><i class="fa fa-lock-open"></i> Change Password</a>
+            <a class="dropdown-item" href="{{ url('/') }}/account/logout"><i class="fa fa-sign-out-alt"></i> Logout</a>
           </div>
         </li>
       </ul>

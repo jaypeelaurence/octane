@@ -65,7 +65,7 @@ $(document).ready(function(){
 		// 	}else{
 		// 		$('#btn-account').hide();
 		// 	}
-		// });		
+		// });
 
 		$(".pickedAccount").click(function(event){
 			if($(this).children("button").attr('class') == 'down'){
@@ -100,20 +100,17 @@ $(document).ready(function(){
 
 			var list = '';
 
-			// if(selected < 5){
 			$.each(obj, function(key, value) {
 				list += key + "|";
 			});
 
 			$(".accountField").val(list);
-			$('.pickedAccount span').html(selected + " account(s) selected");
-			// }else{
-			// 	$('.pickedAccount span').html(selected + " account(s) selected <i>(max of 5 accounts)</i>");
-			// 	delete obj[picked[0]];
 
-			// 	$(this).removeClass('pick');
-			// 	$(this).addClass('unPick');
-			// }
+			if(selected != 0){
+				$('.pickedAccount span').html(selected + " account(s) selected");
+			}else{
+				$('.pickedAccount span').html("-- select account --");
+			}
 
 	// SenderSelection
 			if(obj != '' && selected != 0){

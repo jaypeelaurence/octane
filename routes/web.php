@@ -38,9 +38,9 @@ Route::get('/account/{uid}', 'MainController@show')->middleware(['auth','account
 Route::get('/account/{uid}/change-password', 'AccountController@change')->middleware(['auth','account']);	
 Route::post('/account/{uid}/change-password', 'AccountController@changeUpdate')->middleware('auth');
 
-Route::get('/report', 'ReportController@index')->middleware('auth');
-Route::post('/report', 'ReportController@show')->middleware('auth');
-Route::post('/report/download', 'ReportController@get')->middleware('auth');
+Route::get('/report/generate', 'ReportController@index')->middleware('auth');
+Route::post('/report/generate', 'ReportController@show')->middleware('auth');
+// Route::post('/report/download', 'ReportController@get')->middleware('auth');
 Route::get('/report/sender/{idList}', 'ReportController@load')->middleware('auth');
 
 Route::get('/token/{hash}', 'SessionsController@token')->middleware('guest');

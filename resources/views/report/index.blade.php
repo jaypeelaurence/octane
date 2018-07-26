@@ -8,7 +8,7 @@
 	<div id="content" class="filter">
 		<div id="wrapper">
 			<div id="report">
-				<form method="POST" action="{{ url('/') }}/report">
+				<form method="POST" action="{{ url('/') }}/report/generate">
 					{{ csrf_field() }}
 				  	<div id="column">
 					  	<div class="form-group monthYear">
@@ -29,7 +29,7 @@
 				    		<input type='hidden' class='accountField' name='account'/>
 				    		<div id="accountContainer">
 					    		<div class="pickedAccount">
-				    				<span>-- select account --</span>
+				    				<input type="text" name="" value='' class=''>
 				    				<button class='list' type="button"></button>
 				    			</div>
 						    	<div id="dropDown">

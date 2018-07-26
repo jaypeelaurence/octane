@@ -142,6 +142,10 @@ nav.navbar .navbar-nav {
           flex-direction: row;
 }
 
+nav.navbar .nav-item i {
+  margin-right: 5px;
+}
+
 nav.navbar .nav-item a {
   font-size: 14px;
   color: #f9f9f9;
