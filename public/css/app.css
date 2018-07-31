@@ -56,7 +56,11 @@ button:hover {
 #content #wrapper #table table td,
 #content #wrapper #details .actions a,
 #content #wrapper #details .actions form button,
+#content.filter #wrapper #report form #column .senderId .pickedSender,
+#content.filter #wrapper #report form #column .senderId .pickedSender .searchField,
+#content.filter #wrapper #report form #column .senderId #dropDown #btn-sender button,
 #content.filter #wrapper #report form #column .accountName .pickedAccount,
+#content.filter #wrapper #report form #column .accountName .pickedAccount .searchField,
 #content.filter #wrapper #report form #column .accountName #dropDown #btn-account button,
 #content.report #table form button {
   padding: 0px;
@@ -770,8 +774,8 @@ nav.navbar .navbar-toggler {
   color: #2878b3;
 }
 
-#content.filter #wrapper #report form #column .accountName .pickedAccount {
-  padding: 4px 10px;
+#content.filter #wrapper #report form #column .senderId .pickedSender {
+  padding: 0px;
   margin: 0px;
   color: #777777;
   border: 1px solid #dbd9d9;
@@ -779,8 +783,85 @@ nav.navbar .navbar-toggler {
   cursor: pointer;
 }
 
-#content.filter #wrapper #report form #column .accountName .pickedAccount button {
+#content.filter #wrapper #report form #column .senderId .pickedSender .searchField {
+  padding: 4px 10px;
+  margin: 0px;
+  border: 0px;
+  color: #777777;
+  width: 100%;
+}
+
+#content.filter #wrapper #report form #column .senderId .pickedSender button {
+  padding: 4px 10px;
+  margin: 0px;
+  right: 0;
+  position: absolute;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#content.filter #wrapper #report form #column .senderId .pickedSender button.down {
+  color: #777777;
+}
+
+#content.filter #wrapper #report form #column .senderId .pickedSender button.up {
+  color: #2878b3;
+}
+
+#content.filter #wrapper #report form #column .senderId #dropDown #btn-sender {
+  position: absolute;
+  z-index: 9999999;
+  overflow-y: scroll;
+  width: 304px;
+  height: 200px;
+  border: 1px solid #dbd9d9;
+  border-top: 0px;
+  background-color: #ffffff;
+}
+
+#content.filter #wrapper #report form #column .senderId #dropDown #btn-sender button {
   padding: 0px 10px;
+  margin: 0px;
+  width: 100%;
+  text-align: left;
+  display: block;
+  cursor: pointer;
+  border-bottom: 1px solid #ffffff;
+}
+
+#content.filter #wrapper #report form #column .senderId #dropDown #btn-sender button:hover {
+  background-color: #1c5e8e;
+}
+
+#content.filter #wrapper #report form #column .senderId #dropDown #btn-sender button.unPick {
+  color: #777777;
+  background-color: transparent;
+}
+
+#content.filter #wrapper #report form #column .senderId #dropDown #btn-sender button.pick {
+  color: #ffffff;
+  background-color: #2878b3;
+}
+
+#content.filter #wrapper #report form #column .accountName .pickedAccount {
+  padding: 0px;
+  margin: 0px;
+  color: #777777;
+  border: 1px solid #dbd9d9;
+  position: relative;
+  cursor: pointer;
+}
+
+#content.filter #wrapper #report form #column .accountName .pickedAccount .searchField {
+  padding: 4px 10px;
+  margin: 0px;
+  border: 0px;
+  color: #777777;
+  width: 100%;
+}
+
+#content.filter #wrapper #report form #column .accountName .pickedAccount button {
+  padding: 4px 10px;
   margin: 0px;
   right: 0;
   position: absolute;
@@ -815,6 +896,10 @@ nav.navbar .navbar-toggler {
   display: block;
   cursor: pointer;
   border-bottom: 1px solid #ffffff;
+}
+
+#content.filter #wrapper #report form #column .accountName #dropDown #btn-account button:hover {
+  background-color: #1c5e8e;
 }
 
 #content.filter #wrapper #report form #column .accountName #dropDown #btn-account button.unPick {

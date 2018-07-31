@@ -591,17 +591,97 @@
 								}
 							}
 
-							.accountName{
-								.pickedAccount{
-									@include container(4px 10px, 0px);
+							.senderId{
+								.pickedSender{
+									@include container(0px, 0px);
 									@extend %title4;
 									color: $color7;
 									border: 1px solid $color5;
 									position: relative;
 									cursor: pointer;
 
+									.searchField{
+										@include container(4px 10px, 0px);
+										border: 0px;
+										@extend %title4;
+										color: $color7;
+										width: 100%;
+									}
+
 									button{
-										@include container(0px 10px, 0px);
+										@include container(4px 10px, 0px);
+										right: 0;
+										position: absolute;
+										background-color: transparent;
+										cursor: pointer;
+
+										&.down{
+											color: $color7;
+										}
+
+										&.up{
+											color: $color2;
+										}
+									}
+								}
+
+								#dropDown{
+									#btn-sender{
+										position: absolute;
+										z-index: 9999999;
+										overflow-y: scroll;
+										width: 304px;
+										height: 200px;
+										border: 1px solid $color5;
+										border-top: 0px;
+										background-color: $color1;
+
+										button{
+											@include container(0px 10px, 0px);
+											@extend %title4;
+											width: 100%;
+											text-align: left;
+											display: block;
+											cursor: pointer;
+											border-bottom: 1px solid $color1;
+
+											&:hover {
+												background-color: $color3;
+											};
+
+											&.unPick{
+												color: $color7;
+												background-color: transparent;
+											}
+
+											&.pick{
+												color: $color1;
+												background-color: $color2;
+											}
+									 	}
+								 	}
+								}
+							}
+
+							.accountName{
+								.pickedAccount{
+									@include container(0px, 0px);
+									@extend %title4;
+									color: $color7;
+									border: 1px solid $color5;
+									position: relative;
+									cursor: pointer;
+
+									.searchField{
+										@include container(4px 10px, 0px);
+										border: 0px;
+										@extend %title4;
+										color: $color7;
+										width: 100%;
+									}
+
+									button{
+										@include container(4px 10px, 0px);
 										right: 0;
 										position: absolute;
 										background-color: transparent;
@@ -636,6 +716,10 @@
 											display: block;
 											cursor: pointer;
 											border-bottom: 1px solid $color1;
+												
+											&:hover {
+												background-color: $color3;
+											};
 
 											&.unPick{
 												color: $color7;

@@ -29,7 +29,7 @@
 				    		<input type='hidden' class='accountField' name='account'/>
 				    		<div id="accountContainer">
 					    		<div class="pickedAccount">
-				    				<input type="text" name="" value='' class=''>
+				    				<input type="text" name="" value='' class='searchField' placeholder="-- type account name --">
 				    				<button class='list' type="button"></button>
 				    			</div>
 						    	<div id="dropDown">
@@ -45,7 +45,17 @@
 				  	<div id="column">
 					  	<div class="form-group senderId">
 					    	<label for="senderId">Sender ID </label>
-							<input class="form-control form-control-sm" id="btn-sender" name='sender' placeholder="-- n/a --"/>
+				    		<input type='hidden' class='senderField' name='sender'/>
+				    		<div id="senderContainer">
+					    		<div class="pickedSender">
+				    				<input type="text" name="" value='' class='searchField' placeholder="-- n/a --">
+				    				<button class='list' type="button"></button>
+				    			</div>
+						    	<div id="dropDown">
+							    	<div id="btn-sender">
+							    	</div>
+						    	</div>
+					    	</div>
 					  	</div>
 				  	</div>
 				  	<div id="column">
@@ -63,5 +73,5 @@
 @section ('custom_script')
 	<script src="{{ url('/') }}/js/app.js" type="text/javascript"></script>
 	<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/js/gijgo.min.js" type="text/javascript"></script>
-	<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
 @endsection

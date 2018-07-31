@@ -23,7 +23,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/') }}/report/generate"><i class="fa fa-print"></i> Generate Report</a>
-            <a class="dropdown-item" href="{{ url('/') }}/report/download"><i class="fa fa-download"></i> Download Report</a>
+            <!-- <a class="dropdown-item" href="{{ url('/') }}/report/download"><i class="fa fa-download"></i> Download Report</a> -->
           </div>
         </li>
         <li class="nav-item dropdown">

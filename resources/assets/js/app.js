@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	console.log(window.location.origin);
+	// console.log(window.location.origin);
 	// DatePicker
 		var date = new Date;
 	   	var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate()-1);
@@ -47,35 +47,77 @@ $(document).ready(function(){
 		});
 
 	// AccountSelection
-		$('#btn-sender').prop("disabled", true);
 		$('#btn-account').hide();
+		$('#btn-sender').hide();
+		$('#senderContainer .searchField').prop("disabled", true);
+		$('#senderContainer button').prop("disabled", true);
 
-		$(".pickedAccount button").attr('class','down');
-		$(".pickedAccount button").html("<i class='fa fa-angle-down'></i>");
+		$("div.pickedAccount button").attr('class','down');
+		$("div.pickedAccount button").html("<i class='fa fa-angle-down'></i>");
 
-		// $("body").click(function(event){
-		// 	if($(event.target).parent('div#accountContainer').length == 1){
-		// 		console.log("accountContainer");
+		$('div.pickedSender button').attr('class','down');
+		$('div.pickedSender button').html("<i class='fa fa-angle-down'></i>");
 
-		// 		$('#btn-account').show();
 
-		// 		if($(event.target).attr('class') == 'pickedAccount'){
-		// 			$('#btn-account').show();
-		// 		}
-		// 	}else{
-		// 		$('#btn-account').hide();
-		// 	}
-		// });
+		$("body").click(function(event){
+			if($(event.target).parent('div.pickedAccount').length == 1 || $(event.target).parent('div#accountContainer').length == 1 || $(event.target).parent('div#btn-account').length == 1){
 
-		$(".pickedAccount").click(function(event){
-			if($(this).children("button").attr('class') == 'down'){
-				$(this).children("button").attr('class','up');
-				$(this).children("button").html("<i class='fa fa-angle-up'></i>");
-				$('#btn-account').show();
+				var pickedAccount = $('div.pickedAccount button');
+
+				if(pickedAccount.attr('class') == 'down'){
+					pickedAccount.attr('class','up');
+					pickedAccount.html("<i class='fa fa-angle-up'></i>");
+					$('#btn-account').show();
+				}else{
+					pickedAccount.attr('class','down');
+					pickedAccount.html("<i class='fa fa-angle-down'></i>");
+					$('#btn-account').hide();
+				}
+
+				if($(event.target).parent('div#btn-account').length == 1 || $(event.target).parent('div#dropDown').length == 1){
+					pickedAccount.attr('class','up');
+					pickedAccount.html("<i class='fa fa-angle-up'></i>");
+					$('#btn-account').show();
+				}
 			}else{
-				$(this).children("button").attr('class','down');
-				$(this).children("button").html("<i class='fa fa-angle-down'></i>")
 				$('#btn-account').hide();
+
+				$('div.pickedAccount button').attr('class','down');
+				$('div.pickedAccount button').html("<i class='fa fa-angle-down'></i>");
+			}
+
+			if($(event.target).parent('div.pickedSender').length == 1 || $(event.target).parent('div#senderContainer').length == 1 || $(event.target).parent('div#btn-sender').length == 1){
+
+				var pickedSender = $('div.pickedSender button');
+
+				if(pickedSender.attr('class') == 'down'){
+					pickedSender.attr('class','up');
+					pickedSender.html("<i class='fa fa-angle-up'></i>");
+
+					$('#btn-sender').show();
+				}else{
+					pickedSender.attr('class','down');
+					pickedSender.html("<i class='fa fa-angle-down'></i>");
+					$('#btn-sender').hide();
+				}
+
+				if($(event.target).parent('div#btn-sender').length == 1){
+					pickedSender.attr('class','up');
+					pickedSender.html("<i class='fa fa-angle-up'></i>");
+					$('#btn-sender').show();
+
+					var set = $(event.target);
+
+					if(set.toggle("unPick")){
+						set.addClass('pick');
+						set.removeClass('unPick');
+					}
+				}
+			}else{
+				$('#btn-sender').hide();
+
+				$('div.pickedSender button').attr('class','down');
+				$('div.pickedSender button').html("<i class='fa fa-angle-down'></i>");
 			}
 		});
 
@@ -83,6 +125,9 @@ $(document).ready(function(){
 
 		$('#btn-account button').click(function(){
 			var picked = $(this).val().split("|");
+
+			$('.senderId .senderField').val('');
+			$('.senderId .searchField').val('');
 
 			if($(this).hasClass('unPick')){
 				obj[picked[0]] = picked[1];
@@ -107,36 +152,37 @@ $(document).ready(function(){
 			$(".accountField").val(list);
 
 			if(selected != 0){
-				$('.pickedAccount span').html(selected + " account(s) selected");
+				$('.pickedAccount .searchField').attr('placeholder',selected + " account(s) selected");
 			}else{
-				$('.pickedAccount span').html("-- select account --");
+				$('.pickedAccount .searchField').attr('placeholder',"-- type account name --");
 			}
 
 	// SenderSelection
 			if(obj != '' && selected != 0){
-				$('#btn-sender').prop("disabled", false);
-				$('#btn-sender').attr('placeholder',"-- all sender Id --");
+				$('#senderContainer .searchField').prop("disabled", false);
+				$('#senderContainer button').prop("disabled", false);
 
 				$(this).parent().append("<input type='hidden' class='accountField' name='account' value='"+ list +"'/>");
 
+				$('#btn-sender').html("<button type='button' class='unPick' value='ALL SENDER ID'>-- ALL SENDER ID --</button>");
+
 				$.ajax({
-				    url: window.location.origin + "/report/sender/" + list,
+				    url: "/report/sender/" + list,
 				    type: "GET",
 				    success: function(data){
 				    	console.log(data);
-					    },
-
-				   //  	 	$('#btn-sender').append("<option class='senderId' value='all'>-- All Sender ID --</option>");
-					  //   	$.each(data, function(key, value){
-							//    $('#btn-sender').append("<option class='senderId' value='" + value + "'>" + value + "</option>");
-							// });
+				    	
+			    		$.each(data, function(key, value){
+							$('#btn-sender').append("<button type='button' class='unPick' value='" + value + "'>" + value + "</button>");
+						});
+				    },
 			      	error: function(jqXHR, textStatus, errorThrown){
 					    console.log(textStatus + " - " + errorThrown)
 				  	}
 				});
 			}else{
-				$('#btn-sender').prop("disabled", true);
-				$('#btn-sender').attr('placeholder',"-- n/attr --");
+				$('#senderContainer .searchField').prop("disabled", true);
+				$('#senderContainer .searchField').attr('placeholder',"-- n/a --");
 			}
 	});
 });
