@@ -12,8 +12,12 @@ class Report extends Model
         $this->query = DB::connection('mysql2'); //dummy_db
     }
 
-    public function listAccount(){
-        return $this->query->table('esme_credential')->select('id','system_id')->orderBy('system_id', 'asc')->get();
+    public function listAccount($name = NULL){
+        if($name){
+            return $this->query->table('esme_credential')->select('id','system_id')->where('system_id', $name)->orderBy('system_id', 'asc')->get();
+        }else{
+            return $this->query->table('esme_credential')->select('id','system_id')->orderBy('system_id', 'asc')->get();
+        }
     }
 
     public function listSender($idList){
@@ -45,51 +49,51 @@ class Report extends Model
         $startDate = $start[2] . "-" . $start[0] . "-" . $start[1];
         $endDate = $end[2] . "-" . $end[0] . "-" .$end[1];
 
-        $dateRange = date_diff(date_create($startDate), date_create($endDate))->d;
+        // $dateRange = date_diff(date_create($startDate), date_create($endDate))->d;
 
-        $date[] = [
-            'start' => $startDate . " 00:00:01",
-            'end' => $startDate . " 23:59:59"
-        ];
+        // $date[] = [
+        //     'start' => $startDate . " 00:00:01",
+        //     'end' => $startDate . " 23:59:59"
+        // ];
 
-        $column = ['sender id',$startDate];
+        // $column = ['sender id',$startDate];
 
-        for($i=1; $i <= $dateRange; $i++){
-            $date[] = [
-               'start' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 00:00:01",
-               'end' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 23:59:59"
-            ];
+        // for($i=1; $i <= $dateRange; $i++){
+        //     $date[] = [
+        //        'start' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 00:00:01",
+        //        'end' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 23:59:59"
+        //     ];
 
-            $column[] = date('Y-m-d', strtotime("+$i day" . $startDate));
-        }
+        //     $column[] = date('Y-m-d', strtotime("+$i day" . $startDate));
+        // }
 
-        $accountId = $this->query->table('esme_credential');
-        $accountId->select('system_id','allowed_sender_ids');
-        $accountId->where('esme_credential.id', $request->account);
-        $accountId->get();
+        // $accountId = $this->query->table('esme_credential');
+        // $accountId->select('system_id','allowed_sender_ids');
+        // $accountId->where('esme_credential.id', $request->account);
+        // $accountId->get();
 
-        $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
+        // $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
   
-        $select[] = DB::raw("transactions.source_addr AS 'sender id'");
+        // $select[] = DB::raw("transactions.source_addr AS 'sender id'");
 
-        foreach($senderId as $value){
-            foreach($date as $eachDay){ 
-                $dayStart = $eachDay['start'];
-                $dayEnd = $eachDay['end'];
-                $select[] = DB::raw("(CASE WHEN transactions.date_time_created BETWEEN '$dayStart' AND '$dayEnd' THEN COUNT(transactions.id) END) as '" . substr($dayStart, 0, -9) . "'");
-            }
-        }
+        // foreach($senderId as $value){
+        //     foreach($date as $eachDay){ 
+        //         $dayStart = $eachDay['start'];
+        //         $dayEnd = $eachDay['end'];
+        //         $select[] = DB::raw("(CASE WHEN transactions.date_time_created BETWEEN '$dayStart' AND '$dayEnd' THEN COUNT(transactions.id) END) as '" . substr($dayStart, 0, -9) . "'");
+        //     }
+        // }
 
-        $mysql = $this->query->table('transactions');
-        $mysql->select($select);
-        $mysql->where('esme_credential_id', $request->account);
-        $mysql->groupBy(DB::raw("transactions.source_addr"));
+        // $mysql = $this->query->table('transactions');
+        // $mysql->select($select);
+        // $mysql->where('esme_credential_id', $request->account);
+        // $mysql->groupBy(DB::raw("transactions.source_addr"));
 
-        return [
-                'accountName' => $accountId->get()[0]->system_id,
-                'column' => $column,
-                'data' => $mysql->get()
-            ];
+        // return [
+        //         'accountName' => $accountId->get()[0]->system_id,
+        //         'column' => $column,
+        //         'data' => $mysql->get()
+        //     ];
     }
 
     public function transSender($request){
@@ -178,5 +182,11 @@ class Report extends Model
         $filename .= "_" . $transactions->dateRange[0] . "-" . $transactions->dateRange[0];
 
         return response()->download($path, str_replace("/","", $filename) . ".csv", $headers);
+    }
+
+    public function test(){
+        $test = DB::connection('mysql3');
+
+        return $list;
     }
 }

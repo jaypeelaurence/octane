@@ -184,10 +184,22 @@ $(document).ready(function () {
 
 				var set = $(event.target);
 
-				if (set.toggle("unPick")) {
-					set.addClass('pick');
+				if (set.hasClass('unPick')) {
+					$('#btn-sender button').removeClass('pick');
+					$('#btn-sender button').addClass('unPick');
+
 					set.removeClass('unPick');
+					set.addClass('pick');
+				} else {
+					$('#btn-sender button').removeClass('pick');
+					$('#btn-sender button').addClass('unPick');
+
+					set.removeClass('pick');
+					set.addClass('unPick');
 				}
+
+				$('.senderId .senderField').val(set.val());
+				$('.senderId .searchField').val(set.val());
 			}
 		} else {
 			$('#btn-sender').hide();
@@ -261,6 +273,47 @@ $(document).ready(function () {
 			$('#senderContainer .searchField').attr('placeholder', "-- n/a --");
 		}
 	});
+
+	// var sourceAccount = [];
+
+	// $.ajax({
+	//     url: "/report/account/",
+	//     type: "GET",
+	//     success: function(data){
+	//    		$.each(data, function(key, value){
+	// 			$('#btn-account').append("<button type='button' class='unPick' value='" + value.id + "|" + value.system_id + "'>" + value.system_id + "</button>");
+
+	// 			sourceAccount = value.system_id;
+	// 		});
+	//     },
+	//      	error: function(jqXHR, textStatus, errorThrown){
+	// 	    console.log(textStatus + " - " + errorThrown)
+	//   	}
+	// });
+
+	// var strAcct = "";
+
+	// $(".pickedAccount .searchField" ).keyup(function(event){
+	//   	if(event.which <= 90 && event.which >= 48){
+	//        	strAcct += event.key;
+	//       	}
+
+	//   		$.ajax({
+	// 	    url: "/report/account/search/" + strAcct,
+	// 	    type: "GET",
+	// 	    success: function(data){
+	//       			console.log(data);
+	//     		$.each(data, function(key, value){
+	// 				$('#btn-account').append("<button type='button' class='unPick' value='" + value.id + "|" + value.system_id + "'>" + value.system_id + "</button>");
+
+	// 				sourceAccount = value.system_id;
+	// 			});
+	// 	    },
+	//       	error: functio(textStatus + " - " + errorThrown)
+	// 	  	}n(jqXHR, textStatus, errorThrown){
+	// 		    console.log
+	// 	});
+	// });
 });
 
 /***/ }),

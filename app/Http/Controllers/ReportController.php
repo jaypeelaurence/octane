@@ -21,10 +21,6 @@ class ReportController extends Controller
     }
 
     public function show(Request $request){
-        return $request->all();
-
-        $account = $this->report->listAccount();
-
         $result = $this->formValidate->queryReport($request);
 
         $dateRange = [
@@ -38,6 +34,8 @@ class ReportController extends Controller
         }else{
             if($request->sender){
                 $listTrans = $this->report->transSender($request);
+
+                return $listTrans;
 
                 $transactions = [
                     'type'          => 'sender',
@@ -57,16 +55,22 @@ class ReportController extends Controller
                     'column'        => $listTrans['column'],
                     'data'          => $listTrans['data']
                 ];
-
-                // return $transactions;
             }
         }
 
         return view('report.index', compact(['account','transactions']));
     }
 
-    public function load($idList){
-        return $this->report->listSender($idList);
+    public function load($idList = null){
+        if($idList){
+            return $this->report->listSender($idList);
+        }else{
+            return $this->report->listAccount();
+        }
+    }
+
+    public function search(){
+       return $this->report->listAccount();
     }
     
     public function get(Request $request){
@@ -75,5 +79,9 @@ class ReportController extends Controller
         $generateReport = $this->report->generateReport(json_decode(base64_decode($request->transactions)));
 
         return $generateReport;
+    }
+
+    public function loadAcct($strAcct){
+       return $this->report->listAccount($strAcct);
     }
 }
