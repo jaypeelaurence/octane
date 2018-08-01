@@ -91,25 +91,27 @@ $(document).ready(function () {
 
 	$('#endDate').datepicker({
 		uiLibrary: 'bootstrap4',
-		iconsLibrary: 'fontawesome',
-		minDate: function minDate() {
-			return $('#startDate').val();
-		},
-		maxDate: function maxDate() {
-			var startDate = new Date($('#startDate').val());
+		iconsLibrary: 'fontawesome'
+		//      minDate: function (){
+		//          return $('#startDate').val();
+		//      },
+		//      maxDate: function (){
+		//      	return $('#startDate').val();
 
-			var checkDate = startDate.getDate() + 7;
+		// // var startDate = new Date($('#startDate').val());
 
-			if (checkDate > 31) {
-				days = checkDate - 30;
-			} else if (checkDate > today.getDate()) {
-				days = today.getDate() - startDate.getDate() - 1;
-			} else {
-				days = 6;
-			}
+		// // var checkDate = startDate.getDate() + 7;
 
-			return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + days);
-		}
+		// // // if(checkDate > 31){
+		// // //              days = checkDate - 30;
+		// // // }else if(checkDate > today.getDate()){
+		// // // 	days = today.getDate() - startDate.getDate() - 1;
+		// // // }else{
+		// // // 	days = 6;
+		// // // }
+
+		// // return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + days);
+		//      },
 	});
 
 	if ($("#startDate").val() == '') {

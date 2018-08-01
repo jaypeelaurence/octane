@@ -21,6 +21,7 @@ class ReportController extends Controller
     }
 
     public function show(Request $request){
+        $account = $this->report->listAccount();
         $result = $this->formValidate->queryReport($request);
 
         $dateRange = [
@@ -28,14 +29,11 @@ class ReportController extends Controller
             $request->end
         ];
 
-
         if ($result->fails()) {
             return back()->withErrors($result)->withInput();
         }else{
             if($request->sender){
                 $listTrans = $this->report->transSender($request);
-
-                return $listTrans;
 
                 $transactions = [
                     'type'          => 'sender',
@@ -56,6 +54,8 @@ class ReportController extends Controller
                     'data'          => $listTrans['data']
                 ];
             }
+
+            return $listTrans;
         }
 
         return view('report.index', compact(['account','transactions']));

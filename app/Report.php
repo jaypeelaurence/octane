@@ -49,51 +49,89 @@ class Report extends Model
         $startDate = $start[2] . "-" . $start[0] . "-" . $start[1];
         $endDate = $end[2] . "-" . $end[0] . "-" .$end[1];
 
-        // $dateRange = date_diff(date_create($startDate), date_create($endDate))->d;
+        $dateRange = date_diff(date_create($startDate), date_create($endDate))->d;
 
-        // $date[] = [
-        //     'start' => $startDate . " 00:00:01",
-        //     'end' => $startDate . " 23:59:59"
-        // ];
+        $date[] = [
+            'start' => $startDate . " 00:00:01",
+            'end' => $startDate . " 23:59:59"
+        ];
 
-        // $column = ['sender id',$startDate];
+        $column[] = date('Y-m-d', strtotime($startDate));
+        $total[date('Y-m-d', strtotime($startDate))] = 0;
 
-        // for($i=1; $i <= $dateRange; $i++){
-        //     $date[] = [
-        //        'start' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 00:00:01",
-        //        'end' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 23:59:59"
-        //     ];
+        for($i=1; $i <= $dateRange; $i++){
+            $date[] = [
+               'start' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 00:00:01",
+               'end' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 23:59:59"
+            ];
 
-        //     $column[] = date('Y-m-d', strtotime("+$i day" . $startDate));
-        // }
+            $column[] = date('Y-m-d', strtotime("+$i day" . $startDate));
 
-        // $accountId = $this->query->table('esme_credential');
-        // $accountId->select('system_id','allowed_sender_ids');
-        // $accountId->where('esme_credential.id', $request->account);
-        // $accountId->get();
+            $total[date('Y-m-d', strtotime("+$i day" . $startDate))] = 0;
+        }
 
-        // $senderId = explode("|", $accountId->get()[0]->allowed_sender_ids, -1);
-  
-        // $select[] = DB::raw("transactions.source_addr AS 'sender id'");
+        $formAccount = explode("|",$request->account,-1);
 
-        // foreach($senderId as $value){
-        //     foreach($date as $eachDay){ 
-        //         $dayStart = $eachDay['start'];
-        //         $dayEnd = $eachDay['end'];
-        //         $select[] = DB::raw("(CASE WHEN transactions.date_time_created BETWEEN '$dayStart' AND '$dayEnd' THEN COUNT(transactions.id) END) as '" . substr($dayStart, 0, -9) . "'");
-        //     }
-        // }
+        foreach($formAccount as $value){
+            $query = $this->query->table('esme_credential');
+            $query->select('system_id','allowed_sender_ids');
+            $query->where('esme_credential.id', $value);
+            $query->get();
 
-        // $mysql = $this->query->table('transactions');
-        // $mysql->select($select);
-        // $mysql->where('esme_credential_id', $request->account);
-        // $mysql->groupBy(DB::raw("transactions.source_addr"));
+            $accountId[] = $query->get()[0]->system_id;
 
-        // return [
-        //         'accountName' => $accountId->get()[0]->system_id,
-        //         'column' => $column,
-        //         'data' => $mysql->get()
-        //     ];
+            $senderId = [explode("|", utf8_encode($query->get()[0]->allowed_sender_ids), -1)];
+        }
+
+        $stringAccount = '';
+
+        foreach ($accountId as $value) {
+            $stringAccount .= "'".$value."',";
+        }
+
+        $listAccount =  substr($stringAccount, 0, -1);
+
+        $i = 0;
+
+        foreach($date as $value){
+            $where = "account in (" . $listAccount . ") AND date_time_created BETWEEN '" . $value['start'] . "' AND '" . $value['end'] . "'";
+
+            $query = $this->query->table('v10_outbound_txn');
+            $query->select(['sender_id', DB::raw("COUNT(id) as count")]);
+            $query->whereRaw($where);
+            $query->groupBy('sender_id');
+            $query->orderBY('sender_id', 'asc');
+
+            foreach($query->get() as $value){
+                $result[$column[$i]][strtolower($value->sender_id)] = $value->count;
+
+                $total[$column[$i]] = $total[$column[$i]] + $value->count;
+            }
+
+            ++$i;
+        }
+
+        foreach ($senderId[0] as $senderName){
+            foreach ($column as $day) {
+                $data[$senderName][$day] = 0;
+
+                if(!isset($result) || count($result) <= 0){
+                    $data[$senderName][$day] = 0;
+                }else{
+                    foreach ($result as $createdAt => $value){
+                        if(array_key_exists($senderName,$value)){
+                            $data[$senderName][$createdAt] = $value[$senderName];
+                        }
+                    }
+                }
+            }
+        }
+
+        return [
+            'accountName' => $accountId,
+            'column' => $column,
+            'data' => ['total' => $total, 'row' => $data]
+        ];
     }
 
     public function transSender($request){
