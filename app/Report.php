@@ -111,8 +111,6 @@ class Report extends Model
             ++$i;
         }
 
-        return array_sum($count);
-
         foreach ($senderId[0] as $senderName){
             foreach ($column as $day) {
                 $data[$senderName][$day] = 0;
