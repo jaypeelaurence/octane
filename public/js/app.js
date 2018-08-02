@@ -91,27 +91,25 @@ $(document).ready(function () {
 
 	$('#endDate').datepicker({
 		uiLibrary: 'bootstrap4',
-		iconsLibrary: 'fontawesome'
-		//      minDate: function (){
-		//          return $('#startDate').val();
-		//      },
-		//      maxDate: function (){
-		//      	return $('#startDate').val();
+		iconsLibrary: 'fontawesome',
+		minDate: function minDate() {
+			return $('#startDate').val();
+		},
+		maxDate: function maxDate() {
+			var startDate = new Date($('#startDate').val());
 
-		// // var startDate = new Date($('#startDate').val());
+			var checkDate = startDate.getDate() + 7;
 
-		// // var checkDate = startDate.getDate() + 7;
+			if (checkDate > 31) {
+				days = checkDate - 30;
+			} else if (checkDate > today.getDate()) {
+				days = today.getDate() - startDate.getDate() - 1;
+			} else {
+				days = 6;
+			}
 
-		// // // if(checkDate > 31){
-		// // //              days = checkDate - 30;
-		// // // }else if(checkDate > today.getDate()){
-		// // // 	days = today.getDate() - startDate.getDate() - 1;
-		// // // }else{
-		// // // 	days = 6;
-		// // // }
-
-		// // return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + days);
-		//      },
+			return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + days);
+		}
 	});
 
 	if ($("#startDate").val() == '') {
@@ -254,7 +252,7 @@ $(document).ready(function () {
 
 			$(this).parent().append("<input type='hidden' class='accountField' name='account' value='" + list + "'/>");
 
-			$('#btn-sender').html("<button type='button' class='unPick' value='All Sender Id'>-- ALL SENDER ID --</button>");
+			$('#btn-sender').html("<button type='button' class='unPick' value='ALL SENDER ID'>-- ALL SENDER ID --</button>");
 
 			$.ajax({
 				url: "/report/sender/" + list,
