@@ -254,7 +254,7 @@ $(document).ready(function () {
 
 			$(this).parent().append("<input type='hidden' class='accountField' name='account' value='" + list + "'/>");
 
-			$('#btn-sender').html("<button type='button' class='unPick' value='ALL SENDER ID'>-- ALL SENDER ID --</button>");
+			$('#btn-sender').html("<button type='button' class='unPick' value='All Sender Id'>-- ALL SENDER ID --</button>");
 
 			$.ajax({
 				url: "/report/sender/" + list,

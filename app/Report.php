@@ -105,22 +105,20 @@ class Report extends Model
             foreach($query->get() as $value){
                 $result[$column[$i]][strtolower($value->sender_id)] = $value->count;
 
-                $total[$column[$i]] = $total[$column[$i]] + $value->count;
+                $total[$column[$i]] = $value->count;
             }
 
             ++$i;
         }
 
+        return array_sum($count);
+
         foreach ($senderId[0] as $senderName){
             foreach ($column as $day) {
                 $data[$senderName][$day] = 0;
 
-                if(isset($result) && count($result) > 0){
-                    foreach ($result as $createdAt => $value){
-                        if(array_key_exists($senderName,$value)){
-                            $data[$senderName][$createdAt] = $value[$senderName];
-                        }
-                    }
+                if(isset($result) && count($result) > 0 && array_key_exists($day,$result) && array_key_exists($senderName,$result[$day])){
+                    $data[$senderName][$day] = $result[$day][$senderName];
                 }
             }
         }
@@ -192,7 +190,7 @@ class Report extends Model
 
         $i = 0;
 
-        if($request->sender == "ALL SENDER ID"){
+        if($request->sender == "All Sender Id"){
             foreach($date as $value){
                 $start = $value['start'];
                 $end = $value['end'];
@@ -208,7 +206,7 @@ class Report extends Model
                     foreach($query->get() as $value){
                         $result[$row[$i]][$brand] = $value->count;
 
-                        $total[$brand] = $total[$brand] + $value->count;
+                        $total[$brand] +=  $value->count;
                     }
                 }
 
@@ -230,7 +228,7 @@ class Report extends Model
                     foreach($query->get() as $value){
                         $result[$row[$i]][$brand] = $value->count;
 
-                        $total[$brand] = $total[$brand] + $value->count;
+                        $total[$brand] += $value->count;
                     }
                 }
 
@@ -242,12 +240,8 @@ class Report extends Model
             foreach ($column as $brand) {
                 $data[$date][$brand] = 0;
 
-                if(isset($result) && count($result) > 0){
-                    if(array_key_exists($date,$result)){
-                        if(array_key_exists($brand,$result[$date])){
-                            $data[$date][$brand] = $result[$date][$brand];
-                        }
-                    }
+                if(isset($result) && count($result) > 0 && array_key_exists($date,$result) && array_key_exists($brand,$result[$date])){
+                    $data[$date][$brand] = $result[$date][$brand];
                 }
             }
         }
@@ -261,7 +255,7 @@ class Report extends Model
     }
 
     public function generateReport($transactions){
-        $cols = "";
+        $cols = ",";
 
         foreach ($transactions->column as $value){
             $cols .= $value . ",";
@@ -270,15 +264,22 @@ class Report extends Model
 
         $line[] = $cols;
 
-        foreach ($transactions->data as $value){
-            $row = "";
-
-            foreach($column as $field){
-                $row .= $value->$field . ",";
+        foreach ($transactions->data->row as $key => $row){
+            $data = $key . ",";
+            foreach ($row as $value){
+                $data .= $value . ",";
             }
-            
-            $line[] = $row;
+
+            $line[] = $data;
         }
+
+        $total = "total,";
+
+        foreach ($transactions->data->total as $value){
+            $total .= $value . ",";
+        }
+
+        $line[] = $total;
 
         $headers = array(
             "Content-type" => "text/csv",
@@ -295,7 +296,7 @@ class Report extends Model
 
         fclose($file);
 
-        $filename = $transactions->accountName;
+        $filename = implode(" ", $transactions->accountName);
 
         if($transactions->type == "sender"){
             $filename .= "_" . $transactions->senderName;

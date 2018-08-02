@@ -46,6 +46,8 @@ class ReportController extends Controller
             }else{
                 $listTrans = $this->report->transAccount($request);
 
+                return $listTrans;
+
                 $transactions = [
                     'type'          => 'account',
                     'dateRange'     => $dateRange,
@@ -55,8 +57,6 @@ class ReportController extends Controller
                 ];
             }
         }
-
-        return $transactions;
 
         return view('report.index', compact(['account','transactions']));
     }
