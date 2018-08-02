@@ -54,9 +54,9 @@ class ReportController extends Controller
                     'data'          => $listTrans['data']
                 ];
             }
-
-            return $listTrans;
         }
+
+        return $transactions;
 
         return view('report.index', compact(['account','transactions']));
     }

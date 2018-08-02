@@ -115,9 +115,7 @@ class Report extends Model
             foreach ($column as $day) {
                 $data[$senderName][$day] = 0;
 
-                if(!isset($result) || count($result) <= 0){
-                    $data[$senderName][$day] = 0;
-                }else{
+                if(isset($result) && count($result) > 0){
                     foreach ($result as $createdAt => $value){
                         if(array_key_exists($senderName,$value)){
                             $data[$senderName][$createdAt] = $value[$senderName];
@@ -138,41 +136,127 @@ class Report extends Model
         $start = explode("/",$request->start);
         $end = explode("/",$request->end);
 
-        $startDate = $start[2] . "-" . $start[0] . "-" . $start[1] . " 00:00:00";
-        $endDate = $end[2] . "-" . $end[0] . "-" .$end[1] . " 24:59:59";
+        $startDate = $start[2] . "-" . $start[0] . "-" . $start[1];
+        $endDate = $end[2] . "-" . $end[0] . "-" .$end[1];
 
-        $accountId = $this->query->table('esme_credential');
-        $accountId->select('system_id');
-        $accountId->where('esme_credential.id', $request->account);
+        $dateRange = date_diff(date_create($startDate), date_create($endDate))->d;
 
-        $prefix = $this->query->table('prefix');
-        $prefix->select('id', 'name');
+        $date[] = [
+            'start' => $startDate . " 00:00:01",
+            'end' => $startDate . " 23:59:59"
+        ];
 
-        $select[] = DB::raw("SUBSTRING(transactions.date_time_created, 1, 10) AS date");
+        $row[] = date('Y-m-d', strtotime($startDate));
 
-        $network[] = "date";
+        for($i=1; $i <= $dateRange; $i++){
+            $date[] = [
+               'start' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 00:00:01",
+               'end' => date('Y-m-d', strtotime("+$i day" . $startDate)) . " 23:59:59"
+            ];
 
-        foreach($prefix->get() as $value){
-            $prefix_id = $value->id;
-            $prefix_name = $value->name;
-            $select[] = DB::raw("(CASE WHEN transactions.prefix_id = '$prefix_id' THEN COUNT(transactions.prefix_id) END) as '$prefix_name'");
-
-            $network[] = $value->name;
+            $row[] = date('Y-m-d', strtotime("+$i day" . $startDate));
         }
 
-        $mysql = $this->query->table('transactions');
-        $mysql->select($select);
-        $mysql->where([
-            ['esme_credential_id', $request->account],
-            ['source_addr', $request->sender]
-        ]);
-        $mysql->groupBy(DB::raw("DATE_FORMAT(transactions.date_time_created, '%Y-%m-%d')"));
+        $column = [
+            1 => 'GLOBE',
+            2 => 'Smart',
+            3 => 'Others',
+            4 => 'SUN',
+            5 => 'other2'
+        ];
+
+        foreach ($column as $brand) {
+           $total[$brand] = 0;
+        }
+
+        $formAccount = explode("|",$request->account,-1);
+
+        foreach($formAccount as $value){
+            $query = $this->query->table('esme_credential');
+            $query->select('system_id','allowed_sender_ids');
+            $query->where('esme_credential.id', $value);
+            $query->get();
+
+            $accountId[] = $query->get()[0]->system_id;
+
+            $senderId = [explode("|", utf8_encode($query->get()[0]->allowed_sender_ids), -1)];
+        }
+
+        $stringAccount = '';
+
+        foreach ($accountId as $value) {
+            $stringAccount .= "'".$value."',";
+        }
+
+        $listAccount =  substr($stringAccount, 0, -1);
+
+        $i = 0;
+
+        if($request->sender == "ALL SENDER ID"){
+            foreach($date as $value){
+                $start = $value['start'];
+                $end = $value['end'];
+                foreach($column as $key => $brand){
+                    $where = "account in (" . $listAccount . ") AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "' AND prefix_id = " . $key;
+
+                    $query = $this->query->table('v10_outbound_txn');
+                    $query->select(['prefix_id', DB::raw("COUNT(id) as count")]);
+                    $query->whereRaw($where);
+                    $query->groupBy('prefix_id');
+                    $query->orderBY('prefix_id', 'asc');
+
+                    foreach($query->get() as $value){
+                        $result[$row[$i]][$brand] = $value->count;
+
+                        $total[$brand] = $total[$brand] + $value->count;
+                    }
+                }
+
+                ++$i;
+            }
+        }else{
+            foreach($date as $value){
+                $start = $value['start'];
+                $end = $value['end'];
+                foreach($column as $key => $brand){
+                    $where = "account in (" . $listAccount . ") AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "' AND prefix_id = " . $key . " AND sender_id = '" . $request->sender . "'";
+
+                    $query = $this->query->table('v10_outbound_txn');
+                    $query->select(['prefix_id', DB::raw("COUNT(id) as count")]);
+                    $query->whereRaw($where);
+                    $query->groupBy('prefix_id');
+                    $query->orderBY('prefix_id', 'asc');
+
+                    foreach($query->get() as $value){
+                        $result[$row[$i]][$brand] = $value->count;
+
+                        $total[$brand] = $total[$brand] + $value->count;
+                    }
+                }
+
+                ++$i;
+            }
+        }
+
+        foreach($row as $date){
+            foreach ($column as $brand) {
+                $data[$date][$brand] = 0;
+
+                if(isset($result) && count($result) > 0){
+                    if(array_key_exists($date,$result)){
+                        if(array_key_exists($brand,$result[$date])){
+                            $data[$date][$brand] = $result[$date][$brand];
+                        }
+                    }
+                }
+            }
+        }
 
         return [
-            'accountName' => $accountId->get()[0]->system_id,
+            'accountName' => $accountId,
             'senderName' => $request->sender,
-            'column' => $network,
-            'data' => $mysql->get()
+            'column' => $column,
+            'data' =>  ['total' => $total, 'row' => $data]
         ];
     }
 
