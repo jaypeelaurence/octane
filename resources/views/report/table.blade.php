@@ -57,12 +57,12 @@
 									echo "</tr>";
 								}
 
-								echo "<tr>";
-									echo "<td class='date'>Total</td>";
-									foreach ($transactions['data']['total'] as $row => $data){
-										echo "<td class='date'>$data</td>";
-									}
-								echo "</tr>";
+								//echo "<tr>";
+								//	echo "<td class='date'>Total</td>";
+								//	foreach ($transactions['data']['total'] as $row => $data){
+								//		echo "<td class='date'>$data</td>";
+								//	}
+								//echo "</tr>";
 
 							@endphp
 						</tbody>
