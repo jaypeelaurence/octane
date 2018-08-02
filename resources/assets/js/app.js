@@ -12,7 +12,7 @@ $(document).ready(function(){
 	        maxDate: yesterday
 	    });
 
-		 	$('#endDate').datepicker({
+	 	$('#endDate').datepicker({
 	        uiLibrary: 'bootstrap4',
 	        iconsLibrary: 'fontawesome',
 	        minDate: function (){
