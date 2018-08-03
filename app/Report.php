@@ -26,13 +26,13 @@ class Report extends Model
         if(count($accounts) > 0){
             foreach($accounts as $key => $id){
                 $accountId = $this->query->table('esme_credential');
-                $accountId->select('allowed_sender_ids');
+                $accountId->select('system_id','allowed_sender_ids');
                 $accountId->where('esme_credential.id', $id);
                 $accountId->get();
                 $senderIds = explode("|", utf8_encode($accountId->get()[0]->allowed_sender_ids), -1);
 
                 foreach($senderIds as $senderId){
-                    $list[] = $senderId;
+                    $list[] = [$accountId->get()[0]->system_id, $senderId];
                 }
             }
 
@@ -93,6 +93,8 @@ class Report extends Model
 
         $i = 0;
 
+        $count = [];
+
         foreach($date as $value){
             $where = "account in (" . $listAccount . ") AND date_time_created BETWEEN '" . $value['start'] . "' AND '" . $value['end'] . "'";
 
@@ -105,10 +107,14 @@ class Report extends Model
             foreach($query->get() as $value){
                 $result[$column[$i]][strtolower($value->sender_id)] = $value->count;
 
-                $total[$column[$i]] = $value->count;
+                $count[$column[$i]][] = $value->count;
             }
 
             ++$i;
+        }
+
+        foreach($count as $date => $value){
+            $total[$date] = array_sum($value);
         }
 
         foreach ($senderId[0] as $senderName){
@@ -188,7 +194,7 @@ class Report extends Model
 
         $i = 0;
 
-        if($request->sender == "All Sender Id"){
+        if($request->sender == "All Sender ID"){
             foreach($date as $value){
                 $start = $value['start'];
                 $end = $value['end'];
@@ -206,6 +212,9 @@ class Report extends Model
 
                         $total[$brand] +=  $value->count;
                     }
+
+                    $sample[] = $where;
+
                 }
 
                 ++$i;
@@ -215,7 +224,9 @@ class Report extends Model
                 $start = $value['start'];
                 $end = $value['end'];
                 foreach($column as $key => $brand){
-                    $where = "account in (" . $listAccount . ") AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "' AND prefix_id = " . $key . " AND sender_id = '" . $request->sender . "'";
+                    $sender = explode(" => ",$request->sender);
+
+                    $where = "account in (" . $listAccount . ") AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "' AND prefix_id = " . $key . " AND sender_id = '" . $sender[1] . "'";
 
                     $query = $this->query->table('v10_outbound_txn');
                     $query->select(['prefix_id', DB::raw("COUNT(id) as count")]);
@@ -228,6 +239,8 @@ class Report extends Model
 
                         $total[$brand] += $value->count;
                     }
+
+                    $sample[] = $where;
                 }
 
                 ++$i;
@@ -303,11 +316,5 @@ class Report extends Model
         $filename .= "_" . $transactions->dateRange[0] . "-" . $transactions->dateRange[0];
 
         return response()->download($path, str_replace("/","", $filename) . ".csv", $headers);
-    }
-
-    public function test(){
-        $test = DB::connection('mysql3');
-
-        return $list;
     }
 }

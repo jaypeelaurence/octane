@@ -162,7 +162,7 @@ nav.navbar .nav-item a:hover {
 
 @media (min-width: 0px) {
   nav.navbar .nav-item a {
-    padding-right: .5rem;
+    padding-right: 1rem;
   }
 }
 

@@ -45,24 +45,26 @@
 						</thead>
 						<tbody>
 							@php
-								foreach ($transactions['data']['row'] as $row => $data){
-									echo "<tr>";
+								if($transactions['type'] != "account"){
+									foreach ($transactions['data']['row'] as $row => $data){
+										echo "<tr>";
 
-										echo "<td class='date'>$row</td>";
+											echo "<td class='date'>$row</td>";
 
-										foreach($column as $col){
-											echo "<td>" . $data[$col] . "</td>";
-										}
+											foreach($column as $col){
+												echo "<td>" . $data[$col] . "</td>";
+											}
 
-									echo "</tr>";
+										echo "</tr>";
+									}
 								}
 
-								//echo "<tr>";
-								//	echo "<td class='date'>Total</td>";
-								//	foreach ($transactions['data']['total'] as $row => $data){
-								//		echo "<td class='date'>$data</td>";
-								//	}
-								//echo "</tr>";
+								echo "<tr>";
+									echo "<td class='date'>Total</td>";
+										foreach ($transactions['data']['total'] as $row => $data){
+											echo "<td class='date'>$data</td>";
+										}
+								echo "</tr>";
 
 							@endphp
 						</tbody>

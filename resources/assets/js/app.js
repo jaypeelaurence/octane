@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	console.log(window.location.origin);
+	// console.log(window.location.origin);
 	// DatePicker
 		var date = new Date;
 	   	var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate()-1);
@@ -12,7 +12,7 @@ $(document).ready(function(){
 	        maxDate: yesterday
 	    });
 
-	 	$('#endDate').datepicker({
+		 	$('#endDate').datepicker({
 	        uiLibrary: 'bootstrap4',
 	        iconsLibrary: 'fontawesome',
 	        minDate: function (){
@@ -24,7 +24,7 @@ $(document).ready(function(){
 				var checkDate = startDate.getDate() + 7;
 
 				if(checkDate > 31){
-				    days = checkDate - 30;
+	                days = checkDate - 30;
 				}else if(checkDate > today.getDate()){
 					days = today.getDate() - startDate.getDate() - 1;
 				}else{
@@ -122,7 +122,14 @@ $(document).ready(function(){
 					}
 
 					$('.senderId .senderField').val(set.val());
-					$('.senderId .searchField').val(set.val());
+
+					var len = set.val().split(" => ");
+
+					if(len.length == 1){
+						$('.senderId .searchField').val(set.val());
+					}else{
+						$('.senderId .searchField').val(len[0] + " - " +len[1]);
+					}
 				}
 			}else{
 				$('#btn-sender').hide();
@@ -175,7 +182,7 @@ $(document).ready(function(){
 
 				$(this).parent().append("<input type='hidden' class='accountField' name='account' value='"+ list +"'/>");
 
-				$('#btn-sender').html("<button type='button' class='unPick' value='ALL SENDER ID'>-- ALL SENDER ID --</button>");
+				$('#btn-sender').html("<button type='button' class='unPick' value='All Sender ID'>-- All Sender ID --</button>");
 
 				$.ajax({
 				    url: "/report/sender/" + list,
@@ -184,7 +191,7 @@ $(document).ready(function(){
 				    	console.log(data);
 				    	
 			    		$.each(data, function(key, value){
-							$('#btn-sender').append("<button type='button' class='unPick' value='" + value + "'>" + value + "</button>");
+							$('#btn-sender').append("<button type='button' class='unPick' value='" + value[0] + " => " + value[1] + "'>" + value[0] + " - " + value[1] + "</button>");
 						});
 				    },
 			      	error: function(jqXHR, textStatus, errorThrown){
