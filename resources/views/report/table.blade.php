@@ -11,7 +11,7 @@
 					@endphp
 					@php 
 						if(isset($transactions['senderName'])){
-							echo "| Sender ID: " . $transactions['senderName'];
+							echo "| Sender ID: " . explode(' => ', $transactions['senderName'])[1];
 						}
 					@endphp
 					@php 

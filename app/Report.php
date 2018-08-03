@@ -70,7 +70,7 @@ class Report extends Model
             $total[date('Y-m-d', strtotime("+$i day" . $startDate))] = 0;
         }
 
-        $formAccount = explode("|",$request->account,-1);
+        $formAccount = explode("|", $request->account,-1);
 
         foreach($formAccount as $value){
             $query = $this->query->table('esme_credential');
@@ -96,7 +96,7 @@ class Report extends Model
         $count = [];
 
         foreach($date as $value){
-            $where = "account in (" . $listAccount . ") AND date_time_created BETWEEN '" . $value['start'] . "' AND '" . $value['end'] . "'";
+            $where = "account IN (" . $listAccount . ") AND date_time_created BETWEEN '" . $value['start'] . "' AND '" . $value['end'] . "'";
 
             $query = $this->query->table('v10_outbound_txn');
             $query->select(['sender_id', DB::raw("COUNT(id) as count")]);
@@ -199,7 +199,7 @@ class Report extends Model
                 $start = $value['start'];
                 $end = $value['end'];
                 foreach($column as $key => $brand){
-                    $where = "account in (" . $listAccount . ") AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "' AND prefix_id = " . $key;
+                    $where = "account IN (" . $listAccount . ") AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "' AND prefix_id = " . $key;
 
                     $query = $this->query->table('v10_outbound_txn');
                     $query->select(['prefix_id', DB::raw("COUNT(id) as count")]);
@@ -226,7 +226,7 @@ class Report extends Model
                 foreach($column as $key => $brand){
                     $sender = explode(" => ",$request->sender);
 
-                    $where = "account in (" . $listAccount . ") AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "' AND prefix_id = " . $key . " AND sender_id = '" . $sender[1] . "'";
+                    $where = "account IN (" . $listAccount . ") AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "' AND prefix_id = " . $key . " AND sender_id = '" . $sender[1] . "'";
 
                     $query = $this->query->table('v10_outbound_txn');
                     $query->select(['prefix_id', DB::raw("COUNT(id) as count")]);
