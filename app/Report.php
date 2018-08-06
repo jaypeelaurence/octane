@@ -137,10 +137,9 @@ class Report extends Model
 
         $column = [
             1 => 'GLOBE',
-            2 => 'Smart',
+            2 => 'SMART',
             3 => 'Others',
-            4 => 'SUN',
-            5 => 'other2'
+            4 => 'SUN'
         ];
 
         foreach ($column as $brand) {
