@@ -127,6 +127,9 @@ class Report extends Model
 
         $dateRange = date_diff(date_create($startDate), date_create($endDate))->d;
 
+        $date[] = date('Y-m-d', strtotime($startDate));
+        $total['col'][date('Y-m-d', strtotime($startDate))] = 0;
+
         for($i=1; $i <= $dateRange; $i++){
             $date[] = date('Y-m-d', strtotime("+$i day" . $startDate));
             $total['col'][date('Y-m-d', strtotime("+$i day" . $startDate))] = 0;
@@ -173,26 +176,29 @@ class Report extends Model
             $accountList .= "'" . $value . "',";
         }
 
-        foreach($column as $brand){
-            foreach ($pickedList as $value) {
-                $pickedId = explode(' - ',$value);
-                foreach ($date as $day){
-                    $start = $day . " 00:00:01";
-                    $end = $day . " 23:59:59";
+        $senderNames = "";
 
-                    $query = $this->query->table('v10_outbound_txn');
+        foreach ($pickedList as $key => $value) {
+            $senderNames .= "\"" . explode(' - ',$value)[1] . "\",";
+        }
 
-                    $where = "prefix_name = '". $brand ."' AND account IN (" . substr($accountList, 0, -1) . ") AND sender_id = \"" . $pickedId[1] . "\" AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "'";
+        foreach ($column as $brand) {
+            foreach ($date as $day) {
+                $start = $day . " 00:00:01";
+                $end = $day . " 23:59:59";
 
-                    $query->select([DB::raw("COUNT(id) as count")]);
-                    
-                    $query->whereRaw($where);
+                $query = $this->query->table('v10_outbound_txn');
 
-                    $result[$brand][$day] = $query->count();
+                $where = "prefix_name = '". $brand ."' AND account IN (" . substr($accountList, 0, -1) . ") AND sender_id IN (" . substr($senderNames, 0, -1) . ") AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "'";
 
-                    $total['row'][$brand] += $query->count();
-                    $total['col'][$day] += $query->count();
-                }
+                $query->select([DB::raw("COUNT(id) as count")]);
+                
+                $query->whereRaw($where);
+
+                $result[$brand][$day] = $query->count();
+
+                $total['row'][$brand] += $query->count();
+                $total['col'][$day] += $query->count();
             }
         }
 
