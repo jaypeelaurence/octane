@@ -9,11 +9,7 @@
 							echo $accountName . " ";
 						}
 					@endphp
-					@php 
-						if(isset($transactions['senderName'])){
-							echo "| Sender ID: " . explode(' => ', $transactions['senderName'])[1];
-						}
-					@endphp
+
 					@php 
 						echo "| Date Range: ";
 
@@ -40,20 +36,27 @@
 										}
 										$column[] = $value;
 									}
+
+									if($transactions['type'] != "account"){
+										echo "<th>Total</th>";
+									}
 								@endphp
 							</tr>
 						</thead>
 						<tbody>
 							@php
 								if($transactions['type'] != "account"){
-									foreach ($transactions['data']['row'] as $row => $data){
+									foreach ($transactions['data']['count'] as $row => $data){
 										echo "<tr>";
 
-											echo "<td class='date'>$row</td>";
+										echo "<td class='date'>$row</td>";
 
-											foreach($column as $col){
-												echo "<td>" . $data[$col] . "</td>";
-											}
+										foreach($column as $col){
+											echo "<td>" . $data[$col] . "</td>";
+										}
+
+										echo "<td class='date'>" . $transactions['data']['total']['col'][$row] . "</td>";
+
 
 										echo "</tr>";
 									}
@@ -61,7 +64,7 @@
 
 								echo "<tr>";
 									echo "<td class='date'>Total</td>";
-										foreach ($transactions['data']['total'] as $row => $data){
+										foreach ($transactions['data']['total']['row'] as $row => $data){
 											echo "<td class='date'>$data</td>";
 										}
 								echo "</tr>";

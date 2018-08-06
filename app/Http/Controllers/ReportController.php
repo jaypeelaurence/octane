@@ -35,6 +35,8 @@ class ReportController extends Controller
             if($request->sender){
                 $listTrans = $this->report->transSender($request);
 
+                return $listTrans;
+
                 $transactions = [
                     'type'          => 'sender',
                     'dateRange'     => $dateRange,
@@ -45,8 +47,6 @@ class ReportController extends Controller
                 ];
             }else{
                 $listTrans = $this->report->transAccount($request);
-
-                return $listTrans;
 
                 $transactions = [
                     'type'          => 'account',
