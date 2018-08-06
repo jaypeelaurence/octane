@@ -182,7 +182,7 @@ class Report extends Model
 
                     $query = $this->query->table('v10_outbound_txn');
 
-                    $where[] = "prefix_name = '". $brand ."' AND account IN (" . substr($accountList, 0, -1) . ") AND sender_id = \"" . $pickedId[1] . "\" AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "'";
+                    $where = "prefix_name = '". $brand ."' AND account IN (" . substr($accountList, 0, -1) . ") AND sender_id = \"" . $pickedId[1] . "\" AND date_time_created BETWEEN '" . $start . "' AND '" . $end . "'";
 
                     $query->select([DB::raw("COUNT(id) as count")]);
                     
