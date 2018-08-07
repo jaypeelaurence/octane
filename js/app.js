@@ -262,7 +262,7 @@ $(document).ready(function () {
 			$('#btn-sender').html("<button type='button' class='unPick' value='All Sender ID'>-- All Sender ID --</button>");
 
 			$.ajax({
-				url: "/report/sender/" + list,
+				url: window.origin + "/report/sender/" + list,
 				type: "GET",
 				success: function success(data) {
 					console.log(data);
