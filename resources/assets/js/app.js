@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	console.log(window.origin);
+	console.log(window.location);
 	// DatePicker
 		var date = new Date;
 	   	var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate()-1);
