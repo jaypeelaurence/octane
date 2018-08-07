@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	console.log(window.location);
 	// DatePicker
 		var date = new Date;
 	   	var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate()-1);
@@ -185,7 +184,7 @@ $(document).ready(function(){
 				$('#btn-sender').html("<button type='button' class='unPick' value='All Sender ID'>-- All Sender ID --</button>");
 
 				$.ajax({
-				    url: window.origin + "/report/sender/" + list,
+				    url: window.origin + "octane/report/sender/" + list,
 				    type: "GET",
 				    success: function(data){
 				    	console.log(data);
