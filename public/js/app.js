@@ -260,6 +260,8 @@ $(document).ready(function () {
 
 			$('#btn-sender').html("<button type='button' class='unPick' value='All Sender ID'>-- All Sender ID --</button>");
 
+			console.log(window.origin + "octane/report/sender/" + list);
+
 			$.ajax({
 				url: window.origin + "octane/report/sender/" + list,
 				type: "GET",

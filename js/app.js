@@ -76,7 +76,6 @@ module.exports = __webpack_require__(2);
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-	console.log(window.location);
 	// DatePicker
 	var date = new Date();
 	var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
@@ -261,8 +260,10 @@ $(document).ready(function () {
 
 			$('#btn-sender').html("<button type='button' class='unPick' value='All Sender ID'>-- All Sender ID --</button>");
 
+			console.log(window.origin + "octane/report/sender/" + list);
+
 			$.ajax({
-				url: window.origin + "/report/sender/" + list,
+				url: window.origin + "octane/report/sender/" + list,
 				type: "GET",
 				success: function success(data) {
 					console.log(data);
