@@ -186,7 +186,7 @@ $(document).ready(function(){
 				console.log(window.origin + "octane/report/sender/" + list);
 
 				$.ajax({
-				    url: window.origin + "octane/report/sender/" + list,
+				    url: window.origin + "/octane/report/sender/" + list,
 				    type: "GET",
 				    success: function(data){
 				    	console.log(data);
