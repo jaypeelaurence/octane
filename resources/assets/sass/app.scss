@@ -535,28 +535,37 @@
 		}
 
 		&.filter{
-			@media (min-width: 0px){
+			/*@media (min-width: 0px){
 				overflow-x: scroll;
 			}
 
 			@media (min-width: 800px){
 				overflow-x: hidden;
-			}
+			}*/
 
 			#wrapper{
-				@media (min-width: 0px){
-					width: 1000px;
-				}
-
-				@media (min-width: 800px){
-					width: 100%;
-				}
-
 				#report{
 					form{
+						button{
+							@media (min-width: 0px){
+								margin-top: 10px;
+							}
+
+							@media (min-width: 800px){
+								margin-top: 0px;
+							}
+						}
+
 						#column{
 							display: inline-block;
-							width: 30.3%;
+
+							@media (min-width: 0px){
+								width: 100%;
+							}
+
+							@media (min-width: 800px){
+								width: 314px;
+							}
 
 							&:nth-child(3), &:nth-child(4){
 								padding-right: 10px;							
@@ -567,6 +576,7 @@
 							}
 
 							.monthYear{
+
 								#date{
 									display: block;
 

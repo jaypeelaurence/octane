@@ -712,33 +712,42 @@ nav.navbar .navbar-toggler {
   margin-right: 10px;
 }
 
+#content.filter {
+  /*@media (min-width: 0px){
+				overflow-x: scroll;
+			}
+
+			@media (min-width: 800px){
+				overflow-x: hidden;
+			}*/
+}
+
 @media (min-width: 0px) {
-  #content.filter {
-    overflow-x: scroll;
+  #content.filter #wrapper #report form button {
+    margin-top: 10px;
   }
 }
 
 @media (min-width: 800px) {
-  #content.filter {
-    overflow-x: hidden;
-  }
-}
-
-@media (min-width: 0px) {
-  #content.filter #wrapper {
-    width: 1000px;
-  }
-}
-
-@media (min-width: 800px) {
-  #content.filter #wrapper {
-    width: 100%;
+  #content.filter #wrapper #report form button {
+    margin-top: 0px;
   }
 }
 
 #content.filter #wrapper #report form #column {
   display: inline-block;
-  width: 30.3%;
+}
+
+@media (min-width: 0px) {
+  #content.filter #wrapper #report form #column {
+    width: 100%;
+  }
+}
+
+@media (min-width: 800px) {
+  #content.filter #wrapper #report form #column {
+    width: 314px;
+  }
 }
 
 #content.filter #wrapper #report form #column:nth-child(3),

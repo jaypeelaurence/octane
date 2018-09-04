@@ -71,7 +71,8 @@
 @endsection	
 
 @section ('custom_script')
-	<script src="{{ url('/') }}/js/app.js" type="text/javascript"></script>
+	<script src="{{ url('/') }}/js/filter.js" type="text/javascript"></script>
+	<script src="{{ url('/') }}/js/date.js" type="text/javascript"></script>
 	<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/js/gijgo.min.js" type="text/javascript"></script>
 	<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
 @endsection

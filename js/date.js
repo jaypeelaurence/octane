@@ -60,28 +60,69 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(1);
-module.exports = __webpack_require__(2);
+module.exports = __webpack_require__(4);
 
 
 /***/ }),
-/* 1 */
+/* 4 */
 /***/ (function(module, exports) {
 
-$(document).ready(function () {});
+$(document).ready(function () {
+	var date = new Date();
+	var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
+	var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+	var days;
 
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
+	$('#startDate').datepicker({
+		uiLibrary: 'bootstrap4',
+		iconsLibrary: 'fontawesome',
+		maxDate: yesterday
+	});
 
-// removed by extract-text-webpack-plugin
+	$('#endDate').datepicker({
+		uiLibrary: 'bootstrap4',
+		iconsLibrary: 'fontawesome',
+		minDate: function minDate() {
+			return $('#startDate').val();
+		},
+		maxDate: function maxDate() {
+			var startDate = new Date($('#startDate').val());
+
+			var checkDate = startDate.getDate() + 7;
+
+			if (checkDate > 31) {
+				days = checkDate - 30;
+			} else if (checkDate > today.getDate()) {
+				days = today.getDate() - startDate.getDate() - 1;
+			} else {
+				days = 6;
+			}
+
+			return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + days);
+		}
+	});
+
+	if ($("#startDate").val() == '') {
+		$('.end #endDate').prop('disabled', true);
+		$('.end button').prop('disabled', true);
+	}
+
+	$("#startDate").change(function () {
+		$('.end #endDate').prop('disabled', false);
+		$('.end button').prop('disabled', false);
+		$('#endDate').val('');
+	});
+});
 
 /***/ })
 /******/ ]);
