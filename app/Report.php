@@ -138,7 +138,7 @@ class Report extends Model
         $column = [
             1 => 'GLOBE',
             2 => 'SMART',
-            4 => 'SUN'
+            4 => 'SUN',
             3 => 'Others',
         ];
 
@@ -147,6 +147,8 @@ class Report extends Model
         }
 
         if($request->sender == "All Sender ID"){
+            $getSender = $request->sender;
+
             $formAccount = explode("|", $request->account,-1);
 
             foreach($formAccount as $value){
@@ -165,6 +167,7 @@ class Report extends Model
             }
         }else{
             $accountId[] = explode(' => ', $request->sender)[0];
+            $getSender = explode(' => ', $request->sender)[0];
 
             $pickedList[] = str_replace(' => ', ' - ', $request->sender);
         }
@@ -211,7 +214,7 @@ class Report extends Model
 
         return [
             'accountName' => $accountId,
-            'senderName' => $request->sender,
+            'senderName' => $getSender,
             'column' => $column,
             'data' =>  ['total' => $total, 'count' => $data]
         ];
