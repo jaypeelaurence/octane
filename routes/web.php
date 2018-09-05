@@ -41,6 +41,9 @@ Route::post('/account/{uid}/change-password', 'AccountController@changeUpdate')-
 Route::get('/report/generate', 'ReportController@index')->middleware('auth');
 Route::post('/report/generate', 'ReportController@show')->middleware('auth');
 
+Route::get('/report/audit', 'AuditController@index')->middleware(['auth','admin']);
+Route::post('/report/audit', 'AuditController@show')->middleware(['auth','admin']);
+
 Route::get('/report/account', 'ReportController@load')->middleware('auth');
 Route::get('/report/account/search/{strAcct}', 'ReportController@loadAcct')->middleware('auth');
 

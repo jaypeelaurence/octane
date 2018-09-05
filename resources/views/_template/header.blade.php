@@ -23,7 +23,9 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ url('/') }}/report/generate"><i class="fa fa-print"></i> Generate Report</a>
-            <!-- <a class="dropdown-item" href="{{ url('/') }}/report/download"><i class="fa fa-download"></i> Download Report</a> -->
+            @if(Auth::user()->role == "Admin") 
+                <a class="dropdown-item" href="{{ url('/') }}/report/audit"><i class="fa fa-flag"></i> Audit Trail</a>
+            @endif
           </div>
         </li>
         <li class="nav-item dropdown">
