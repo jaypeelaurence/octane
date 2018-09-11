@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Account;
 use App\FormValidate;
 use App\User;
+use App\Audit;
 
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class AccountController extends Controller
     function __construct(){
         $this->account = new Account();
         $this->formValidate = new FormValidate();
+        $this->audit = new Audit();
     }
 
     public function index(){
@@ -33,7 +35,11 @@ class AccountController extends Controller
         }else{
             $uid = $this->account->addUser($request->all());
 
-            return redirect('manage-account/'.$uid)->with('message', "Account ".request('firstname')." ".request('lastname')." was created!");
+            $message = "Account ".request('firstname')." ".request('lastname')." was created!";
+
+            $this->audit->log('200',$message);
+
+            return redirect('manage-account/'.$uid)->with('message', $message);
         }
     }
 
@@ -65,14 +71,22 @@ class AccountController extends Controller
         }else{
             $this->account->editUser($request->all(), $uid);
 
-            return redirect('manage-account/'.$uid->id)->with('message', "Account ".$uid->firstname." ".$uid->lastname." was edited!");
+            $message = "Account ".$uid->firstname." ".$uid->lastname." was edited!";
+
+            $this->audit->log('201',$message);
+
+            return redirect('manage-account/'.$uid->id)->with('message', $message);
         }
     }
 
     public function destroy(User $uid){
         $this->account->deleteUser($uid);
 
-        return redirect('manage-account/')->with('message', "Account ".$uid->firstname." ".$uid->lastname." was deleted!");
+        $message =  "Account ".$uid->firstname." ".$uid->lastname." was deleted!";
+        
+        $this->audit->log('203',$message);
+
+        return redirect('manage-account/')->with('message', $message);
     }
 
     public function change($uid){
@@ -93,7 +107,11 @@ class AccountController extends Controller
         }else{
             $this->account->editUser($request->all(), $uid);
 
-            return redirect('account/'.$uid->id)->with('message', "Account ".$uid->firstname." ".$uid->lastname." changed password!");
+            $message =  "Account ".$uid->firstname." ".$uid->lastname." changed password!";
+
+            $this->audit->log('202',$message);
+
+            return redirect('account/'.$uid->id)->with('message', $message);
         }
     }
 }

@@ -8,9 +8,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Email;
 use App\FormValidate;
 use App\Account;
+use App\Audit;
 
 class SessionsController extends Controller
 {
@@ -19,6 +22,7 @@ class SessionsController extends Controller
         $this->user = new User();
         $this->account = new Account();
         $this->formValidate = new FormValidate();
+        $this->audit = new Audit();
     }
 
 	public function create(){
@@ -37,6 +41,10 @@ class SessionsController extends Controller
 
 				auth()->login($getUser[0]);
 
+				$message = "user " . $getUser[0]->email . ' logged in';
+
+		        $this->audit->log('101',$message);
+
 		        return redirect()->home();
 			}else{
 				return back()->withErrors(['message' => 'Incorrect Email Address or password'])->withInput();
@@ -47,6 +55,10 @@ class SessionsController extends Controller
 	}
 
 	public function destroy(){
+		$message = "user " . Auth::user()->email . ' logged out';
+
+        $this->audit->log('102',$message);
+
 		auth()->logout();
 
         return redirect('/account/login');
@@ -62,6 +74,10 @@ class SessionsController extends Controller
 		$user = $this->user::where('email',$request->email);
 
 		if(count($user->get()) == 1){
+			$message = "user " . $user->get()[0]->email . ' request forgot password.';
+
+	        $this->audit->log('103',$message,$user->get()[0]->email);
+
 	        $body = new \stdClass();
 	        $body->to = $user->get()[0]->firstname . " " . $user->get()[0]->lastname;
 	        $body->url = base64_encode("type=forgot&uid=" . $user->get()[0]->id . "&time=" . time());
@@ -98,6 +114,10 @@ class SessionsController extends Controller
         	$data = $request->all();
 
             $user = $this->account->changePass($data['password'], $data['uid']);
+
+			$message = "user " . $user->email . ' change password.';
+
+	        $this->audit->log('104',$message, $user->email);
 
             auth()->login($user);
 

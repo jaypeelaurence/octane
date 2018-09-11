@@ -5,7 +5,7 @@
 @endsection
 
 @section ('body')
-	<div id="content" class="filter">
+	<div id="content" class="filter report">
 		<div id="wrapper">
 			<div id="report">
 				<form method="POST" action="{{ url('/') }}/report/generate">

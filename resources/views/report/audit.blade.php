@@ -5,10 +5,10 @@
 @endsection
 
 @section ('body')
-	<div id="content" class="filter">
+	<div id="content" class="filter audit">
 		<div id="wrapper">
 			<div id="report" class="audit">
-				<form method="POST" action="{{ url('/') }}/report/Audit">
+				<form method="POST" action="{{ url('/') }}/report/audit">
 					{{ csrf_field() }}
 				  	<div id="column">
 					  	<div class="form-group monthYear">
@@ -29,12 +29,14 @@
 				    		<input type='hidden' class='accountField' name='account'/>
 				    		<div id="accountContainer">
 					    		<div class="pickedAccount">
-				    				<input type="text" name="" value='' class='searchField' placeholder="-- type account name --">
+				    				<input type="text" name="" value='' class='searchField' placeholder="-- type user name --">
 				    				<button class='list' type="button"></button>
 				    			</div>
 						    	<div id="dropDown">
 							    	<div id="btn-account">
-										<button type='button' class="unPick" value="sample">sample</button>
+										@foreach ($users as $key => $value)
+										  	<button type='button' class="unPick" value="{{ $key }}">{{ $value }}</button>
+									  	@endforeach
 							    	</div>
 						    	</div>
 					    	</div>
@@ -42,7 +44,7 @@
 				  	</div>
 				  	<div id="column">
 						  	<div class="form-group senderId">
-							<button type="submit" class="btn btn-primary">Generate</button>
+							<button type="submit" class="btn btn-primary">Filter</button>
 					  	</div>
 				  	</div>
 				</form>

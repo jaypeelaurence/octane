@@ -18,7 +18,6 @@ class Report extends Model
         }else{
             return $this->query->table('accounts')->select('id', 'account')->orderBy('account', 'asc')->get();
         }
-
     }
 
     public function listSender($idList){

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Report;
 use App\FormValidate;
 use App\Audit;
+use App\Account;
 
 class AuditController extends Controller
 {
@@ -14,10 +15,14 @@ class AuditController extends Controller
         $this->report = new Report();
         $this->formValidate = new FormValidate();
         $this->audit = new Audit();
+        $this->account = new Account();
     }
 
     public function index(){
+    	$users = $this->account->listUserFullName();
 
-        return view('report.audit');
+    	// return $this->audit->log('asdasd');
+
+        return view('report.audit', compact('users'));
     }
 }

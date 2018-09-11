@@ -1,46 +1,86 @@
 $(document).ready(function(){
 	var date = new Date;
-   	var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate()-1);
-   	var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-   	var days;
+	var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-    $('#startDate').datepicker({
-        uiLibrary: 'bootstrap4',
-        iconsLibrary: 'fontawesome',
-        maxDate: yesterday
-    });
+	if($('div#content').hasClass('report')){
+		var startDate;
+    	var sd;
+		var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate()-1);
+
+	    $('#startDate').datepicker({
+	        uiLibrary: 'bootstrap4',
+	        iconsLibrary: 'fontawesome',
+	        maxDate: yesterday
+	    });
 
 	 	$('#endDate').datepicker({
-        uiLibrary: 'bootstrap4',
-        iconsLibrary: 'fontawesome',
-        minDate: function (){
-            return $('#startDate').val();
-        },
-        maxDate: function (){
-			var startDate = new Date($('#startDate').val());
+	        uiLibrary: 'bootstrap4',
+	        iconsLibrary: 'fontawesome',
+	        minDate: function(){
+	        	return $('#startDate').val();
+	        },
+	        maxDate: function(){
+	        	var maxDate = new Date(sd.getFullYear(), sd.getMonth(), sd.getDate()+8);
 
-			var checkDate = startDate.getDate() + 7;
+				if (maxDate.getDate() > 31) {
+					days = minDate - 30;
+				} else if (maxDate.getDate() > today.getDate()) {
+					days = today.getDate() - startDate.getDate() - 1;
+				} else {
+					days = 6;
+				}
 
-			if(checkDate > 31){
-                days = checkDate - 30;
-			}else if(checkDate > today.getDate()){
-				days = today.getDate() - startDate.getDate() - 1;
-			}else{
-				days = 6;
-			}
+				return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + days);
+	        }
+	    });
 
-			return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + days);
-        },
-    });
+	    $('.end #endDate').prop('disabled', true);
+    	$('.end button').prop('disabled', true);
 
-	if($("#startDate").val() == ''){
+		$("#startDate").change(function(){
+        	startDate = new Date($('#startDate').val());
+        	sd = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+
 	    	$('.end #endDate').prop('disabled', true);
 	    	$('.end button').prop('disabled', true);
-	}
 
-	$("#startDate").change(function(){
-	    	$('.end #endDate').prop('disabled', false);
-	    	$('.end button').prop('disabled', false);
-	    	$('#endDate').val('');
-	});
+			if($(this).val().length != 0){
+		    	$('.end #endDate').prop('disabled', false);
+		    	$('.end button').prop('disabled', false);
+		    	$('#endDate').val('');
+			}
+		});
+	}else{
+		var startDate = new Date();
+
+	    $('#startDate').datepicker({
+	        uiLibrary: 'bootstrap4',
+        	iconsLibrary: 'fontawesome',
+	        maxDate: today
+	    });
+
+	    $('#endDate').datepicker({
+	        uiLibrary: 'bootstrap4',
+        	iconsLibrary: 'fontawesome',
+        	minDate: function(){
+        		return startDate;
+        	}
+	    });
+
+	    $('.end #endDate').prop('disabled', true);
+    	$('.end button').prop('disabled', true);
+
+		$("#startDate").change(function(){
+			startDate = new Date($('#startDate').val());
+
+	    	$('.end #endDate').prop('disabled', true);
+	    	$('.end button').prop('disabled', true);
+
+			if($(this).val().length != 0){
+		    	$('.end #endDate').prop('disabled', false);
+		    	$('.end button').prop('disabled', false);
+		    	$('#endDate').val('');
+			}
+		});
+	}
 });
