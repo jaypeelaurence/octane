@@ -24,11 +24,11 @@ class Audit extends Model
     	return $type[$code];
 	}
 
-    public function log($type, $activity, $user = null){
-       	DB::table('audit')->insert([
-       		'date_logged' => date('Y-m-d H:i:s'),
-       		'user' => $user == null ? Auth::user()->email : $user,
-			    'activity' => $this->logType($type) . $activity,
-       	]);
-    }
+  public function log($type, $activity, $user = null){
+     	DB::table('audit')->insert([
+     		'date_logged' => date('Y-m-d H:i:s'),
+     		'user' => $user == null ? Auth::user()->email : $user,
+		    'activity' => $this->logType($type) . $activity,
+     	]);
+  }
 }
