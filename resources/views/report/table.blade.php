@@ -6,12 +6,12 @@
 				<h1 class='title'>Account:
 					@php 
 						foreach($transactions['accountName'] as $accountName){
-							echo $accountName;
+							echo $accountName . " ";
 						}
 
-						echo isset($transactions['senderName']) ? " | " . $transactions['senderName'] . " ": " ";
+						echo isset($transactions['senderName']) ? " | " . $transactions['senderName'] . " ": " | ";
 
-						echo "| Date Range: ";
+						echo "Date Range: ";
 
 						foreach($transactions['dateRange'] as $key => $date){
 							echo $date;
