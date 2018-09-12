@@ -28,7 +28,7 @@
 					    	<label for="accountName">Account Name *</label>
 				    		<input type='hidden' class='accountField' name='account'/>
 				    		<div id="accountContainer">
-					    		<div class="pickedAccount">
+					    		<div id="searchContainer" class="pickedAccount">
 				    				<input type="text" name="" value='' class='searchField' placeholder="-- type account name --">
 				    				<button class='list' type="button"></button>
 				    			</div>
@@ -47,7 +47,7 @@
 					    	<label for="senderId">Sender ID </label>
 				    		<input type='hidden' class='senderField' name='sender'/>
 				    		<div id="senderContainer">
-					    		<div class="pickedSender">
+					    		<div id="searchContainer" class="pickedSender">
 				    				<input type="text" name="" value='' class='searchField' placeholder="-- n/a --">
 				    				<button class='list' type="button"></button>
 				    			</div>
