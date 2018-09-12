@@ -166,7 +166,7 @@ class Report extends Model
             }
         }else{
             $accountId[] = explode(' => ', $request->sender)[0];
-            $getSender = explode(' => ', $request->sender)[0];
+            $getSender = explode(' => ', $request->sender)[1];
 
             $pickedList[] = str_replace(' => ', ' - ', $request->sender);
         }
