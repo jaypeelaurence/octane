@@ -59,6 +59,7 @@ button:hover {
 #content.filter #wrapper #report form #column #searchContainer,
 #content.filter #wrapper #report form #column #searchContainer .searchField,
 #content.filter #wrapper #report form #column .senderId #dropDown #btn-sender button,
+#content.filter #wrapper #report form #column .userName #dropDown #btn-sender button,
 #content.filter #wrapper #report form #column .accountName #dropDown #btn-account button,
 #content.report #table form button {
   padding: 0px;
@@ -848,6 +849,41 @@ nav.navbar .navbar-toggler {
 }
 
 #content.filter #wrapper #report form #column .senderId #dropDown #btn-sender button.pick {
+  color: #ffffff;
+  background-color: #2878b3;
+}
+
+#content.filter #wrapper #report form #column .userName #dropDown #btn-sender {
+  position: absolute;
+  z-index: 9999999;
+  overflow-y: scroll;
+  width: 304px;
+  height: 200px;
+  border: 1px solid #dbd9d9;
+  border-top: 0px;
+  background-color: #ffffff;
+}
+
+#content.filter #wrapper #report form #column .userName #dropDown #btn-sender button {
+  padding: 0px 10px;
+  margin: 0px;
+  width: 100%;
+  text-align: left;
+  display: block;
+  cursor: pointer;
+  border-bottom: 1px solid #ffffff;
+}
+
+#content.filter #wrapper #report form #column .userName #dropDown #btn-sender button:hover {
+  background-color: #1c5e8e;
+}
+
+#content.filter #wrapper #report form #column .userName #dropDown #btn-sender button.unPick {
+  color: #777777;
+  background-color: transparent;
+}
+
+#content.filter #wrapper #report form #column .userName #dropDown #btn-sender button.pick {
   color: #ffffff;
   background-color: #2878b3;
 }

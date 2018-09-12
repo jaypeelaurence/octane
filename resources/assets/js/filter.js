@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	var location = window.origin;
+
 	// AccountSelection
 		$('#btn-account').hide();
 		$('#btn-sender').hide();
@@ -141,7 +143,7 @@ $(document).ready(function(){
 
 				$.ajax({
 				    // url: window.origin + "/octane/report/sender/" + list,
-				    url: window.origin + "/report/sender/" + list,
+				    url: location + "/report/sender/" + list,
 				    type: "GET",
 				    success: function(data){
 				    	console.log(data);
@@ -154,7 +156,7 @@ $(document).ready(function(){
 					    console.log(textStatus + " - " + errorThrown)
 				  	}
 				});
-			}else{
+				}else{
 				$('#senderContainer .searchField').prop("disabled", true);
 				$('#senderContainer .searchField').attr('placeholder',"-- n/a --");
 			}

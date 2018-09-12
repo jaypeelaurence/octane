@@ -77,6 +77,8 @@ module.exports = __webpack_require__(6);
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
+	var location = window.origin;
+
 	// AccountSelection
 	$('#btn-account').hide();
 	$('#btn-sender').hide();
@@ -219,7 +221,7 @@ $(document).ready(function () {
 
 			$.ajax({
 				// url: window.origin + "/octane/report/sender/" + list,
-				url: window.origin + "/report/sender/" + list,
+				url: location + "/report/sender/" + list,
 				type: "GET",
 				success: function success(data) {
 					console.log(data);

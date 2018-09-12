@@ -24,11 +24,11 @@
 					  	</div>
 				  	</div>
 				  	<div id="column">
-					  	<div class="form-group accountName">
-					    	<label for="accountName">User *</label>
-				    		<input type='hidden' class='accountField' name='account'/>
+					  	<div class="form-group userName">
+					    	<label for="userName">User *</label>
+				    		<input type='hidden' class='accountField' name='userName'/>
 				    		<div id="accountContainer">
-					    		<div class="pickedAccount">
+					    		<div id="searchContainer" class="pickedUser">
 				    				<input type="text" name="" value='' class='searchField' placeholder="-- type user name --">
 				    				<button class='list' type="button"></button>
 				    			</div>

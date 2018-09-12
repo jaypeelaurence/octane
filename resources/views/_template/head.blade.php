@@ -1,5 +1,6 @@
 <title>@yield('pageTitle') | Octane</title>
 
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -15,7 +16,5 @@
 
 <link rel="shortcut icon" href="{{ url('/') }}/images/favicon.ico" type="image/vnd.microsoft.icon" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
