@@ -9,7 +9,7 @@
 							echo $accountName . " ";
 						}
 
-						echo isset($transactions['senderName']) ? " | " . $transactions['senderName'] . " ": " | ";
+						echo isset($transactions['senderName']) ? " | " . $transactions['senderName'] . " | ": " | ";
 
 						echo "Date Range: ";
 
