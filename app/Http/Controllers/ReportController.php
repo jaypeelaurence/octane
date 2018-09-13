@@ -15,13 +15,13 @@ class ReportController extends Controller
     }
 
     public function index(){
-        $account = $this->report->listAccount();
+        // $account = $this->report->listAccount();
 
-        return view('report.index', compact('account'));
+        return view('report.index');
     }
 
     public function show(Request $request){
-        $account = $this->report->listAccount();
+        // $account = $this->report->listAccount();
         $result = $this->formValidate->queryReport($request);
 
         $dateRange = [
@@ -56,7 +56,7 @@ class ReportController extends Controller
             }
         }
 
-        return view('report.index', compact(['account','transactions']));
+        return view('report.index', compact(['transactions']));
     }
 
     public function load($idList = null){

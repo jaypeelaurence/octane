@@ -1,7 +1,8 @@
 $(document).ready(function(){
 	var location = window.origin;
+	// var location = "http://10.1.9.59/octane" + list;
 
-	// AccountSelection
+	// Filter Selection
 		$('#btn-account').hide();
 		$('#btn-sender').hide();
 		$('#senderContainer .searchField').prop("disabled", true);
@@ -94,112 +95,133 @@ $(document).ready(function(){
 			}
 		});
 
+	// Account Selection
 		var obj = {};
 
-		$('#btn-account button').click(function(){
-			var picked = $(this).val().split("|");
-
-			$('.senderId .senderField').val('');
-			$('.senderId .searchField').val('');
-
-			if($(this).hasClass('unPick')){
-				obj[picked[0]] = picked[1];
-
-				$(this).removeClass('unPick');
-				$(this).addClass('pick');
-			}else{
-				delete obj[picked[0]];
-
-				$(this).removeClass('pick');
-				$(this).addClass('unPick');
-			}
-
-			var selected = Object.keys(obj).length;
-
-			var list = '';
-
-			$.each(obj, function(key, value) {
-				list += key + "|";
-			});
-
-			$(".accountField").val(list);
-
-			if(selected != 0){
-				$('.pickedAccount .searchField').attr('placeholder',selected + " account(s) selected");
-			}else{
-				$('.pickedAccount .searchField').attr('placeholder',"-- type account name --");
-			}
-
-	// SenderSelection
-			if(obj != '' && selected != 0){
-				$('#senderContainer .searchField').prop("disabled", false);
-				$('#senderContainer button').prop("disabled", false);
-
-				$(this).parent().append("<input type='hidden' class='accountField' name='account' value='"+ list +"'/>");
-
-				$('#btn-sender').html("<button type='button' class='unPick' value='All Sender ID'>-- All Sender ID --</button>");
-
-				// console.log(window.origin + "octane/report/sender/" + list);
-
+		var load = {
+			setAccount: function(){
 				$.ajax({
-				    // url: window.origin + "/octane/report/sender/" + list,
-				    url: location + "/report/sender/" + list,
+				    url: location + "/report/account/",
 				    type: "GET",
 				    success: function(data){
-				    	console.log(data);
-				    	
-			    		$.each(data, function(key, value){
-							$('#btn-sender').append("<button type='button' class='unPick' value='" + value[0] + " => " + value[1] + "'>" + value[0] + " - " + value[1] + "</button>");
-						});
+				    	for (var i = 0; i < data.length; i++){
+				    		if(obj[data[i].id]){
+								$('#btn-account').append("<button type='button' class='pick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
+				    		}else{
+								$('#btn-account').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
+				    		}
+						}
 				    },
 			      	error: function(jqXHR, textStatus, errorThrown){
 					    console.log(textStatus + " - " + errorThrown)
 				  	}
 				});
+			},
+			dropAccount: function(){
+				$('#btn-account button').remove();
+			}
+		};
+
+		load.setAccount();
+
+		$('body').click(function(event){
+			if($(event.target).parent("#btn-account").length == 1){
+				var accountButton = $(event.target);
+
+				var picked = accountButton.val().split(" | ");
+
+				$('.senderId .senderField').val('');
+
+				if(accountButton.hasClass('unPick')){
+					obj[picked[0]] = picked[1];
+
+					accountButton.removeClass('unPick');
+					accountButton.addClass('pick');
 				}else{
-				$('#senderContainer .searchField').prop("disabled", true);
-				$('#senderContainer .searchField').attr('placeholder',"-- n/a --");
+					delete obj[picked[0]];
+
+					accountButton.removeClass('pick');
+					accountButton.addClass('unPick');
+				}
+
+				var selected = Object.keys(obj).length;
+
+				var list = '';
+
+				$.each(obj, function(key, value) {
+					list += key + "|";
+				});
+
+				$(".accountField").val(list);
+
+				if(selected != 0){
+					$('.pickedAccount .searchField').attr('placeholder',selected + " account(s) selected");
+				}else{
+					$('.pickedAccount .searchField').attr('placeholder',"-- type account name --");
+				}
+
+				console.log(obj);
+
+				if(obj != '' && selected != 0){
+					$('#senderContainer .searchField').prop("disabled", false);
+					$('#senderContainer button').prop("disabled", false);
+
+					$(this).parent().append("<input type='hidden' class='accountField' name='account' value='"+ list +"'/>");
+
+					$('#btn-sender').html("<button type='button' class='unPick' value='All Sender ID'>-- All Sender ID --</button>");
+
+					// console.log(window.origin + "octane/report/sender/" + list);
+
+					$.ajax({
+					    url: location + "/report/sender/" + list,
+					    type: "GET",
+					    success: function(data){
+				    		$.each(data, function(key, value){
+								$('#btn-sender').append("<button type='button' class='unPick' value='" + value[0] + " => " + value[1] + "'>" + value[0] + " - " + value[1] + "</button>");
+							});
+					    },
+				      	error: function(jqXHR, textStatus, errorThrown){
+						    console.log(textStatus + " - " + errorThrown)
+					  	}
+					});
+				}else{
+					$('#senderContainer .searchField').prop("disabled", true);
+					$('#senderContainer .searchField').val("");
+					$('#senderContainer .searchField').attr('placeholder',"-- n/a --");
+				}
 			}
 		});
 
-	// var sourceAccount = [];
+	//AutoComplete Selection
 
-	// $.ajax({
-	//     url: "/report/account/",
-	//     type: "GET",
-	//     success: function(data){
- //    		$.each(data, function(key, value){
-	// 			$('#btn-account').append("<button type='button' class='unPick' value='" + value.id + "|" + value.system_id + "'>" + value.system_id + "</button>");
+		$('body').on('keyup',function(event){
+			if($(event.target).parent("div#searchContainer.pickedAccount").length == 1){
+				var strAcct = $(event.target).val();
 
-	// 			sourceAccount = value.system_id;
-	// 		});
-	//     },
- //      	error: function(jqXHR, textStatus, errorThrown){
-	// 	    console.log(textStatus + " - " + errorThrown)
-	//   	}
-	// });
+				if($(event.target).val().length == 0){
+					load.setAccount();
+				}else{
+					load.dropAccount();
 
-	// var strAcct = "";
+					$.ajax({
+					    url: location + "/report/account/search/" + encodeURI(strAcct),
+					    type: "GET",
+					    success: function(data){
+					    	for (var i = 0; i < data.length; i++){
+					    		if(obj[data[i].id]){
+									$('#btn-account').append("<button type='button' class='pick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
+					    		}else{
+									$('#btn-account').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
+					    		}
+							}
+					    },
+				      	error: function(jqXHR, textStatus, errorThrown){
+						    console.log(textStatus + " - " + errorThrown)
+					  	}
+					});
+				}
+			}
 
-	// $(".pickedAccount .searchField" ).keyup(function(event){
-	//   	if(event.which <= 90 && event.which >= 48){
- //        	strAcct += event.key;
- //       	}
-
- //   		$.ajax({
-	// 	    url: "/report/account/search/" + strAcct,
-	// 	    type: "GET",
-	// 	    success: function(data){
- //       			console.log(data);
-	//     		$.each(data, function(key, value){
-	// 				$('#btn-account').append("<button type='button' class='unPick' value='" + value.id + "|" + value.system_id + "'>" + value.system_id + "</button>");
-
-	// 				sourceAccount = value.system_id;
-	// 			});
-	// 	    },
-	//       	error: functio(textStatus + " - " + errorThrown)
-	// 	  	}n(jqXHR, textStatus, errorThrown){
-	// 		    console.log
-	// 	});
-	// });
+			// $(event.target).val()
+		});
 });

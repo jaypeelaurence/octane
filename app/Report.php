@@ -14,7 +14,9 @@ class Report extends Model
 
     public function listAccount($name = NULL){
         if($name){
-            return $this->query->table('accounts')->select('id', 'account')->where(['account' => $name])->orderBy('account', 'asc')->get();
+            $where = "account LIKE '" . $name . "%'"; 
+
+            return $this->query->table('accounts')->select('id', 'account')->whereRaw($where)->orderBy('account', 'asc')->get();
         }else{
             return $this->query->table('accounts')->select('id', 'account')->orderBy('account', 'asc')->get();
         }

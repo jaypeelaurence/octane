@@ -34,9 +34,6 @@
 				    			</div>
 						    	<div id="dropDown">
 							    	<div id="btn-account">
-										@foreach ($account as $accountDetails)
-										  	<button type='button' class="unPick" value="{{ $accountDetails->id }}|{{ $accountDetails->account }}">{{ $accountDetails->account }}</button>
-									  	@endforeach
 							    	</div>
 						    	</div>
 					    	</div>
