@@ -19,10 +19,19 @@ class AuditController extends Controller
     }
 
     public function index(){
-    	$users = $this->account->listUserFullName();
+        $users = $this->account->listUserFullName();
 
-    	// return $this->audit->log('asdasd');
+        // return $this->audit->log('asdasd');
 
         return view('report.audit', compact('users'));
+    }
+
+    public function show(Request $request){
+        return $request->all();
+    	// $users = $this->account->listUserFullName();
+
+    	// // return $this->audit->log('asdasd');
+
+     //    return view('report.audit', compact('users'));
     }
 }

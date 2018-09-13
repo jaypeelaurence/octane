@@ -22,24 +22,56 @@ class Report extends Model
         }
     }
 
-    public function listSender($idList){
-        $accounts = explode("|", $idList, -1);
+    public function listSender($idList, $strSndr = NULL){
+        if($idList && $strSndr == NULL){
+            $accounts = explode("|", $idList, -1);
 
-        if(count($accounts) > 0){
-            foreach($accounts as $id){
-                $accountId = $this->query->table('accounts');
-                $accountId->select('account', 'allowed_sender_ids');
-                $accountId->where('id', $id);
-                $accountId->get();
+            if(count($accounts) != 0){
+                foreach($accounts as $id){
+                    $accountId = $this->query->table('accounts');
+                    $accountId->select('account', 'allowed_sender_ids');
+                    $accountId->where('id', $id);
+                    $accountId->get();
 
-                $senderIds = explode("|", utf8_encode($accountId->get()[0]->allowed_sender_ids), -1);
+                    $senderIds = explode("|", utf8_encode($accountId->get()[0]->allowed_sender_ids), -1);
 
-                foreach($senderIds as $senderId){
-                    $list[] = [$accountId->get()[0]->account, $senderId];
+                    foreach($senderIds as $senderId){
+                        $list[] = [$accountId->get()[0]->account, $senderId];
+                    }
                 }
-            }
 
-            return $list;
+                return $list;
+            }else{
+                return redirect('error/100');
+            }
+        }elseif($idList && $strSndr){
+            $accounts = explode("|", $idList, -1);
+
+            if(count($accounts) != 0){
+                foreach($accounts as $id){
+                    $where = "id = " . $id . " AND allowed_sender_ids LIKE '%" . $strSndr . "%'";;
+
+                    $accountId = $this->query->table('accounts');
+                    $accountId->select('account', 'allowed_sender_ids');
+                    $accountId->whereRaw($where);
+                    // $accountId->where('id', $id);
+                    $accountId->get();
+
+                    // return [$where];
+
+                    return $accountId->get();
+
+                    $senderIds = explode("|", utf8_encode($accountId->get()[0]->allowed_sender_ids), -1);
+
+                    foreach($senderIds as $senderId){
+                        $list[] = [$accountId->get()[0]->account, $senderId];
+                    }
+                }
+
+                return $list;
+            }else{
+                return redirect('error/100');
+            }
         }else{
             return redirect('error/100');
         }

@@ -3,10 +3,19 @@ $(document).ready(function(){
 	// var location = "http://10.1.9.59/octane" + list;
 
 	// Filter Selection
+		$('.senderId .searchField').keypress(function(char){
+		    return false;
+		});
+
 		$('#btn-account').hide();
 		$('#btn-sender').hide();
+		$('#btn-user').hide();
+
 		$('#senderContainer .searchField').prop("disabled", true);
 		$('#senderContainer button').prop("disabled", true);
+
+		$("div.pickedUser button").attr('class','down');
+		$("div.pickedUser button").html("<i class='fa fa-angle-down'></i>");
 
 		$("div.pickedAccount button").attr('class','down');
 		$("div.pickedAccount button").html("<i class='fa fa-angle-down'></i>");
@@ -15,6 +24,33 @@ $(document).ready(function(){
 		$('div.pickedSender button').html("<i class='fa fa-angle-down'></i>");
 
 		$("body").click(function(event){
+			if($(event.target).parent('div.pickedUser').length == 1 || $(event.target).parent('div#userContainer').length == 1 || $(event.target).parent('div#btn-user').length == 1){
+
+				var pickedUser = $('div.pickedUser button');
+
+				if(pickedUser.attr('class') == 'down'){
+					pickedUser.attr('class','up');
+					pickedUser.html("<i class='fa fa-angle-up'></i>");
+					$('#btn-user').show();
+				}else{
+					pickedUser.attr('class','down');
+					pickedUser.html("<i class='fa fa-angle-down'></i>");
+					$('#btn-user').hide();
+				}
+
+				if($(event.target).parent('div#btn-user').length == 1 || $(event.target).parent('div#dropDown').length == 1){
+					pickedUser.attr('class','up');
+					pickedUser.html("<i class='fa fa-angle-up'></i>");
+					$('#btn-user').show();
+				}
+
+			}else{
+				$('#btn-user').hide();
+
+				$('div.pickedUser button').attr('class','down');
+				$('div.pickedUser button').html("<i class='fa fa-angle-down'></i>");
+			}
+
 			if($(event.target).parent('div.pickedAccount').length == 1 || $(event.target).parent('div#accountContainer').length == 1 || $(event.target).parent('div#btn-account').length == 1){
 
 				var pickedAccount = $('div.pickedAccount button');
@@ -63,6 +99,8 @@ $(document).ready(function(){
 
 					var set = $(event.target);
 
+					var check = 0;
+
 					if(set.hasClass('unPick')){
 					    $('#btn-sender button').removeClass('pick');
 					    $('#btn-sender button').addClass('unPick');
@@ -75,14 +113,20 @@ $(document).ready(function(){
 
 						set.removeClass('pick');
 					    set.addClass('unPick');
-					}
 
-					$('.senderId .senderField').val(set.val());
+					    check = 1;
+
+					    $('.senderId .searchField').val('');
+					}
 
 					var len = set.val().split(" => ");
 
+					console.log(check)
+
 					if(len.length == 1){
 						$('.senderId .searchField').val(set.val());
+					}else if(check == 1){
+					    $('.senderId .searchField').val('');
 					}else{
 						$('.senderId .searchField').val(len[0] + " - " +len[1]);
 					}
@@ -125,6 +169,28 @@ $(document).ready(function(){
 		load.setAccount();
 
 		$('body').click(function(event){
+			if($(event.target).parent("#btn-user").length == 1){
+				var userButton = $(event.target);
+
+				var picked = userButton.val().split(" | ");
+
+				if(userButton.hasClass('unPick')){
+					$('#btn-user button').removeClass('pick');
+					$('#btn-user button').addClass('unPick');
+					userButton.addClass('pick');
+
+					userButton.removeClass('unPick');
+					userButton.addClass('pick');
+
+					$('.pickedUser .searchField').val(picked[1]);
+					$('.userField').val(userButton.val());
+				}else{
+					$('input.searchField').val("");
+					userButton.removeClass('pick');
+					userButton.addClass('unPick');
+				}
+			}
+
 			if($(event.target).parent("#btn-account").length == 1){
 				var accountButton = $(event.target);
 
@@ -160,8 +226,6 @@ $(document).ready(function(){
 					$('.pickedAccount .searchField').attr('placeholder',"-- type account name --");
 				}
 
-				console.log(obj);
-
 				if(obj != '' && selected != 0){
 					$('#senderContainer .searchField').prop("disabled", false);
 					$('#senderContainer button').prop("disabled", false);
@@ -169,8 +233,6 @@ $(document).ready(function(){
 					$(this).parent().append("<input type='hidden' class='accountField' name='account' value='"+ list +"'/>");
 
 					$('#btn-sender').html("<button type='button' class='unPick' value='All Sender ID'>-- All Sender ID --</button>");
-
-					// console.log(window.origin + "octane/report/sender/" + list);
 
 					$.ajax({
 					    url: location + "/report/sender/" + list,
@@ -183,7 +245,7 @@ $(document).ready(function(){
 				      	error: function(jqXHR, textStatus, errorThrown){
 						    console.log(textStatus + " - " + errorThrown)
 					  	}
-					});
+				  	});
 				}else{
 					$('#senderContainer .searchField').prop("disabled", true);
 					$('#senderContainer .searchField').val("");
@@ -193,7 +255,6 @@ $(document).ready(function(){
 		});
 
 	//AutoComplete Selection
-
 		$('body').on('keyup',function(event){
 			if($(event.target).parent("div#searchContainer.pickedAccount").length == 1){
 				var strAcct = $(event.target).val();
@@ -221,7 +282,5 @@ $(document).ready(function(){
 					});
 				}
 			}
-
-			// $(event.target).val()
 		});
 });

@@ -78,12 +78,22 @@ module.exports = __webpack_require__(6);
 
 $(document).ready(function () {
 	var location = window.origin;
+	// var location = "http://10.1.9.59/octane" + list;
 
-	// AccountSelection
+	// Filter Selection
+	$('.senderId .searchField').keypress(function (char) {
+		return false;
+	});
+
 	$('#btn-account').hide();
 	$('#btn-sender').hide();
+	$('#btn-user').hide();
+
 	$('#senderContainer .searchField').prop("disabled", true);
 	$('#senderContainer button').prop("disabled", true);
+
+	$("div.pickedUser button").attr('class', 'down');
+	$("div.pickedUser button").html("<i class='fa fa-angle-down'></i>");
 
 	$("div.pickedAccount button").attr('class', 'down');
 	$("div.pickedAccount button").html("<i class='fa fa-angle-down'></i>");
@@ -92,6 +102,32 @@ $(document).ready(function () {
 	$('div.pickedSender button').html("<i class='fa fa-angle-down'></i>");
 
 	$("body").click(function (event) {
+		if ($(event.target).parent('div.pickedUser').length == 1 || $(event.target).parent('div#userContainer').length == 1 || $(event.target).parent('div#btn-user').length == 1) {
+
+			var pickedUser = $('div.pickedUser button');
+
+			if (pickedUser.attr('class') == 'down') {
+				pickedUser.attr('class', 'up');
+				pickedUser.html("<i class='fa fa-angle-up'></i>");
+				$('#btn-user').show();
+			} else {
+				pickedUser.attr('class', 'down');
+				pickedUser.html("<i class='fa fa-angle-down'></i>");
+				$('#btn-user').hide();
+			}
+
+			if ($(event.target).parent('div#btn-user').length == 1 || $(event.target).parent('div#dropDown').length == 1) {
+				pickedUser.attr('class', 'up');
+				pickedUser.html("<i class='fa fa-angle-up'></i>");
+				$('#btn-user').show();
+			}
+		} else {
+			$('#btn-user').hide();
+
+			$('div.pickedUser button').attr('class', 'down');
+			$('div.pickedUser button').html("<i class='fa fa-angle-down'></i>");
+		}
+
 		if ($(event.target).parent('div.pickedAccount').length == 1 || $(event.target).parent('div#accountContainer').length == 1 || $(event.target).parent('div#btn-account').length == 1) {
 
 			var pickedAccount = $('div.pickedAccount button');
@@ -140,6 +176,8 @@ $(document).ready(function () {
 
 				var set = $(event.target);
 
+				var check = 0;
+
 				if (set.hasClass('unPick')) {
 					$('#btn-sender button').removeClass('pick');
 					$('#btn-sender button').addClass('unPick');
@@ -152,14 +190,20 @@ $(document).ready(function () {
 
 					set.removeClass('pick');
 					set.addClass('unPick');
-				}
 
-				$('.senderId .senderField').val(set.val());
+					check = 1;
+
+					$('.senderId .searchField').val('');
+				}
 
 				var len = set.val().split(" => ");
 
+				console.log(check);
+
 				if (len.length == 1) {
 					$('.senderId .searchField').val(set.val());
+				} else if (check == 1) {
+					$('.senderId .searchField').val('');
 				} else {
 					$('.senderId .searchField').val(len[0] + " - " + len[1]);
 				}
@@ -172,114 +216,150 @@ $(document).ready(function () {
 		}
 	});
 
+	// Account Selection
 	var obj = {};
 
-	$('#btn-account button').click(function () {
-		var picked = $(this).val().split("|");
-
-		$('.senderId .senderField').val('');
-		$('.senderId .searchField').val('');
-
-		if ($(this).hasClass('unPick')) {
-			obj[picked[0]] = picked[1];
-
-			$(this).removeClass('unPick');
-			$(this).addClass('pick');
-		} else {
-			delete obj[picked[0]];
-
-			$(this).removeClass('pick');
-			$(this).addClass('unPick');
-		}
-
-		var selected = Object.keys(obj).length;
-
-		var list = '';
-
-		$.each(obj, function (key, value) {
-			list += key + "|";
-		});
-
-		$(".accountField").val(list);
-
-		if (selected != 0) {
-			$('.pickedAccount .searchField').attr('placeholder', selected + " account(s) selected");
-		} else {
-			$('.pickedAccount .searchField').attr('placeholder', "-- type account name --");
-		}
-
-		// SenderSelection
-		if (obj != '' && selected != 0) {
-			$('#senderContainer .searchField').prop("disabled", false);
-			$('#senderContainer button').prop("disabled", false);
-
-			$(this).parent().append("<input type='hidden' class='accountField' name='account' value='" + list + "'/>");
-
-			$('#btn-sender').html("<button type='button' class='unPick' value='All Sender ID'>-- All Sender ID --</button>");
-
-			// console.log(window.origin + "octane/report/sender/" + list);
-
+	var load = {
+		setAccount: function setAccount() {
 			$.ajax({
-				// url: window.origin + "/octane/report/sender/" + list,
-				url: location + "/report/sender/" + list,
+				url: location + "/report/account/",
 				type: "GET",
 				success: function success(data) {
-					console.log(data);
-
-					$.each(data, function (key, value) {
-						$('#btn-sender').append("<button type='button' class='unPick' value='" + value[0] + " => " + value[1] + "'>" + value[0] + " - " + value[1] + "</button>");
-					});
+					for (var i = 0; i < data.length; i++) {
+						if (obj[data[i].id]) {
+							$('#btn-account').append("<button type='button' class='pick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
+						} else {
+							$('#btn-account').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
+						}
+					}
 				},
 				error: function error(jqXHR, textStatus, errorThrown) {
 					console.log(textStatus + " - " + errorThrown);
 				}
 			});
-		} else {
-			$('#senderContainer .searchField').prop("disabled", true);
-			$('#senderContainer .searchField').attr('placeholder', "-- n/a --");
+		},
+		dropAccount: function dropAccount() {
+			$('#btn-account button').remove();
+		}
+	};
+
+	load.setAccount();
+
+	$('body').click(function (event) {
+		if ($(event.target).parent("#btn-user").length == 1) {
+			var userButton = $(event.target);
+
+			var picked = userButton.val().split(" | ");
+
+			if (userButton.hasClass('unPick')) {
+				$('#btn-user button').removeClass('pick');
+				$('#btn-user button').addClass('unPick');
+				userButton.addClass('pick');
+
+				userButton.removeClass('unPick');
+				userButton.addClass('pick');
+
+				$('.pickedUser .searchField').val(picked[1]);
+				$('.userField').val(userButton.val());
+			} else {
+				$('input.searchField').val("");
+				userButton.removeClass('pick');
+				userButton.addClass('unPick');
+			}
+		}
+
+		if ($(event.target).parent("#btn-account").length == 1) {
+			var accountButton = $(event.target);
+
+			var picked = accountButton.val().split(" | ");
+
+			$('.senderId .senderField').val('');
+
+			if (accountButton.hasClass('unPick')) {
+				obj[picked[0]] = picked[1];
+
+				accountButton.removeClass('unPick');
+				accountButton.addClass('pick');
+			} else {
+				delete obj[picked[0]];
+
+				accountButton.removeClass('pick');
+				accountButton.addClass('unPick');
+			}
+
+			var selected = Object.keys(obj).length;
+
+			var list = '';
+
+			$.each(obj, function (key, value) {
+				list += key + "|";
+			});
+
+			$(".accountField").val(list);
+
+			if (selected != 0) {
+				$('.pickedAccount .searchField').attr('placeholder', selected + " account(s) selected");
+			} else {
+				$('.pickedAccount .searchField').attr('placeholder', "-- type account name --");
+			}
+
+			if (obj != '' && selected != 0) {
+				$('#senderContainer .searchField').prop("disabled", false);
+				$('#senderContainer button').prop("disabled", false);
+
+				$(this).parent().append("<input type='hidden' class='accountField' name='account' value='" + list + "'/>");
+
+				$('#btn-sender').html("<button type='button' class='unPick' value='All Sender ID'>-- All Sender ID --</button>");
+
+				$.ajax({
+					url: location + "/report/sender/" + list,
+					type: "GET",
+					success: function success(data) {
+						$.each(data, function (key, value) {
+							$('#btn-sender').append("<button type='button' class='unPick' value='" + value[0] + " => " + value[1] + "'>" + value[0] + " - " + value[1] + "</button>");
+						});
+					},
+					error: function error(jqXHR, textStatus, errorThrown) {
+						console.log(textStatus + " - " + errorThrown);
+					}
+				});
+			} else {
+				$('#senderContainer .searchField').prop("disabled", true);
+				$('#senderContainer .searchField').val("");
+				$('#senderContainer .searchField').attr('placeholder', "-- n/a --");
+			}
 		}
 	});
 
-	// var sourceAccount = [];
+	//AutoComplete Selection
+	$('body').on('keyup', function (event) {
+		if ($(event.target).parent("div#searchContainer.pickedAccount").length == 1) {
+			var strAcct = $(event.target).val();
 
-	// $.ajax({
-	//     url: "/report/account/",
-	//     type: "GET",
-	//     success: function(data){
-	//    		$.each(data, function(key, value){
-	// 			$('#btn-account').append("<button type='button' class='unPick' value='" + value.id + "|" + value.system_id + "'>" + value.system_id + "</button>");
+			if ($(event.target).val().length == 0) {
+				load.setAccount();
+			} else {
+				load.dropAccount();
 
-	// 			sourceAccount = value.system_id;
-	// 		});
-	//     },
-	//      	error: function(jqXHR, textStatus, errorThrown){
-	// 	    console.log(textStatus + " - " + errorThrown)
-	//   	}
-	// });
-
-	// var strAcct = "";
-
-	// $(".pickedAccount .searchField" ).keyup(function(event){
-	//   	if(event.which <= 90 && event.which >= 48){
-	//        	strAcct += event.key;
-	//       	}
-
-	//   		$.ajax({
-	// 	    url: "/report/account/search/" + strAcct,
-	// 	    type: "GET",
-	// 	    success: function(data){
-	//       			console.log(data);
-	//     		$.each(data, function(key, value){
-	// 				$('#btn-account').append("<button type='button' class='unPick' value='" + value.id + "|" + value.system_id + "'>" + value.system_id + "</button>");
-
-	// 				sourceAccount = value.system_id;
-	// 			});
-	// 	    },
-	//       	error: functio(textStatus + " - " + errorThrown)
-	// 	  	}n(jqXHR, textStatus, errorThrown){
-	// 		    console.log
-	// 	});
-	// });
+				$.ajax({
+					url: location + "/report/account/search/" + encodeURI(strAcct),
+					type: "GET",
+					success: function success(data) {
+						for (var i = 0; i < data.length; i++) {
+							if (obj[data[i].id]) {
+								$('#btn-account').append("<button type='button' class='pick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
+							} else {
+								$('#btn-account').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
+							}
+						}
+					},
+					error: function error(jqXHR, textStatus, errorThrown) {
+						console.log(textStatus + " - " + errorThrown);
+					}
+				});
+			}
+		}
+	});
 });
 
 /***/ })

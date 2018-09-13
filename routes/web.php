@@ -49,6 +49,8 @@ Route::get('/report/account/search/{strAcct}', 'ReportController@loadAcct')->mid
 
 Route::get('/report/sender/{idList}', 'ReportController@load')->middleware('auth');
 
+Route::get('/report/sender/search/{idList}/{strSndr}', 'ReportController@loadSndr')->middleware('auth');
+
 Route::post('/report/download', 'ReportController@get')->middleware('auth');
 
 Route::get('/token/{hash}', 'SessionsController@token')->middleware('guest');
