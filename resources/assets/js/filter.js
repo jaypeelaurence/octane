@@ -147,7 +147,7 @@ $(document).ready(function(){
 		var load = {
 			setAccount: function(){
 				$.ajax({
-				    url: location + "/report/account/",
+				    url: location + "/report/account",
 				    type: "GET",
 				    success: function(data){
 				    	for (var i = 0; i < data.length; i++){
