@@ -28,8 +28,7 @@ button:hover {
 }
 
 #login #form .form-group label,
-#dashboard h2,
-#content #wrapper form .form-group label {
+#dashboard h2 {
   padding: 0px;
   margin: 0px;
   marign-bottom: 15px;
@@ -39,7 +38,6 @@ button:hover {
 
 #login #form button,
 #dashboard h3,
-#content #wrapper form button,
 #content #wrapper #details table td {
   padding: 0px;
   margin: 0px;
@@ -51,7 +49,9 @@ button:hover {
 .alert,
 #login #form .form-group .form-control,
 #login .action,
+#content #wrapper form .form-group label,
 #content #wrapper form .form-group .form-control,
+#content #wrapper form button,
 #content #wrapper #table table th,
 #content #wrapper #table table td,
 #content #wrapper #details .actions a,
@@ -472,6 +472,7 @@ nav.navbar .navbar-toggler {
 }
 
 #content #wrapper form .form-group label {
+  font-weight: 700;
   color: #777777;
 }
 

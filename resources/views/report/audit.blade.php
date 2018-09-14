@@ -26,7 +26,7 @@
 				  	<div id="column">
 					  	<div class="form-group userName">
 					    	<label for="userName">User *</label>
-				    		<input type='hidden' class='userField' name='userName'/>
+				    		<input type='hidden' class='userField' name='username'/>
 				    		<div id="userContainer">
 					    		<div id="searchContainer" class="pickedUser">
 				    				<input type="text" name="" value='' class='searchField' placeholder="-- type username --">
@@ -34,9 +34,6 @@
 				    			</div>
 						    	<div id="dropDown">
 							    	<div id="btn-user">
-										@foreach ($users as $key => $value)
-										  	<button type='button' class="unPick" value="{{ $key }} | {{ $value }}">{{ $value }}</button>
-									  	@endforeach
 							    	</div>
 						    	</div>
 					    	</div>

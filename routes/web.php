@@ -19,6 +19,8 @@ Route::get('/manage-account/add', 'AccountController@create')->middleware(['auth
 Route::post('/manage-account/add', 'AccountController@store')->middleware(['auth','admin']);
 
 Route::get('/manage-account/{uid}', 'AccountController@show')->middleware(['auth','admin']);
+Route::get('/manage-account/list/account', 'AccountController@listUser')->middleware(['auth','admin']);
+Route::get('/manage-account/list/account/{strUser}', 'AccountController@listUser')->middleware(['auth','admin']);
 
 Route::get('/manage-account/{uid}/edit', 'AccountController@edit')->middleware(['auth','admin']);
 Route::post('/manage-account/{uid}/edit', 'AccountController@update')->middleware(['auth','admin']);

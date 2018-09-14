@@ -14,10 +14,14 @@ class Account extends Model{
         $this->user = new User();
     }
 
-    public function viewUser($uid = null){
+    public function viewUser($uid = null, $strUser = null){
     	if($uid){
             return $this->user::where('id', $uid)->get();
-    	}else{
+    	}elseif($strUser){
+            $where = "firstname LIKE '%" . $strUser . "%' OR lastname LIKE '%" . $strUser . "%'";
+
+            return $this->user::whereRaw($where)->get();
+        }else{
             return $this->user::orderBy('id', 'asc')->get();
     	}
     }
@@ -77,23 +81,5 @@ class Account extends Model{
         $editUser->update(['password' => md5($getForm)]);
 
         return $this->user::find($uid);
-    }
-
-    public function listUserFullName($uid = NULL){
-        if($uid){
-            $getUsers = $this->user::select('id','firstname','lastname')->where('id', $uid)->get();
-
-            $listUser[$getUsers[0]->id] = $getUsers[0]->lastname . ", " . $getUsers[0]->firstname;
-
-            return $listUser;
-        }else{
-            $getUsers = $this->user::select('id','firstname','lastname')->orderBy('lastname','asc')->get();
-
-            foreach($getUsers as $value){
-                $listUsers[$value->id] = $value->lastname . ", " . $value->firstname;
-            }
-
-            return $listUsers;
-        }
     }
 }

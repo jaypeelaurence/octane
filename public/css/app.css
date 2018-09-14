@@ -38,7 +38,6 @@ button:hover {
 
 #login #form button,
 #dashboard h3,
-#content #wrapper form button,
 #content #wrapper #details table td {
   padding: 0px;
   margin: 0px;
@@ -52,6 +51,7 @@ button:hover {
 #login .action,
 #content #wrapper form .form-group label,
 #content #wrapper form .form-group .form-control,
+#content #wrapper form button,
 #content #wrapper #table table th,
 #content #wrapper #table table td,
 #content #wrapper #details .actions a,

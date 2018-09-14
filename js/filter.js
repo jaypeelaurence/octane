@@ -174,9 +174,12 @@ $(document).ready(function () {
 				pickedSender.html("<i class='fa fa-angle-up'></i>");
 				$('#btn-sender').show();
 
+				$('input.senderField').val('');
+
 				var set = $(event.target);
 
 				var check = 0;
+				var len = 0;
 
 				if (set.hasClass('unPick')) {
 					$('#btn-sender button').removeClass('pick');
@@ -184,6 +187,9 @@ $(document).ready(function () {
 
 					set.removeClass('unPick');
 					set.addClass('pick');
+
+					check = 1;
+					len = set.val().split(" => ");
 				} else {
 					$('#btn-sender button').removeClass('pick');
 					$('#btn-sender button').addClass('unPick');
@@ -191,21 +197,16 @@ $(document).ready(function () {
 					set.removeClass('pick');
 					set.addClass('unPick');
 
-					check = 1;
-
 					$('.senderId .searchField').val('');
 				}
 
-				var len = set.val().split(" => ");
-
-				console.log(check);
-
-				if (len.length == 1) {
-					$('.senderId .searchField').val(set.val());
-				} else if (check == 1) {
-					$('.senderId .searchField').val('');
-				} else {
-					$('.senderId .searchField').val(len[0] + " - " + len[1]);
+				if (len != 0 && check == 1) {
+					$('input.senderField').val(set.val());
+					if (len.length == 1) {
+						$('.senderId .searchField').val(set.val());
+					} else {
+						$('.senderId .searchField').val(len[0] + " - " + len[1]);
+					}
 				}
 			}
 		} else {
@@ -240,6 +241,23 @@ $(document).ready(function () {
 		},
 		dropAccount: function dropAccount() {
 			$('#btn-account button').remove();
+		},
+		setUser: function setUser() {
+			$.ajax({
+				url: location + "/manage-account/list/account",
+				type: "GET",
+				success: function success(data) {
+					for (var i = 0; i < data.length; i++) {
+						$('#btn-user').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].firstname + " " + data[i].lastname + "'>" + data[i].firstname + " " + data[i].lastname + "</button>");
+					}
+				},
+				error: function error(jqXHR, textStatus, errorThrown) {
+					console.log(textStatus + " - " + errorThrown);
+				}
+			});
+		},
+		dropUser: function dropUser() {
+			$('#btn-user button').remove();
 		}
 	};
 
@@ -331,10 +349,22 @@ $(document).ready(function () {
 		}
 	});
 
+	load.setUser();
+
 	//AutoComplete Selection
 	$('body').on('keyup', function (event) {
+		$(event.target).bind('cut copy paste', function ($char) {
+			$char.preventDefault();
+		});
+
+		if (event.originalEvent.code == 'KeyA') {
+			return false;
+		}
+
 		if ($(event.target).parent("div#searchContainer.pickedAccount").length == 1) {
 			var strAcct = $(event.target).val();
+
+			console.log(strAcct);
 
 			if ($(event.target).val().length == 0) {
 				load.setAccount();
@@ -351,6 +381,31 @@ $(document).ready(function () {
 							} else {
 								$('#btn-account').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
 							}
+						}
+					},
+					error: function error(jqXHR, textStatus, errorThrown) {
+						console.log(textStatus + " - " + errorThrown);
+					}
+				});
+			}
+		}
+
+		if ($(event.target).parent("div#searchContainer.pickedUser").length == 1) {
+			var strUser = $(event.target).val();
+
+			if (strUser.length == 0) {
+				load.dropUser();
+				load.setUser();
+			} else {
+				load.dropUser();
+
+				$.ajax({
+					url: location + "/manage-account/list/account/" + encodeURI(strUser),
+					type: "GET",
+					success: function success(data) {
+						console.log(data);
+						for (var i = 0; i < data.length; i++) {
+							$('#btn-user').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].firstname + " " + data[i].lastname + "'>" + data[i].firstname + " " + data[i].lastname + "</button>");
 						}
 					},
 					error: function error(jqXHR, textStatus, errorThrown) {

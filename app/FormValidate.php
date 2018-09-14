@@ -95,6 +95,18 @@ class FormValidate extends Model
     return $validator;
   }
 
+  public function auditReport(Request $request){
+    $rules = [
+      "start" => "required",
+      "end" => "required",
+      "username" => "required"
+    ];
+
+    $validator = Validator::make($request->all(), $rules);
+
+    return $validator;
+  }
+
   public function newPass(Request $request){
     $rules = [
       "password" => "required|confirmed"

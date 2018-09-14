@@ -165,7 +165,24 @@ $(document).ready(function(){
 			},
 			dropAccount: function(){
 				$('#btn-account button').remove();
-			}
+			},
+			setUser: function(){
+				$.ajax({
+			    	url: location + "/manage-account/list/account",
+				    type: "GET",
+				    success: function(data){
+				    	for (var i = 0; i < data.length; i++){
+			    			$('#btn-user').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].firstname + " " + data[i].lastname + "'>" + data[i].firstname + " " + data[i].lastname + "</button>");
+						}
+				    },
+			      	error: function(jqXHR, textStatus, errorThrown){
+					    console.log(textStatus + " - " + errorThrown)
+				  	}
+				});
+			},
+			dropUser: function(){
+				$('#btn-user button').remove();
+			},
 		};
 
 		load.setAccount();
@@ -256,10 +273,22 @@ $(document).ready(function(){
 			}
 		});
 
+		load.setUser();
+
 	//AutoComplete Selection
 		$('body').on('keyup',function(event){
+			$(event.target).bind('cut copy paste', function($char){
+				$char.preventDefault();
+			});
+
+			if(event.originalEvent.code == 'KeyA'){
+				return false
+			}
+
 			if($(event.target).parent("div#searchContainer.pickedAccount").length == 1){
 				var strAcct = $(event.target).val();
+
+				console.log(strAcct);
 
 				if($(event.target).val().length == 0){
 					load.setAccount();
@@ -277,6 +306,31 @@ $(document).ready(function(){
 									$('#btn-account').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
 					    		}
 							}
+					    },
+				      	error: function(jqXHR, textStatus, errorThrown){
+						    console.log(textStatus + " - " + errorThrown)
+					  	}
+					});
+				}
+			}
+
+			if($(event.target).parent("div#searchContainer.pickedUser").length == 1){
+				var strUser = $(event.target).val();
+
+				if(strUser.length == 0){
+					load.dropUser();
+					load.setUser();
+				}else{
+					load.dropUser();
+
+					$.ajax({
+				    	url: location + "/manage-account/list/account/" + encodeURI(strUser),
+					    type: "GET",
+					    success: function(data){
+					    	console.log(data);
+					     	for (var i = 0; i < data.length; i++){
+					    			$('#btn-user').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].firstname + " " + data[i].lastname + "'>" + data[i].firstname + " " + data[i].lastname + "</button>");
+								}
 					    },
 				      	error: function(jqXHR, textStatus, errorThrown){
 						    console.log(textStatus + " - " + errorThrown)

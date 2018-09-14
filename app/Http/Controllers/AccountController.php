@@ -114,4 +114,12 @@ class AccountController extends Controller
             return redirect('account/'.$uid->id)->with('message', $message);
         }
     }
+
+    public function listUser($strUser = NULL){
+        if($strUser) {
+            return  $this->account->viewUser(null, $strUser);
+        }else{
+            return  $this->account->viewUser();
+        }
+    }
 }

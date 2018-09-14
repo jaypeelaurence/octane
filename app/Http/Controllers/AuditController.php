@@ -19,19 +19,16 @@ class AuditController extends Controller
     }
 
     public function index(){
-        $users = $this->account->listUserFullName();
-
-        // return $this->audit->log('asdasd');
-
-        return view('report.audit', compact('users'));
+        return view('report.audit');
     }
 
     public function show(Request $request){
-        return $request->all();
-    	// $users = $this->account->listUserFullName();
+        $result = $this->formValidate->auditReport($request);
 
-    	// // return $this->audit->log('asdasd');
-
-     //    return view('report.audit', compact('users'));
+        if ($result->fails()) {
+            return back()->withErrors($result)->withInput();
+        }else{
+            $request->all();
+        }
     }
 }
