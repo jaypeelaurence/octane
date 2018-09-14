@@ -78,7 +78,7 @@ module.exports = __webpack_require__(6);
 
 $(document).ready(function () {
 	var location = window.origin;
-	// var location = "http://10.1.9.59/octane" + list;
+	// var location = "http://10.1.9.59/octane";
 
 	// Filter Selection
 	$('.senderId .searchField').keypress(function (char) {
