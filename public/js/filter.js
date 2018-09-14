@@ -174,9 +174,12 @@ $(document).ready(function () {
 				pickedSender.html("<i class='fa fa-angle-up'></i>");
 				$('#btn-sender').show();
 
+				$('input.senderField').val('');
+
 				var set = $(event.target);
 
 				var check = 0;
+				var len = 0;
 
 				if (set.hasClass('unPick')) {
 					$('#btn-sender button').removeClass('pick');
@@ -184,6 +187,9 @@ $(document).ready(function () {
 
 					set.removeClass('unPick');
 					set.addClass('pick');
+
+					check = 1;
+					len = set.val().split(" => ");
 				} else {
 					$('#btn-sender button').removeClass('pick');
 					$('#btn-sender button').addClass('unPick');
@@ -191,21 +197,16 @@ $(document).ready(function () {
 					set.removeClass('pick');
 					set.addClass('unPick');
 
-					check = 1;
-
 					$('.senderId .searchField').val('');
 				}
 
-				var len = set.val().split(" => ");
-
-				console.log(check);
-
-				if (len.length == 1) {
-					$('.senderId .searchField').val(set.val());
-				} else if (check == 1) {
-					$('.senderId .searchField').val('');
-				} else {
-					$('.senderId .searchField').val(len[0] + " - " + len[1]);
+				if (len != 0 && check == 1) {
+					$('input.senderField').val(set.val());
+					if (len.length == 1) {
+						$('.senderId .searchField').val(set.val());
+					} else {
+						$('.senderId .searchField').val(len[0] + " - " + len[1]);
+					}
 				}
 			}
 		} else {

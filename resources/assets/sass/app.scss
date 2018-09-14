@@ -321,7 +321,8 @@
 					margin: 0px;
 
 					label{
-	  					@extend %title2;
+	  					@extend %title4;
+	  					font-weight: 700;
 	  					color: $color7;
 					}
 
