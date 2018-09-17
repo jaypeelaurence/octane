@@ -283,14 +283,6 @@ $(document).ready(function(){
 		var set 
 
 		$('body').on('keyup',function(event){
-			$(event.target).bind('cut copy paste', function($char){
-				$char.preventDefault();
-			});
-
-			if(event.originalEvent.code == 'KeyA' || event.originalEvent.code == "ShiftLeft"){
-				return false;
-			}
-
 			if($(event.target).parent("div#searchContainer.pickedAccount").length == 1){
 				load.dropAccount();
 
