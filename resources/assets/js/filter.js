@@ -104,7 +104,6 @@ $(document).ready(function(){
 					var check = 0;
 					var len = 0;
 
-
 					if(set.hasClass('unPick')){
 					    $('#btn-sender button').removeClass('pick');
 					    $('#btn-sender button').addClass('unPick');
@@ -144,6 +143,8 @@ $(document).ready(function(){
 	// Account Selection
 		var obj = {};
 
+		var accoutList;
+
 		var load = {
 			setAccount: function(){
 				$.ajax({
@@ -157,6 +158,8 @@ $(document).ready(function(){
 								$('#btn-account').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
 				    		}
 						}
+
+						accoutist = data;
 				    },
 			      	error: function(jqXHR, textStatus, errorThrown){
 					    console.log(textStatus + " - " + errorThrown)
@@ -192,7 +195,6 @@ $(document).ready(function(){
 				var userButton = $(event.target);
 
 				var picked = userButton.val().split(" | ");
-
 				if(userButton.hasClass('unPick')){
 					$('#btn-user button').removeClass('pick');
 					$('#btn-user button').addClass('unPick');
@@ -205,6 +207,8 @@ $(document).ready(function(){
 					$('.userField').val(userButton.val());
 				}else{
 					$('input.searchField').val("");
+
+					$('.userField').val('');
 					userButton.removeClass('pick');
 					userButton.addClass('unPick');
 				}
@@ -275,68 +279,105 @@ $(document).ready(function(){
 
 		load.setUser();
 
-	//AutoComplete Selection
+	//AutoComplete Selection	
+		var set 
+
 		$('body').on('keyup',function(event){
 			$(event.target).bind('cut copy paste', function($char){
 				$char.preventDefault();
 			});
 
-			if(event.originalEvent.code == 'KeyA'){
-				return false
+			if(event.originalEvent.code == 'KeyA' || event.originalEvent.code == "ShiftLeft"){
+				return false;
 			}
 
 			if($(event.target).parent("div#searchContainer.pickedAccount").length == 1){
-				var strAcct = $(event.target).val();
+				load.dropAccount();
 
-				console.log(strAcct);
+				clearInterval(set);
+				var strAcctValid = null;
 
 				if($(event.target).val().length == 0){
 					load.setAccount();
 				}else{
-					load.dropAccount();
-
-					$.ajax({
-					    url: location + "/report/account/search/" + encodeURI(strAcct),
-					    type: "GET",
-					    success: function(data){
-					    	for (var i = 0; i < data.length; i++){
-					    		if(obj[data[i].id]){
-									$('#btn-account').append("<button type='button' class='pick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
-					    		}else{
-									$('#btn-account').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
-					    		}
-							}
-					    },
-				      	error: function(jqXHR, textStatus, errorThrown){
-						    console.log(textStatus + " - " + errorThrown)
-					  	}
-					});
+					strAcctValid = true;
 				}
+
+				var timer = 0;
+				var run = 0;
+
+				set = setInterval(function(){
+					timer += 1;
+
+					if(timer == 2){
+						if(strAcctValid){
+							var strAcct = $(event.target).val().toLowerCase();
+							$.ajax({
+							    url: location + "/report/account/search/" + encodeURI(strAcct),
+							    type: "GET",
+							    success: function(data){
+							    	console.log(data);
+
+							    	for (var i = 0; i < data.length; i++){
+							    		if(obj[data[i].id]){
+											$('#btn-account').append("<button type='button' class='pick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
+							    		}else{
+											$('#btn-account').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].account + "'>" + data[i].account + "</button>");
+							    		}
+									}
+							    },
+						      	error: function(jqXHR, textStatus, errorThrown){
+								    console.log(textStatus + " - " + errorThrown)
+							  	}
+							});
+						}
+						clearInterval(set);
+					}
+				}, 500);
 			}
 
 			if($(event.target).parent("div#searchContainer.pickedUser").length == 1){
-				var strUser = $(event.target).val();
+				load.dropUser();
 
-				if(strUser.length == 0){
-					load.dropUser();
-					load.setUser();
+				clearInterval(set);
+				var strUserValid = null;
+
+				if($(event.target).val().length == 0){
+					load.setAccount();
 				}else{
-					load.dropUser();
-
-					$.ajax({
-				    	url: location + "/manage-account/list/account/" + encodeURI(strUser),
-					    type: "GET",
-					    success: function(data){
-					    	console.log(data);
-					     	for (var i = 0; i < data.length; i++){
-					    			$('#btn-user').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].firstname + " " + data[i].lastname + "'>" + data[i].firstname + " " + data[i].lastname + "</button>");
-								}
-					    },
-				      	error: function(jqXHR, textStatus, errorThrown){
-						    console.log(textStatus + " - " + errorThrown)
-					  	}
-					});
+					strUserValid = true;
 				}
+
+				var timer = 0;
+				var run = 0;
+
+				set = setInterval(function(){
+					timer += 1;
+
+					if(timer == 2){
+						if(strUserValid){
+							var strUser = $(event.target).val();
+
+							$.ajax({
+						    	url: location + "/manage-account/list/account/" + encodeURI(strUser),
+							    type: "GET",
+							    success: function(data){
+							    	console.log(data);
+							     	for (var i = 0; i < data.length; i++){
+							    			$('#btn-user').append("<button type='button' class='unPick' value='" + data[i].id + " | " + data[i].firstname + " " + data[i].lastname + "'>" + data[i].firstname + " " + data[i].lastname + "</button>");
+										}
+							    },
+						      	error: function(jqXHR, textStatus, errorThrown){
+								    console.log(textStatus + " - " + errorThrown)
+							  	}
+							});
+						}
+						clearInterval(set);
+					}
+
+				}, 500);
+
+				load.dropUser();
 			}
 		});
 });

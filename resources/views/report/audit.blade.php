@@ -12,20 +12,20 @@
 					{{ csrf_field() }}
 				  	<div id="column">
 					  	<div class="form-group monthYear">
-					    	<label for="monthYear">Date *</label>
+					    	<label for="monthYear">Date</label>
 					    	<div id="date">
 						    	<div class="start">
-					    	      	<input id="startDate" name="start" placeholder="start date" value="{{ old('start') }}"/>
+					    	      	<input id="startDate" name="start" placeholder="start date"/>
 						      	</div>	
 						        <div class="end">	
-							        <input id="endDate" name="end" placeholder="End date" value="{{ old('end') }}"/>
+							        <input id="endDate" name="end" placeholder="End date"/>
 						    	</div>
 					    	</div>
 					  	</div>
 				  	</div>
 				  	<div id="column">
 					  	<div class="form-group userName">
-					    	<label for="userName">User *</label>
+					    	<label for="userName">User</label>
 				    		<input type='hidden' class='userField' name='username'/>
 				    		<div id="userContainer">
 					    		<div id="searchContainer" class="pickedUser">

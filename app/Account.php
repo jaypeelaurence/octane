@@ -18,7 +18,7 @@ class Account extends Model{
     	if($uid){
             return $this->user::where('id', $uid)->get();
     	}elseif($strUser){
-            $where = "firstname LIKE '%" . $strUser . "%' OR lastname LIKE '%" . $strUser . "%'";
+            $where = "firstname LIKE '%" . strtolower($strUser) . "%' OR lastname LIKE '%" . strtolower($strUser) . "%' OR '" . strtolower($strUser) ."' LIKE CONCAT(firstname,'%') OR '" . strtolower($strUser) ."' LIKE CONCAT('%',lastname,'%')";
 
             return $this->user::whereRaw($where)->get();
         }else{

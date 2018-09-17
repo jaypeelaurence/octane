@@ -96,14 +96,15 @@ class FormValidate extends Model
   }
 
   public function auditReport(Request $request){
-    $rules = [
-      "start" => "required",
-      "end" => "required",
-      "username" => "required"
-    ];
+    $rules = [];
+
+    if($request->start){
+      $rules['start'] = 'required'; 
+      $rules['end'] = 'required'; 
+    }
 
     $validator = Validator::make($request->all(), $rules);
-
+    
     return $validator;
   }
 
