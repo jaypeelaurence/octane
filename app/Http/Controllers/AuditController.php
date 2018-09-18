@@ -19,7 +19,17 @@ class AuditController extends Controller
     }
 
     public function index(){
-        return view('report.audit');
+        $getLog = $this->audit->getLog();
+
+        $transactions = [
+            'type'          => 'auditReport',
+            'dateRange'     => $getLog['dateRange'],
+            'accountName'   => $getLog['accountName'],
+            'column'        => $getLog['column'],
+            'data'          => $getLog['data']
+        ];
+
+        return view('report.audit', compact(['transactions']));
     }
 
     public function show(Request $request){
@@ -38,6 +48,11 @@ class AuditController extends Controller
                 'data'          => $getLog['data']
             ];
         }
+
+        $message = "Audit " . implode(' ',$request->all()) . " was generated!";
+
+        $this->audit->log('401',$message);
+
         return view('report.audit', compact(['transactions']));
     }
 }

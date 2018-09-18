@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Report;
 use App\FormValidate;
+use App\Audit;
 
 class ReportController extends Controller
 {
     function __construct(){
         $this->report = new Report();
         $this->formValidate = new FormValidate();
+        $this->audit = new Audit();
     }
 
     public function index(){
@@ -55,6 +57,10 @@ class ReportController extends Controller
                 ];
             }
         }
+
+        $message = "Report " . implode(' ',$request->all()) . " was generated!";
+
+        $this->audit->log('300',$message);
 
         return view('report.index', compact(['transactions']));
     }

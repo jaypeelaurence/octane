@@ -25,7 +25,11 @@ class Audit extends Model
     		'200' => "User:",
     		'201' => "User - update:",
     		'202' => "User - change password:",
-    		'203' => "User - deleted:",
+            '203' => "User - deleted:",
+            '300' => "Report",
+            '301' => "Report - generate",
+            '400' => "Audit",
+    		'401' => "Audit - generate",
     	];
 
     	return $type[$code];
@@ -39,7 +43,7 @@ class Audit extends Model
         ]);
     }
 
-    public function getLog($request){
+    public function getLog($request = null){
         $dateRange = [
             date('Y-m-d', strtotime(date('Y-m-d') . ' -3 months')),
             date('Y-m-d')
@@ -47,42 +51,46 @@ class Audit extends Model
 
         $accountName = null;
 
-     	if($request->start == null && $request->end == null && $request->username == null){
-
-            $date = [
-                "start" =>  date('Y-m-d 00:00:00'),
-                "end"   =>  date('Y-m-d 00:00:00', strtotime(date('Y-m-d 00:00:00') . ' -3 months'))
-            ];
-
-            $where = 
-                "date_logged BETWEEN '" . $date["end"] . "' AND '" . $date["start"] . "'";
-
-            $result =  $this->query->whereRaw($where)->limit(30)->get();
+        if($request == NULL){
+            $result =  $this->query->limit(30)->orderBy('id','desc')->get();
         }else{
-            if($request->start && $request->end){
-                $start = explode('/',$request->start);
-                $end = explode('/',$request->end);
+            if($request->start == null && $request->end == null && $request->username == null){
 
                 $date = [
                     "start" =>  date('Y-m-d 00:00:00'),
                     "end"   =>  date('Y-m-d 00:00:00', strtotime(date('Y-m-d 00:00:00') . ' -3 months'))
                 ];
 
-                $dateRange = [
-                    $start[2] . "-" . $start[0] . "-" . $start[1],
-                    $end[2] . "-" . $end[0] . "-" . $end[1]
-                ];
+                $where = 
+                    "date_logged BETWEEN '" . $date["end"] . "' AND '" . $date["start"] . "'";
 
-                $whereRaw[] = "date_logged BETWEEN '" . $date['end'] . "' AND '". $date['end'] . "'";
+                $result =  $this->query->whereRaw($where)->limit(30)->orderBy('id','desc')->get();
+            }else{
+                if($request->start && $request->end){
+                    $start = explode('/',$request->start);
+                    $end = explode('/',$request->end);
+
+                    $date = [
+                        "start" =>  date('Y-m-d 00:00:00'),
+                        "end"   =>  date('Y-m-d 00:00:00', strtotime(date('Y-m-d 00:00:00') . ' -3 months'))
+                    ];
+
+                    $dateRange = [
+                        $start[2] . "-" . $start[0] . "-" . $start[1],
+                        $end[2] . "-" . $end[0] . "-" . $end[1]
+                    ];
+
+                    $whereRaw[] = "date_logged BETWEEN '" . $date['end'] . "' AND '". $date['end'] . "'";
+                }
+
+                if($request->username){
+                    $whereRaw[] = "user = '" .$this->account->viewUser(explode(" | ",$request->username)[0])[0]->email . "'";
+
+                    $accountName = explode(" | ",$request->username)[1];
+                };
+
+                $result =  $this->query->whereRaw(implode(' AND ',$whereRaw))->limit(30)->orderBy('id','desc')->get();
             }
-
-            if($request->username){
-                $whereRaw[] = "user = '" .$this->account->viewUser(explode(" | ",$request->username)[0])[0]->email . "'";
-
-                $accountName = explode(" | ",$request->username)[1];
-            };
-
-            $result =  $this->query->whereRaw(implode(' AND ',$whereRaw))->limit(30)->get();
         }
 
         $column = [
