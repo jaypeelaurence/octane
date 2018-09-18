@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-	@include('report.trail')
+	@include('report.table')
 @endsection	
 
 @section ('custom_script')

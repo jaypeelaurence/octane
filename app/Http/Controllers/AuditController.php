@@ -28,16 +28,16 @@ class AuditController extends Controller
         if ($result->fails()) {
             return back()->withErrors($result)->withInput();
         }else{
-            return $this->audit->getLog($request);
+            $getLog = $this->audit->getLog($request);
 
             $transactions = [
                 'type'          => 'auditReport',
-                'dateRange'     => $dateRange,
-                'accountName'   => $listTrans['accountName'],
-                'column'        => $listTrans['column'],
-                'data'          => $listTrans['data']
+                'dateRange'     => $getLog['dateRange'],
+                'accountName'   => $getLog['accountName'],
+                'column'        => $getLog['column'],
+                'data'          => $getLog['data']
             ];
         }
-        return view('report.index', compact(['transactions']));
+        return view('report.audit', compact(['transactions']));
     }
 }

@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use App\Account;
+
 class Audit extends Model
 {
     function __construct(){
         $this->query = DB::table('audit');
+        $this->account = new Account;
     }
 
 	private function logType($code){
@@ -37,22 +40,63 @@ class Audit extends Model
     }
 
     public function getLog($request){
-        return $request->all();
+        $dateRange = [
+            date('Y-m-d', strtotime(date('Y-m-d') . ' -3 months')),
+            date('Y-m-d')
+        ];
 
-     	if($daterange == null && $user == null){
-            return $this->query->get();
+        $accountName = null;
+
+     	if($request->start == null && $request->end == null && $request->username == null){
+
+            $date = [
+                "start" =>  date('Y-m-d 00:00:00'),
+                "end"   =>  date('Y-m-d 00:00:00', strtotime(date('Y-m-d 00:00:00') . ' -3 months'))
+            ];
+
+            $where = 
+                "date_logged BETWEEN '" . $date["end"] . "' AND '" . $date["start"] . "'";
+
+            $result =  $this->query->whereRaw($where)->limit(30)->get();
         }else{
-            echo "gago"; exit;
+            if($request->start && $request->end){
+                $start = explode('/',$request->start);
+                $end = explode('/',$request->end);
 
-            if($daterange){
-                $where[] = 'id = 1';
+                $date = [
+                    "start" =>  date('Y-m-d 00:00:00'),
+                    "end"   =>  date('Y-m-d 00:00:00', strtotime(date('Y-m-d 00:00:00') . ' -3 months'))
+                ];
+
+                $dateRange = [
+                    $start[2] . "-" . $start[0] . "-" . $start[1],
+                    $end[2] . "-" . $end[0] . "-" . $end[1]
+                ];
+
+                $whereRaw[] = "date_logged BETWEEN '" . $date['end'] . "' AND '". $date['end'] . "'";
             }
 
-            if($user){
-                $where[] = '';
-            }
+            if($request->username){
+                $whereRaw[] = "user = '" .$this->account->viewUser(explode(" | ",$request->username)[0])[0]->email . "'";
 
-            return $this->query->whereRaw($where)->get();
+                $accountName = explode(" | ",$request->username)[1];
+            };
+
+            $result =  $this->query->whereRaw(implode(' AND ',$whereRaw))->limit(30)->get();
         }
+
+        $column = [
+            'ID',
+            'User',
+            'Activity',
+            'Date Logged'
+        ];
+
+        return [
+                'dateRange'     => $dateRange,
+                'accountName'   => $accountName,
+                'column'        => $column,
+                'data'          => $result,
+            ];
     }
 }

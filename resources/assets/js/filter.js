@@ -335,7 +335,7 @@ $(document).ready(function(){
 				var strUserValid = null;
 
 				if($(event.target).val().length == 0){
-					load.setAccount();
+					load.setUser();
 				}else{
 					strUserValid = true;
 				}
