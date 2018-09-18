@@ -51,8 +51,16 @@ class Audit extends Model
 
         $accountName = null;
 
-        if($request == NULL){
-            $result =  $this->query->limit(30)->orderBy('id','desc')->get();
+        if($request == null || ($request->start == null && $request->end == null && $request->username == null)){
+            $date = [
+                "start" =>  date('Y-m-d 00:00:00'),
+                "end"   =>  date('Y-m-d 00:00:00', strtotime(date('Y-m-d 00:00:00') . ' -3 months'))
+            ];
+
+            $where = 
+                "date_logged BETWEEN '" . $date["end"] . "' AND '" . $date["start"] . "'";
+
+            $result =  $this->query->whereRaw($where)->limit(30)->orderBy('id','desc')->get();
         }else{
             if($request->start && $request->end){
                 $start = explode('/',$request->start);
