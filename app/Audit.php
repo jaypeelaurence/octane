@@ -54,43 +54,30 @@ class Audit extends Model
         if($request == NULL){
             $result =  $this->query->limit(30)->orderBy('id','desc')->get();
         }else{
-            if($request->start == null && $request->end == null && $request->username == null){
+            if($request->start && $request->end){
+                $start = explode('/',$request->start);
+                $end = explode('/',$request->end);
 
                 $date = [
-                    "start" =>  date('Y-m-d 00:00:00'),
-                    "end"   =>  date('Y-m-d 00:00:00', strtotime(date('Y-m-d 00:00:00') . ' -3 months'))
+                    "start" =>  $start[2] . "-" . $start[0] . "-" . $start[1] . " 00:00:00",
+                    "end"   =>  $end[2] . "-" . $end[0] . "-" . $end[1] . " 00:00:00"
                 ];
 
-                $where = 
-                    "date_logged BETWEEN '" . $date["end"] . "' AND '" . $date["start"] . "'";
+                $dateRange = [
+                    $start[2] . "-" . $start[0] . "-" . $start[1],
+                    $end[2] . "-" . $end[0] . "-" . $end[1]
+                ];
 
-                $result =  $this->query->whereRaw($where)->limit(30)->orderBy('id','desc')->get();
-            }else{
-                if($request->start && $request->end){
-                    $start = explode('/',$request->start);
-                    $end = explode('/',$request->end);
-
-                    $date = [
-                        "start" =>  date('Y-m-d 00:00:00'),
-                        "end"   =>  date('Y-m-d 00:00:00', strtotime(date('Y-m-d 00:00:00') . ' -3 months'))
-                    ];
-
-                    $dateRange = [
-                        $start[2] . "-" . $start[0] . "-" . $start[1],
-                        $end[2] . "-" . $end[0] . "-" . $end[1]
-                    ];
-
-                    $whereRaw[] = "date_logged BETWEEN '" . $date['end'] . "' AND '". $date['end'] . "'";
-                }
-
-                if($request->username){
-                    $whereRaw[] = "user = '" .$this->account->viewUser(explode(" | ",$request->username)[0])[0]->email . "'";
-
-                    $accountName = explode(" | ",$request->username)[1];
-                };
-
-                $result =  $this->query->whereRaw(implode(' AND ',$whereRaw))->limit(30)->orderBy('id','desc')->get();
+                $whereRaw[] = "date_logged BETWEEN '" . $date['start'] . "' AND '". $date['end'] . "'";
             }
+
+            if($request->username){
+                $whereRaw[] = "user = '" .$this->account->viewUser(explode(" | ",$request->username)[0])[0]->email . "'";
+
+                $accountName = explode(" | ",$request->username)[1];
+            };
+
+            $result =  $this->query->whereRaw(implode(' AND ',$whereRaw))->limit(30)->orderBy('id','desc')->get();
         }
 
         $column = [

@@ -40,6 +40,8 @@ class AuditController extends Controller
         }else{
             $getLog = $this->audit->getLog($request);
 
+            return $getLog;
+
             $transactions = [
                 'type'          => 'auditReport',
                 'dateRange'     => $getLog['dateRange'],
