@@ -59,8 +59,8 @@ class Audit extends Model
                 $end = explode('/',$request->end);
 
                 $date = [
-                    "start" =>  $start[2] . "-" . $start[0] . "-" . $start[1] . " 00:00:00",
-                    "end"   =>  $end[2] . "-" . $end[0] . "-" . $end[1] . " 00:00:00"
+                    "start" =>  $start[2] . "-" . $start[0] . "-" . $start[1] . " 00:00:01",
+                    "end"   =>  $end[2] . "-" . $end[0] . "-" . $end[1] . " 23:59:59"
                 ];
 
                 $dateRange = [
