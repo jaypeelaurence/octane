@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	if(window.origin == "http://127.0.0.1:8080"){
+	if(window.origin == "http://127.0.0.1:8000"){
 		var location = window.origin;
 	}else{
 		var location = "http://10.1.9.59/octane";

@@ -81,7 +81,7 @@ $(document).ready(function () {
 	var date = new Date();
 	var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-	if ($('div#content').hasClass('report')) {
+	if ($('div.filter').is('.report')) {
 		var startDate;
 		var sd;
 		var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
@@ -130,7 +130,10 @@ $(document).ready(function () {
 			}
 		});
 	} else {
+		console.log('audit');
+
 		var startDate = new Date();
+		var sd;
 
 		$('#startDate').datepicker({
 			uiLibrary: 'bootstrap4',
@@ -143,6 +146,9 @@ $(document).ready(function () {
 			iconsLibrary: 'fontawesome',
 			minDate: function minDate() {
 				return startDate;
+			},
+			maxDate: function maxDate() {
+				return today;
 			}
 		});
 

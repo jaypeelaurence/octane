@@ -27,9 +27,9 @@ class Audit extends Model
     		'202' => "User - change password:",
             '203' => "User - deleted:",
             '300' => "Report",
-            '301' => "Report - generate",
+            '301' => "Report - generate:",
             '400' => "Audit",
-    		'401' => "Audit - generate",
+    		'401' => "Audit - generate:",
     	];
 
     	return $type[$code];
@@ -39,7 +39,7 @@ class Audit extends Model
         $this->query->insert([
             'date_logged' => date('Y-m-d H:i:s'),
             'user' => $user == null ? Auth::user()->email : $user,
-            'activity' => $this->logType($type) . $activity,
+            'activity' => $this->logType($type) . " " . $activity,
         ]);
     }
 
@@ -52,7 +52,7 @@ class Audit extends Model
         $accountName = null;
 
         if($request == null || ($request->start == null && $request->end == null && $request->username == null)){
-            $result =  $this->query->limit(30)->orderBy('id','desc')->get();
+            $result = $this->query->limit(30)->orderBy('id','desc')->get();
         }else{
             if($request->start && $request->end){
                 $start = explode('/',$request->start);
@@ -77,7 +77,7 @@ class Audit extends Model
                 $accountName = explode(" | ",$request->username)[1];
             };
 
-            $result =  $this->query->whereRaw(implode(' AND ',$whereRaw))->limit(30)->orderBy('id','desc')->get();
+            $result =  $this->query->whereRaw(implode(' AND ',$whereRaw))->orderBy('id','desc')->get();
         }
 
         $column = [
