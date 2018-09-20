@@ -89,6 +89,9 @@ $(document).ready(function () {
 		$('#startDate').datepicker({
 			uiLibrary: 'bootstrap4',
 			iconsLibrary: 'fontawesome',
+			minDate: function minDate() {
+				return new Date(date.getFullYear(), date.getMonth() - 3, date.getDate());
+			},
 			maxDate: yesterday
 		});
 

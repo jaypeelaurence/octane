@@ -32,7 +32,7 @@
 					</div>
 				  <button type="submit" class="btn btn-primary">Login</button>
 				</form>
-				<a class='action' href="{{ url('/') }}/account/forgot-password">Forgot Password</a>
+				<a class='action' href="{{ url('/') }}/account/forgot-password">Forgot your password?</a>
 			</div>
 		</div>
 		<div id="container">

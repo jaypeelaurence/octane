@@ -47,7 +47,7 @@ class SessionsController extends Controller
 
 		        return redirect()->home();
 			}else{
-				return back()->withErrors(['message' => 'Incorrect Email Address or password'])->withInput();
+				return back()->withErrors(['message' => 'Invalid username or password. Please enter valid credentials and try again.'])->withInput();
 			}
 		}else{
 			return back()->withErrors($result)->withInput();
