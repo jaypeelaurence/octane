@@ -24,7 +24,7 @@
 					 		</div>
 				 		</div>
 					</div>
-				  <button type="submit" class="btn btn-primary">Verify Email Address</button>
+				  <button type="submit" class="btn btn-primary">Reset Password</button>
 				</form>
 				<a class='action' href="{{ url('/') }}/account/login">Go back to login page</a>
 			</div>
