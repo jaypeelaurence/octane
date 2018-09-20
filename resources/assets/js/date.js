@@ -54,8 +54,6 @@ $(document).ready(function(){
 			}
 		});
 	}else{
-		console.log('audit');
-
 		var startDate = new Date();
     	var sd;
 

@@ -7,7 +7,9 @@ body {
 }
 
 a:hover,
-button:hover {
+button:hover,
+.settings form div#prompt,
+.actions form div#prompt {
   -o-transition: .5s !important;
   -ms-transition: .5s !important;
   -moz-transition: .5s !important;
@@ -55,7 +57,7 @@ button:hover {
 #content #wrapper #table table th,
 #content #wrapper #table table td,
 #content #wrapper #details .actions a,
-#content #wrapper #details .actions form button,
+#content #wrapper #details .actions button,
 #content.filter #wrapper #report form #column #searchContainer,
 #content.filter #wrapper #report form #column #searchContainer .searchField,
 #content.filter #wrapper #report form #column .senderId #dropDown #btn-sender button,
@@ -275,7 +277,7 @@ nav.navbar .navbar-toggler {
   width: 100%;
   position: fixed;
   bottom: 0;
-  z-index: 10000000000;
+  z-index: 999;
 }
 
 /*Login Style*/
@@ -563,46 +565,36 @@ nav.navbar .navbar-toggler {
   background-color: #f9f9f9;
 }
 
-#content #wrapper #table table td.settings a {
+#content #wrapper #table table td.settings a,
+#content #wrapper #table table td.settings button {
   font-size: 10px;
   color: #777777;
   margin-right: 10px;
   display: inline-block;
+  border: 0px;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0px;
 }
 
-#content #wrapper #table table td.settings a:hover {
+#content #wrapper #table table td.settings a:hover,
+#content #wrapper #table table td.settings button:hover {
   color: #2878b3;
 }
 
-#content #wrapper #table table td.settings a i {
+#content #wrapper #table table td.settings a i,
+#content #wrapper #table table td.settings button i {
   margin-right: 2px;
+}
+
+#content #wrapper #table table td.settings button {
+  margin: 0px;
 }
 
 #content #wrapper #table table td.settings form {
   padding: 0px;
   margin: 0px;
-  width: auto;
   display: inline-block;
-}
-
-#content #wrapper #table table td.settings form button {
-  padding: 0px;
-  margin: 0px;
-  font-size: 10px;
-  color: #777777;
-  margin-right: 10px;
-  display: inline-block;
-  background-color: rgba(255, 255, 255, 0);
-  display: inline-block;
-}
-
-#content #wrapper #table table td.settings form button:hover {
-  color: #2878b3;
-  cursor: pointer;
-}
-
-#content #wrapper #table table td.settings form button i {
-  margin-right: 2px;
 }
 
 #content #wrapper #table table th,
@@ -674,41 +666,38 @@ nav.navbar .navbar-toggler {
   margin-right: 10px;
 }
 
-#content #wrapper #details .actions form {
-  padding: 0px;
-  margin: 0px;
-}
-
-#content #wrapper #details .actions form button {
+#content #wrapper #details .actions button {
   background-color: #777777;
   font-weight: 700;
   color: #ffffff;
   cursor: pointer;
   text-align: left;
+  border: 0px;
 }
 
 @media (min-width: 0px) {
-  #content #wrapper #details .actions form button {
+  #content #wrapper #details .actions button {
+    width: auto;
     display: inline-block;
     padding: 10px;
-    margin: 5px 0px 5px 0px;
+    margin: 0px;
   }
 }
 
 @media (min-width: 800px) {
-  #content #wrapper #details .actions form button {
-    display: block;
+  #content #wrapper #details .actions button {
     width: 100%;
+    display: block;
     padding: 10px;
     margin: 0px 0px 5px 0px;
   }
 }
 
-#content #wrapper #details .actions form button:hover {
+#content #wrapper #details .actions button:hover {
   opacity: 0.5;
 }
 
-#content #wrapper #details .actions form button i {
+#content #wrapper #details .actions button i {
   margin-right: 10px;
 }
 
@@ -976,5 +965,41 @@ h1#message {
 
 .gj-picker {
   font-size: 12px;
+}
+
+.settings form#prompt {
+  position: relative;
+  min-width: 150px;
+}
+
+.settings form div#prompt {
+  padding: 5px 15px;
+  position: absolute;
+  width: 100%;
+  top: -5px;
+  z-index: 2990000000000;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.actions form#prompt {
+  position: relative;
+  padding: 0px !important;
+}
+
+.actions form div#prompt {
+  padding: 5px 15px;
+  position: absolute;
+  width: 100%;
+  top: -5px;
+  z-index: 2990000000000;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.actions form div#prompt button {
+  display: inline-block !important;
+  width: auto !important;
+  background-color: transparent !important;
+  color: #777777 !important;
+  padding: 10px 5px !important;
 }
 

@@ -160,7 +160,7 @@
 		width: 100%;
 		position: fixed;
 		bottom: 0;
-		z-index: 10000000000;
+		z-index: 999;
 	}
 
 /*Login Style*/
@@ -394,11 +394,14 @@
 					td{
 						&.settings{
 							background-color: $color4;
-							a{
+							a, button{
 								font-size: 10px;
 								color: $color7;
 								margin-right: 10px;
 								display: inline-block;
+								border: 0px;
+
+								cursor: pointer;
 
 								&:hover{
 									color: $color2;
@@ -407,33 +410,20 @@
 								i{
 									margin-right: 2px;
 								}
+
+								background-color: transparent;
+								padding: 0px;
+							}
+
+							button{
+								margin: 0px;
 							}
 
 							form{
-								@include container(0px, 0px);
-								width: auto;
+								padding: 0px;
+								margin: 0px;
 								display: inline-block;
-
-								button{
-									@include container(0px, 0px);
-									font-size: 10px;
-									color: $color7;
-									margin-right: 10px;
-									display: inline-block;
-									background-color: rgba(255,255,255,0);
-									display: inline-block;
-
-									&:hover{
-										color: $color2;
-										cursor: pointer;
-									}
-
-									i{
-										margin-right: 2px;
-									}
-								}
 							}
-
 						}
 					}
 
@@ -501,35 +491,34 @@
 						}
 					}
 
-					form{
-						@include container(0px, 0px);
-						button{
-							@media (min-width: 0px){
-								display: inline-block;
-								@include container(10px, 5px 0px 5px 0px);
-							}
-
-							@media (min-width: 800px){
-								display: block;
-								width: 100%;
-								@include container(10px, 0px 0px 5px 0px);
-							}
-
-							background-color: $color7;
-							@extend %title4;
-							font-weight: 700;
-							color: $color1;
-							cursor: pointer;
-							text-align: left;
-
-							&:hover{
-								opacity: 0.5;
-							}
-
-							i{
-								margin-right: 10px;
-							}
+					button{
+						@media (min-width: 0px){
+							width: auto;
+							display: inline-block;
+							@include container(10px, 0px);
 						}
+
+						@media (min-width: 800px){
+							width: 100%;
+							display: block;
+							@include container(10px, 0px 0px 5px 0px);
+						}
+
+						&:hover{
+							opacity: 0.5;
+						}
+
+						i{
+							margin-right: 10px;
+						}
+
+						@extend %title4;
+						background-color: $color7;
+						font-weight: 700;
+						color: $color1;
+						cursor: pointer;
+						text-align: left;
+						border: 0px;
 					}
 				}
 			}
@@ -808,4 +797,55 @@
 /*Datepicker style*/
 	.gj-picker{
 		font-size: 12px;
+	}
+
+	.settings{
+		form{
+			&#prompt{
+				position: relative;
+				min-width:  150px;
+			}
+
+			div{
+				&#prompt{
+					@extend %linkState;
+					padding: 5px 15px;
+					position: absolute;
+					width: 100%;
+					top: -5px;
+					z-index: 2990000000000;
+					background-color: rgba(255,255,255,0.9);
+				}
+			}
+		}
+	}
+
+	.actions{
+		form{
+			&#prompt{
+				position: relative;
+				padding: 0px !important;
+			}
+
+			div{
+				&#prompt{
+
+					@extend %linkState;
+					padding: 5px 15px;
+					position: absolute;
+					width: 100%;
+					top: -5px;
+					z-index: 2990000000000;
+					background-color: rgba(255,255,255,0.9);
+
+					button{
+						display: inline-block !important;
+						width: auto !important;
+						background-color: transparent !important;
+						color: $color7 !important;
+						padding: 10px 5px !important;
+					}
+				}
+			}
+		}
 	}

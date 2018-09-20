@@ -33,11 +33,11 @@
 								<td>{{ $value->created_at }}</td>
 								<td>{{ $value->updated_at }}</td>
 								<td class='settings'>
-									<a href="{{ url('/') }}/manage-account/{{ $value->id }}"><i class="fa fa-eye"></i>View</a>
-									<a href="{{ url('/') }}/manage-account/{{ $value->id }}/edit"><i class="fa fa-edit"></i>Edit</a>
-									<form action="{{ url('/') }}/manage-account/{{ $value->id }}" method="POST">
+									<form action="{{ url('/') }}/manage-account/{{ $value->id }}" method="POST" id="prompt">
 										{{ csrf_field() }}
-										<button type="submit"><i class='fa fa-edit'></i>Delete</button>
+										<a href="{{ url('/') }}/manage-account/{{ $value->id }}"><i class="fa fa-eye"></i>View</a>
+										<a href="{{ url('/') }}/manage-account/{{ $value->id }}/edit"><i class="fa fa-edit"></i>Edit</a>
+										<button type="button" id="prompt" value="{{ $value->id }}"><i class="fa fa-trash"></i>Delete</button>
 									</form>
 								</td>
 							</tr>
@@ -47,4 +47,8 @@
 			</div>
 		</div>
 	</div>
-@endsection	
+@endsection
+
+@section ('custom_script')
+	<script src="{{ url('/') }}/js/form.js" type="text/javascript"></script>
+@endsection

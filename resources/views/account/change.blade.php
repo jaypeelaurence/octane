@@ -15,7 +15,7 @@
 				  		<div class="col-md-4">
 						  	<div class="form-group password">
 						    	<label for="exampleInputPassword1">Current Password</label>
-						    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="enter old password" name='oldPassword'>
+						    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="enter current password" name='oldPassword'>
 						  	</div>
 					  	</div>
 				  		<div class="col-md-4">
