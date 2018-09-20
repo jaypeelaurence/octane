@@ -54,7 +54,7 @@ class FormValidate extends Model
         "required",
         "checkPass:".$uid->password,
       ],
-      "password" => "required|confirmed|min:6"
+      "password" => "required|confirmed|min:8"
     ];
 
     $validator = Validator::make($request->all(), $rules);

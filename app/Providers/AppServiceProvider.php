@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
             }else{
                 return true;
             }
-        }, 'The old password field is incorrect.');
+        }, 'The current password is incorrect.');
 
         //Validates MobileNumber
         Validator::extend('mobile', function ($attribute, $value, $parameters){
