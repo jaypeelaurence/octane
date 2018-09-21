@@ -336,6 +336,12 @@
 	  						color: $color5;
 	  					}
 	  				}
+
+	  				span{
+	  					@extend %title4;
+	  					border-radius: 0px;
+	  					color: $color7;
+	  				}
 				}
 
 				button{

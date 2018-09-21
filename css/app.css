@@ -53,6 +53,7 @@ button:hover,
 #login .action,
 #content #wrapper form .form-group label,
 #content #wrapper form .form-group .form-control,
+#content #wrapper form .form-group span,
 #content #wrapper form button,
 #content #wrapper #table table th,
 #content #wrapper #table table td,
@@ -498,6 +499,11 @@ nav.navbar .navbar-toggler {
 
 #content #wrapper form .form-group .form-control::placeholder {
   color: #dbd9d9;
+}
+
+#content #wrapper form .form-group span {
+  border-radius: 0px;
+  color: #777777;
 }
 
 #content #wrapper form button {
