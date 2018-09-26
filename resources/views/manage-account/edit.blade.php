@@ -38,7 +38,7 @@
 					  	</div>
 					  	<div class="col-md-6">
 						  	<div class="form-group mobile">
-						    	<label for="mobile">Mobile <span>(mobile number format: +639XXXXXXXXX)</span></label>
+						    	<label for="mobile">Mobile <span>(mobile number format: 639XXXXXXXXX)</span></label>
 						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $user->mobile }}" name='mobile' value="{{ old('mobile') }}">
 						  	</div>
 					  	</div>
