@@ -15,7 +15,7 @@
 					    	<label for="monthYear">Date</label>
 					    	<div id="date">
 						    	<div class="start">
-					    	      	<input id="startDate" name="start" placeholder="start date"/>
+					    	      	<input id="startDate" name="start" placeholder="Start date"/>
 						      	</div>	
 						        <div class="end">	
 							        <input id="endDate" name="end" placeholder="End date"/>
@@ -29,7 +29,7 @@
 				    		<input type='hidden' class='userField' name='username'/>
 				    		<div id="userContainer">
 					    		<div id="searchContainer" class="pickedUser">
-				    				<input type="text" name="" value='' class='searchField' placeholder="-- type username --">
+				    				<input type="text" name="" value='' class='searchField' placeholder="-- Type username --">
 				    				<button class='list' type="button"></button>
 				    			</div>
 						    	<div id="dropDown">

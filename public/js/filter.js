@@ -326,7 +326,7 @@ $(document).ready(function () {
 			if (selected != 0) {
 				$('.pickedAccount .searchField').attr('placeholder', selected + " account(s) selected");
 			} else {
-				$('.pickedAccount .searchField').attr('placeholder', "-- type account name --");
+				$('.pickedAccount .searchField').attr('placeholder', "-- Type account name --");
 			}
 
 			if (obj != '' && selected != 0) {
@@ -352,7 +352,7 @@ $(document).ready(function () {
 			} else {
 				$('#senderContainer .searchField').prop("disabled", true);
 				$('#senderContainer .searchField').val("");
-				$('#senderContainer .searchField').attr('placeholder', "-- n/a --");
+				$('#senderContainer .searchField').attr('placeholder', "-- N/a --");
 			}
 		}
 	});

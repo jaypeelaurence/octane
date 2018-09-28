@@ -15,31 +15,31 @@
 				  		<div class="col-md-4">
 						  	<div class="form-group firstname">
 						    	<label for="firstname">First Name *</label>
-						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter first name" name='firstname' required value="{{ old('firstname') }}">
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter first name" name='firstname' required value="{{ old('firstname') }}">
 						  	</div>
 					  	</div>
 					  	<div class="col-md-4">
 						  	<div class="form-group middlename">
 						    	<label for="middlename">Middle Name</label>
-						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter middle name" name='middlename' value="{{ old('middlename') }}">
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter middle name" name='middlename' value="{{ old('middlename') }}">
 						  	</div>
 					  	</div>
 					  	<div class="col-md-4">
 						  	<div class="form-group lastname">
 						    	<label for="lastname">Last Name *</label>
-						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter last name" name='lastname' required value="{{ old('lastname') }}">
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter last name" name='lastname' required value="{{ old('lastname') }}">
 						  	</div>
 					  	</div>
 					  	<div class="col-md-6">
 						  	<div class="form-group email">
 						    	<label for="email">Email Address *</label>
-						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter email address" name='email' required value="{{ old('email') }}">
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email address" name='email' required value="{{ old('email') }}">
 						  	</div>
 					  	</div>
 					  	<div class="col-md-6">
 						  	<div class="form-group mobile">
 						    	<label for="mobile">Mobile <span>(mobile number format: 639XXXXXXXXX)</span></label>
-						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter moible number" name='mobile' required value="{{ old('mobile') }}">
+						    	<input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter moible number" name='mobile' required value="{{ old('mobile') }}">
 						  	</div>
 					  	</div>
 						<div class="col-md-12">

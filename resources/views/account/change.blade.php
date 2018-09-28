@@ -15,19 +15,19 @@
 				  		<div class="col-md-4">
 						  	<div class="form-group password">
 						    	<label for="exampleInputPassword1">Current Password</label>
-						    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="enter current password" name='oldPassword'>
+						    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Enter current password" name='oldPassword'>
 						  	</div>
 					  	</div>
 				  		<div class="col-md-4">
 						  	<div class="form-group password">
 						    	<label for="exampleInputPassword1">New Password</label>
-						    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="enter new password" name='password'>
+						    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Enter new password" name='password'>
 						  	</div>
 					  	</div>
 				  		<div class="col-md-4">
 						  	<div class="form-group password">
 						    	<label for="exampleInputPassword1">New Password Confirmation</label>
-						    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="re-enter new password" name='password_confirmation'>
+						    	<input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Re-enter new password" name='password_confirmation'>
 						  	</div>
 					  	</div>
 				  	</div>

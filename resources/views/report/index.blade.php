@@ -15,7 +15,7 @@
 					    	<label for="monthYear">Month/Year *</label>
 					    	<div id="date">
 						    	<div class="start">
-					    	      	<input id="startDate" name="start" placeholder="start date" value="{{ old('start') }}"/>
+					    	      	<input id="startDate" name="start" placeholder="Start date" value="{{ old('start') }}"/>
 						      	</div>	
 						        <div class="end">	
 							        <input id="endDate" name="end" placeholder="End date" value="{{ old('end') }}"/>
@@ -29,7 +29,7 @@
 				    		<input type='hidden' class='accountField' name='account'/>
 				    		<div id="accountContainer">
 					    		<div id="searchContainer" class="pickedAccount">
-				    				<input type="text" name="" value='' class='searchField' placeholder="-- type account name --">
+				    				<input type="text" name="" value='' class='searchField' placeholder="-- Type account name --">
 				    				<button class='list' type="button"></button>
 				    			</div>
 						    	<div id="dropDown">
@@ -45,7 +45,7 @@
 				    		<input type='hidden' class='senderField' name='sender'/>
 				    		<div id="senderContainer">
 					    		<div id="searchContainer" class="pickedSender">
-				    				<input type="text" name="" value='' class='searchField' placeholder="-- n/a --">
+				    				<input type="text" name="" value='' class='searchField' placeholder="-- N/a --">
 				    				<button class='list' type="button"></button>
 				    			</div>
 						    	<div id="dropDown">
