@@ -49,7 +49,7 @@
 									@if(old('role'))
 								  		<option value='{{ old('role') }}'>{{ old('role') }}</option>
 									@endif
-								  	<option value=''>-- select a role --</option>
+								  	<option value=''>-- Select a role --</option>
 								  	<option value='Admin'>Admin</option>
 								  	<option value='User'>User</option>
 								</select>
