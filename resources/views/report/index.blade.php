@@ -45,7 +45,7 @@
 				    		<input type='hidden' class='senderField' name='sender'/>
 				    		<div id="senderContainer">
 					    		<div id="searchContainer" class="pickedSender">
-				    				<input type="text" name="" value='' class='searchField' placeholder="-- N/a --">
+				    				<input type="text" name="" value='' class='searchField' placeholder="-- N/A --">
 				    				<button class='list' type="button"></button>
 				    			</div>
 						    	<div id="dropDown">

@@ -352,7 +352,7 @@ $(document).ready(function () {
 			} else {
 				$('#senderContainer .searchField').prop("disabled", true);
 				$('#senderContainer .searchField').val("");
-				$('#senderContainer .searchField').attr('placeholder', "-- N/a --");
+				$('#senderContainer .searchField').attr('placeholder', "-- N/A --");
 			}
 		}
 	});
