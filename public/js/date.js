@@ -104,15 +104,7 @@ $(document).ready(function () {
 			maxDate: function maxDate() {
 				var maxDate = new Date(sd.getFullYear(), sd.getMonth(), sd.getDate() + 8);
 
-				if (maxDate.getDate() > 31) {
-					days = minDate - 30;
-				} else if (maxDate.getDate() > today.getDate()) {
-					days = today.getDate() - startDate.getDate() - 1;
-				} else {
-					days = 6;
-				}
-
-				return new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + days);
+				return maxDate;
 			}
 		});
 
