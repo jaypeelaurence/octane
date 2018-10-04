@@ -3,8 +3,6 @@ $(document).ready(function(){
 	var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
 	if($('div.filter').is('.report')){
-		var startDate;
-    	var sd;
 		var yesterday = new Date(date.getFullYear(), date.getMonth(), date.getDate()-1);
 
 	    $('#startDate').datepicker({
@@ -20,10 +18,21 @@ $(document).ready(function(){
 	        uiLibrary: 'bootstrap4',
 	        iconsLibrary: 'fontawesome',
 	        minDate: function(){
+	        	pickedDate = new Date($('#startDate').val());
+
 	        	return $('#startDate').val();
 	        },
 	        maxDate: function(){
-	        	var maxDate = new Date(sd.getFullYear(), sd.getMonth(), sd.getDate()+8);
+				var timeDiff = Math.abs(today.getTime() - pickedDate.getTime());
+				var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+				var maxDate = new Date();
+
+				if(diffDays > 7){
+		        	maxDate = new Date(pickedDate.getFullYear(), pickedDate.getMonth(), pickedDate.getDate() + 7);
+				}else{
+					maxDate = new Date(pickedDate.getFullYear(), pickedDate.getMonth(), pickedDate.getDate() + (diffDays - 1));
+				}
 
 				return maxDate;
 	        }
@@ -33,8 +42,8 @@ $(document).ready(function(){
     	$('.end button').prop('disabled', true);
 
 		$("#startDate").change(function(){
-        	startDate = new Date($('#startDate').val());
-        	sd = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+        	var startDate = new Date($('#startDate').val());
+        	var pickedDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
 
 	    	$('.end #endDate').prop('disabled', true);
 	    	$('.end button').prop('disabled', true);
@@ -46,8 +55,6 @@ $(document).ready(function(){
 			}
 		});
 	}else{
-		var startDate = new Date();
-    	var sd;
 
 	    $('#startDate').datepicker({
 	        uiLibrary: 'bootstrap4',
@@ -70,7 +77,7 @@ $(document).ready(function(){
     	$('.end button').prop('disabled', true);
 
 		$("#startDate").change(function(){
-			startDate = new Date($('#startDate').val());
+			var startDate = new Date($('#startDate').val());
 
 	    	$('.end #endDate').prop('disabled', true);
 	    	$('.end button').prop('disabled', true);
