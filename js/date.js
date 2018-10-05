@@ -134,7 +134,6 @@ $(document).ready(function () {
 			}
 		});
 	} else {
-
 		$('#startDate').datepicker({
 			uiLibrary: 'bootstrap4',
 			iconsLibrary: 'fontawesome',

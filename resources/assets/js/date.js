@@ -55,11 +55,10 @@ $(document).ready(function(){
 			}
 		});
 	}else{
-
 	    $('#startDate').datepicker({
 	        uiLibrary: 'bootstrap4',
         	iconsLibrary: 'fontawesome',
-	        maxDate: today
+	        maxDate: today,
 	    });
 
 	    $('#endDate').datepicker({
