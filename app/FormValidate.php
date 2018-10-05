@@ -54,7 +54,7 @@ class FormValidate extends Model
         "required",
         "checkPass:".$uid->password,
       ],
-      "password" => "required|confirmed|min:6"
+      "password" => "required|confirmed|min:8"
     ];
 
     $validator = Validator::make($request->all(), $rules);
@@ -92,6 +92,19 @@ class FormValidate extends Model
 
     $validator = Validator::make($request->all(), $rules);
 
+    return $validator;
+  }
+
+  public function auditReport(Request $request){
+    $rules = [];
+
+    if($request->start){
+      $rules['start'] = 'required'; 
+      $rules['end'] = 'required'; 
+    }
+
+    $validator = Validator::make($request->all(), $rules);
+    
     return $validator;
   }
 

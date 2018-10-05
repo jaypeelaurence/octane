@@ -6,30 +6,30 @@ use Illuminate\Http\Request;
 
 use App\Report;
 use App\FormValidate;
+use App\Audit;
 
 class ReportController extends Controller
 {
     function __construct(){
         $this->report = new Report();
         $this->formValidate = new FormValidate();
+        $this->audit = new Audit();
     }
 
     public function index(){
-        $account = $this->report->listAccount();
+        // $account = $this->report->listAccount();
 
-        return view('report.index', compact('account'));
+        return view('report.index');
     }
 
     public function show(Request $request){
-        $account = $this->report->listAccount();
-
+        // $account = $this->report->listAccount();
         $result = $this->formValidate->queryReport($request);
 
         $dateRange = [
             $request->start,
             $request->end
         ];
-
 
         if ($result->fails()) {
             return back()->withErrors($result)->withInput();
@@ -55,16 +55,26 @@ class ReportController extends Controller
                     'column'        => $listTrans['column'],
                     'data'          => $listTrans['data']
                 ];
-
-                // return $transactions;
             }
         }
 
-        return view('report.index', compact(['account','transactions']));
+        $message = "Report " . implode(' ',$request->all()) . " was generated!";
+
+        $this->audit->log('300',$message);
+
+        return view('report.index', compact(['transactions']));
     }
 
-    public function load($accountId){
-        return $this->report->listSender($accountId);
+    public function load($idList = null){
+        if($idList){
+            return $this->report->listSender($idList);
+        }else{
+            return $this->report->listAccount();
+        }
+    }
+
+    public function search(){
+       return $this->report->listAccount();
     }
     
     public function get(Request $request){
@@ -73,5 +83,9 @@ class ReportController extends Controller
         $generateReport = $this->report->generateReport(json_decode(base64_decode($request->transactions)));
 
         return $generateReport;
+    }
+
+    public function loadAcct($strAcct){
+       return $this->report->listAccount($strAcct);
     }
 }

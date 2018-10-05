@@ -14,10 +14,14 @@ class Account extends Model{
         $this->user = new User();
     }
 
-    public function viewUser($uid = null){
+    public function viewUser($uid = null, $strUser = null){
     	if($uid){
             return $this->user::where('id', $uid)->get();
-    	}else{
+    	}elseif($strUser){
+            $where = "firstname LIKE '%" . strtolower($strUser) . "%' OR lastname LIKE '%" . strtolower($strUser) . "%' OR '" . strtolower($strUser) ."' LIKE CONCAT(firstname,'%') OR '" . strtolower($strUser) ."' LIKE CONCAT('%',lastname,'%')";
+
+            return $this->user::whereRaw($where)->get();
+        }else{
             return $this->user::orderBy('id', 'asc')->get();
     	}
     }
@@ -74,7 +78,7 @@ class Account extends Model{
 
     public function changePass($getForm, $uid){
         $editUser = $this->user::find($uid);
-        $editUser->update(["password" => md5($getForm)]);
+        $editUser->update(['password' => md5($getForm)]);
 
         return $this->user::find($uid);
     }

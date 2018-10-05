@@ -7,14 +7,14 @@
 @section('body')
 	<div id=login>
 		<div id="container">
-			<img src="/images/whitelogo.png">
+			<img src="{{ url('/') }}/images/whitelogo.png">
 		</div>
 		<div id="container">
 
 			@include('_template.alert')
 
 			<div id=form>
-				<form method="POST" action="/token/{{ $hash }}">
+				<form method="POST" action="{{ url('/') }}/token/{{ $hash }}">
 					{{ csrf_field() }}
 					<input type="hidden" value="{{ $data['type'] }}" name="type">
 					<input type="hidden" value="{{ $data['uid'] }}" name="uid">

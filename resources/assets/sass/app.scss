@@ -53,6 +53,10 @@
 			}
 
 			.nav-item{
+				i{
+					margin-right: 5px;
+				}
+
 				a{
 					font-size: 14px;
 					color: $color4;
@@ -63,7 +67,7 @@
 					}
 
 					@media (min-width: 0px){
-						padding-right: .5rem;
+						padding-right: 1rem;
 					}
 				}
 
@@ -156,6 +160,7 @@
 		width: 100%;
 		position: fixed;
 		bottom: 0;
+		z-index: 999;
 	}
 
 /*Login Style*/
@@ -316,7 +321,8 @@
 					margin: 0px;
 
 					label{
-	  					@extend %title2;
+	  					@extend %title4;
+	  					font-weight: 700;
 	  					color: $color7;
 					}
 
@@ -330,10 +336,16 @@
 	  						color: $color5;
 	  					}
 	  				}
+
+	  				span{
+	  					@extend %title4;
+	  					border-radius: 0px;
+	  					color: $color7;
+	  				}
 				}
 
 				button{
-					@extend %title3;
+					@extend %title4;
 					padding: 5px 10px;
 					margin: 0px 5px;
 					margin-right: 5px;
@@ -388,11 +400,14 @@
 					td{
 						&.settings{
 							background-color: $color4;
-							a{
+							a, button{
 								font-size: 10px;
 								color: $color7;
 								margin-right: 10px;
 								display: inline-block;
+								border: 0px;
+
+								cursor: pointer;
 
 								&:hover{
 									color: $color2;
@@ -401,33 +416,20 @@
 								i{
 									margin-right: 2px;
 								}
+
+								background-color: transparent;
+								padding: 0px;
+							}
+
+							button{
+								margin: 0px;
 							}
 
 							form{
-								@include container(0px, 0px);
-								width: auto;
+								padding: 0px;
+								margin: 0px;
 								display: inline-block;
-
-								button{
-									@include container(0px, 0px);
-									font-size: 10px;
-									color: $color7;
-									margin-right: 10px;
-									display: inline-block;
-									background-color: rgba(255,255,255,0);
-									display: inline-block;
-
-									&:hover{
-										color: $color2;
-										cursor: pointer;
-									}
-
-									i{
-										margin-right: 2px;
-									}
-								}
 							}
-
 						}
 					}
 
@@ -495,63 +497,71 @@
 						}
 					}
 
-					form{
-						@include container(0px, 0px);
-						button{
-							@media (min-width: 0px){
-								display: inline-block;
-								@include container(10px, 5px 0px 5px 0px);
-							}
-
-							@media (min-width: 800px){
-								display: block;
-								width: 100%;
-								@include container(10px, 0px 0px 5px 0px);
-							}
-
-							background-color: $color7;
-							@extend %title4;
-							font-weight: 700;
-							color: $color1;
-							cursor: pointer;
-							text-align: left;
-
-							&:hover{
-								opacity: 0.5;
-							}
-
-							i{
-								margin-right: 10px;
-							}
+					button{
+						@media (min-width: 0px){
+							width: auto;
+							display: inline-block;
+							@include container(10px, 0px);
 						}
+
+						@media (min-width: 800px){
+							width: 100%;
+							display: block;
+							@include container(10px, 0px 0px 5px 0px);
+						}
+
+						&:hover{
+							opacity: 0.5;
+						}
+
+						i{
+							margin-right: 10px;
+						}
+
+						@extend %title4;
+						background-color: $color7;
+						font-weight: 700;
+						color: $color1;
+						cursor: pointer;
+						text-align: left;
+						border: 0px;
 					}
 				}
 			}
 		}
 
 		&.filter{
-			@media (min-width: 0px){
+			/*@media (min-width: 0px){
 				overflow-x: scroll;
 			}
 
 			@media (min-width: 800px){
 				overflow-x: hidden;
-			}
+			}*/
 
 			#wrapper{
-				@media (min-width: 0px){
-					width: 1000px;
-				}
-
-				@media (min-width: 800px){
-					width: 100%;
-				}
-
 				#report{
 					form{
+						button{
+							@media (min-width: 0px){
+								margin-top: 10px;
+							}
+
+							@media (min-width: 800px){
+								margin-top: 0px;
+							}
+						}
+
 						#column{
 							display: inline-block;
-							width: 30.3%;
+
+							@media (min-width: 0px){
+								width: 100%;
+							}
+
+							@media (min-width: 800px){
+								width: 314px;
+							}
 
 							&:nth-child(3), &:nth-child(4){
 								padding-right: 10px;							
@@ -584,6 +594,157 @@
 											}
 										}
 									}
+								}
+							}
+
+							#searchContainer{
+								@include container(0px, 0px);
+								@extend %title4;
+								color: $color7;
+								border: 1px solid $color5;
+								position: relative;
+								cursor: pointer;
+
+								.searchField{
+									@include container(4px 10px, 0px);
+									border: 0px;
+									@extend %title4;
+									color: $color7;
+									width: 100%;
+								}
+
+								button{
+									@include container(4px 10px, 0px);
+									top: 0;
+									right: 0;
+									position: absolute;
+									background-color: transparent;
+									cursor: pointer;
+
+									&.down{
+										color: $color7;
+									}
+
+									&.up{
+										color: $color2;
+									}
+								}
+							}
+
+							.senderId{
+								#dropDown{
+									#btn-sender{
+										position: absolute;
+										z-index: 9999999;
+										overflow-y: scroll;
+										width: 304px;
+										height: 200px;
+										border: 1px solid $color5;
+										border-top: 0px;
+										background-color: $color1;
+
+										button{
+											@include container(0px 10px, 0px);
+											@extend %title4;
+											width: 100%;
+											text-align: left;
+											display: block;
+											cursor: pointer;
+											border-bottom: 1px solid $color1;
+
+											&:hover {
+												background-color: $color3;
+											};
+
+											&.unPick{
+												color: $color7;
+												background-color: transparent;
+											}
+
+											&.pick{
+												color: $color1;
+												background-color: $color2;
+											}
+									 	}
+								 	}
+								}
+							}
+
+							.userName{
+								#dropDown{
+									#btn-user{
+										position: absolute;
+										z-index: 9999999;
+										overflow-y: scroll;
+										width: 304px;
+										height: 200px;
+										border: 1px solid $color5;
+										border-top: 0px;
+										background-color: $color1;
+
+										button{
+											@include container(0px 10px, 0px);
+											@extend %title4;
+											width: 100%;
+											text-align: left;
+											display: block;
+											cursor: pointer;
+											border-bottom: 1px solid $color1;
+
+											&:hover {
+												background-color: $color3;
+											};
+
+											&.unPick{
+												color: $color7;
+												background-color: transparent;
+											}
+
+											&.pick{
+												color: $color1;
+												background-color: $color2;
+											}
+									 	}
+								 	}
+								}
+							}
+
+							.accountName{
+								#dropDown{
+									#btn-account{
+										position: absolute;
+										z-index: 9999999;
+										overflow-y: scroll;
+										width: 304px;
+										height: 200px;
+										border: 1px solid $color5;
+										border-top: 0px;
+										background-color: $color1;
+
+										button{
+											@include container(0px 10px, 0px);
+											@extend %title4;
+											width: 100%;
+											text-align: left;
+											display: block;
+											cursor: pointer;
+											border-bottom: 1px solid $color1;
+												
+											&:hover {
+												background-color: $color3;
+											};
+
+											&.unPick{
+												color: $color7;
+												background-color: transparent;
+											}
+
+											&.pick{
+												color: $color1;
+												background-color: $color2;
+											}
+									 	}
+								 	}
 								}
 							}
 						}
@@ -642,4 +803,55 @@
 /*Datepicker style*/
 	.gj-picker{
 		font-size: 12px;
+	}
+
+	.settings{
+		form{
+			&#prompt{
+				position: relative;
+				min-width:  150px;
+			}
+
+			div{
+				&#prompt{
+					@extend %linkState;
+					padding: 5px 15px;
+					position: absolute;
+					width: 100%;
+					top: -5px;
+					z-index: 2990000000000;
+					background-color: rgba(249,249,249,0.9);
+				}
+			}
+		}
+	}
+
+	.actions{
+		form{
+			&#prompt{
+				position: relative;
+				padding: 0px !important;
+			}
+
+			div{
+				&#prompt{
+
+					@extend %linkState;
+					padding: 5px 15px;
+					position: absolute;
+					width: 100%;
+					top: -5px;
+					z-index: 2990000000000;
+					background-color: rgba(249,249,249,0.9);
+
+					button{
+						display: inline-block !important;
+						width: auto !important;
+						background-color: transparent !important;
+						color: $color7 !important;
+						padding: 10px 5px !important;
+					}
+				}
+			}
+		}
 	}

@@ -43,10 +43,10 @@
 						</table>
 					</div>
 					<div class="col-md-3 actions">
-						<a href="{{ $user->id }}/change-password" class='edit'><i class="fa fa-edit"></i>Change Password</a>
+						<a href="{{ url('/') }}/account/{{ $user->id }}/change-password" class='edit'><i class="fa fa-edit"></i>Change Password</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-@endsection	
+@endsection
